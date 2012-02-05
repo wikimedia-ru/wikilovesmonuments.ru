@@ -58,6 +58,7 @@ class House(models.Model):
     )
     
     kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
+    kult_checked = models.BooleanField(default=False, verbose_name=_("Is ID Kulturnoe Nasledie checked?"))
     name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
     street = models.ForeignKey('Street', verbose_name=_("Street"))
     number = models.CharField(max_length=20, verbose_name=_("Number"))
