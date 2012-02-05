@@ -20,25 +20,25 @@
 {% if house.safety %}
 	<tr>
 		<th>Сохранность</th>
-		<td>{{ house.safety }}</a><td>
+		<td>{{ house.get_safety_display }}</a><td>
 	</tr>
 {% endif %}
 {% if house.state and house.safety == 'S' %}
 	<tr>
 		<th>Состояние</th>
-		<td>{{ house.state }}<td>
+		<td>{{ house.get_state_display }}<td>
 	</tr>
 {% endif %}
 {% if house.usage %}
 	<tr>
 		<th>Использование</th>
-		<td>{{ house.usage }}</a><td>
+		<td>{{ house.get_usage_display }}</a><td>
 	</tr>
 {% endif %}
 {% if house.protection %}
 	<tr>
 		<th>Категория охраны</th>
-		<td>{{ house.protection }}</a><td>
+		<td>{{ house.get_protection_display }}</a><td>
 	</tr>
 {% endif %}
 {% if house.pasport %}
@@ -50,7 +50,7 @@
 {% if house.material %}
 	<tr>
 		<th>Материал</th>
-		<td>{{ house.material }}</a><td>
+		<td>{{ house.get_material_display }}</a><td>
 	</tr>
 {% endif %}
 {% if house.extra_info %}
