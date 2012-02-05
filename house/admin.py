@@ -7,11 +7,11 @@ from house.models import Street, House, HousePhoto, HouseEvent
 class StreetAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('name',)
+            'fields': ('name', 'full_name', 'type',)
         }),
     )
 
-    list_display = ['name',]
+    list_display = ['name', 'full_name', 'type',]
     ordering = ['name',]
 
 
