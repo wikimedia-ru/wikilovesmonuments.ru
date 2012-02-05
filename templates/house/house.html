@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ house.street }}, {{ house.number }}</h1>
+{% if house.name %}<h2>{{ house.name }}</h2>{% endif %}
+
+<table>
+{% if house.kult_id %}
+	<tr>
+		<th>На сайте Культурного наследия</th>
+		<td><a href="kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}">{{ house.kult_id }}</a><td>
+	</tr>
+{% endif %}
+{% if house.coord_x %}
+	<tr>
+		<th>Карта</th>
+		<td>{{ house.coord_x }}, {{ house.coord_y }}<td>
+	</tr>
+{% endif %}
+{% if house.safety %}
+	<tr>
+		<th>Сохранность</th>
+		<td>{{ house.safety }}</a><td>
+	</tr>
+{% endif %}
+{% if house.state and house.safety == 'S' %}
+	<tr>
+		<th>Состояние</th>
+		<td>{{ house.state }}<td>
+	</tr>
+{% endif %}
+{% if house.usage %}
+	<tr>
+		<th>Использование</th>
+		<td>{{ house.usage }}</a><td>
+	</tr>
+{% endif %}
+{% if house.protection %}
+	<tr>
+		<th>Категория охраны</th>
+		<td>{{ house.protection }}</a><td>
+	</tr>
+{% endif %}
+{% if house.ownership %}
+	<tr>
+		<th>Владение</th>
+		<td>{{ house.ownership }}</a><td>
+	</tr>
+{% endif %}
+{% if house.protection %}
+	<tr>
+		<th>Категория охраны</th>
+		<td>{{ house.protection }}</a><td>
+	</tr>
+{% endif %}
+{% if house.pasport %}
+	<tr>
+		<th>Паспорт</th>
+		<td>{{ house.pasport }}</a><td>
+	</tr>
+{% endif %}
+	<tr>
+		<th>Охранное обязательство</th>
+		<td>{{ house.obligation|yesno:'Подписано,Не подписано,Неизвестно' }}</a><td>
+	</tr>
+{% if house.material %}
+	<tr>
+		<th>Материал</th>
+		<td>{{ house.material }}</a><td>
+	</tr>
+{% endif %}
+{% if house.owner %}
+	<tr>
+		<th>Владелец</th>
+		<td>{{ house.owner }}</a><td>
+	</tr>
+{% endif %}
+{% if house.tenant %}
+	<tr>
+		<th>Арендатор</th>
+		<td>{{ house.tenant }}</a><td>
+	</tr>
+{% endif %}
+{% if house.extra_info %}
+	<tr>
+		<th>Дополнительная информация</th>
+		<td>{{ house.extra_info }}</a><td>
+	</tr>
+{% endif %}
+</table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+{% for street in list %}
+<li><a href="/street/{{ street.id }}">{{ street.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
