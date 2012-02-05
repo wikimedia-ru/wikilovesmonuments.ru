@@ -38,6 +38,9 @@ class HouseAdmin(admin.ModelAdmin):
         'material', 'owner', 'tenant', 'extra_info',]
     ordering = ['street', 'number',]
 
+    list_filter = ['safety', 'state', 'usage', 'protection', 'material',]
+    search_fields = ['kult_id',]
+
 
 admin.site.register(Street, StreetAdmin)
 admin.site.register(House, HouseAdmin)
