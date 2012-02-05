@@ -36,6 +36,7 @@ class HouseAdmin(admin.ModelAdmin):
     def addr(obj):
         return ("%s, %s" % (obj.street.name, obj.number))
     addr.short_description = _("Address")
+    addr.admin_order_field = 'street__name'
 
     def kult_url(obj):
         if obj.kult_id == 0:
@@ -48,6 +49,7 @@ class HouseAdmin(admin.ModelAdmin):
         return out
     kult_url.short_description = _("ID Kulturnoe Nasledie")
     kult_url.allow_tags = True
+    kult_url.admin_order_field = 'kult_id'
 
     list_display = [addr, 'name', kult_url, 'safety', 'state',
         'usage', 'protection', 'ownership', 'pasport', 'obligation',
