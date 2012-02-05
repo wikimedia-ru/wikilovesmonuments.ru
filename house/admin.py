@@ -33,7 +33,9 @@ class HouseAdmin(admin.ModelAdmin):
     )
     inlines = (HousePhotoInline, HouseEventInline,)
 
-    list_display = ['street', 'number', 'name',]
+    list_display = ['street', 'number', 'name', 'kult_id', 'safety', 'state',
+        'usage', 'protection', 'ownership', 'pasport', 'obligation',
+        'material', 'owner', 'tenant', 'extra_info',]
     ordering = ['street', 'number',]
 
 
