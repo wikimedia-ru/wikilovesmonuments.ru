@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ name }}</h1>
+<h1>{{ street.full_name }}</h1>
 <ul>
 {% for house in list %}
 <li><a href="/house/{{ house.id }}">{{ house.number }}</a></li>

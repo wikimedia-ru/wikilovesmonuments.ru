@@ -19,7 +19,7 @@ def street(request, id):
     h_list = House.objects.filter(street=id).order_by('number')
 
     return render_to_response('house/street.html', {
-        'name': s.name,
+        'street': s,
         'list': h_list,
         }, context_instance=RequestContext(request))
 
