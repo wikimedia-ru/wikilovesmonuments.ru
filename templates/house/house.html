@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ house.street }}, {{ house.number }}</h1>
-{% if house.name %}<h2>{{ house.name }}</h2>{% endif %}
+<h1>{{ house.street }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 
 <table>
 {% if house.kult_id %}
