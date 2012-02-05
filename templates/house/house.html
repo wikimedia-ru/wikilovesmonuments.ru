@@ -41,44 +41,16 @@
 		<td>{{ house.protection }}</a><td>
 	</tr>
 {% endif %}
-{% if house.ownership %}
-	<tr>
-		<th>Владение</th>
-		<td>{{ house.ownership }}</a><td>
-	</tr>
-{% endif %}
-{% if house.protection %}
-	<tr>
-		<th>Категория охраны</th>
-		<td>{{ house.protection }}</a><td>
-	</tr>
-{% endif %}
 {% if house.pasport %}
 	<tr>
 		<th>Паспорт</th>
 		<td>{{ house.pasport }}</a><td>
 	</tr>
 {% endif %}
-	<tr>
-		<th>Охранное обязательство</th>
-		<td>{{ house.obligation|yesno:'Подписано,Не подписано,Неизвестно' }}</a><td>
-	</tr>
 {% if house.material %}
 	<tr>
 		<th>Материал</th>
 		<td>{{ house.material }}</a><td>
-	</tr>
-{% endif %}
-{% if house.owner %}
-	<tr>
-		<th>Владелец</th>
-		<td>{{ house.owner }}</a><td>
-	</tr>
-{% endif %}
-{% if house.tenant %}
-	<tr>
-		<th>Арендатор</th>
-		<td>{{ house.tenant }}</a><td>
 	</tr>
 {% endif %}
 {% if house.extra_info %}
