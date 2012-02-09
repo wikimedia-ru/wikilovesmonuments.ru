@@ -10,6 +10,12 @@
 		<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}">{{ house.kult_id }}</a><td>
 	</tr>
 {% endif %}
+{% if house.ruwiki %}
+	<tr>
+		<th>В Википедии</th>
+		<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}">{{ house.ruwiki }}</a><td>
+	</tr>
+{% endif %}
 {% if house.coord_x %}
 	<tr>
 		<th>Карта</th>

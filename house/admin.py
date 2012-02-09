@@ -25,10 +25,20 @@ class HouseEventInline(admin.TabularInline):
 
 class HouseAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {
-            'fields': ('street', 'number', 'name', 'kult_id', 'kult_checked',
-            'safety', 'state', 'usage', 'protection', 'ownership', 'pasport',
-            'obligation', 'material', 'owner', 'tenant', 'extra_info',)
+        (_("Main info"), {
+            'fields': ('street', 'number', 'name', 'material',)
+        }),
+        (_("External sources"), {
+            'fields': ('kult_id', 'kult_checked', 'ruwiki',)
+        }),
+        (_("Safety"), {
+            'fields': ('safety', 'state', 'protection',)
+        }),
+        (_("Ownership"), {
+            'fields': ('usage', 'ownership', 'pasport', 'obligation', 'owner', 'tenant',)
+        }),
+        (_("Additional"), {
+            'fields': ('extra_info',)
         }),
     )
     inlines = (HousePhotoInline, HouseEventInline,)
