@@ -12,7 +12,6 @@ class StreetAdmin(admin.ModelAdmin):
     )
 
     list_display = ['name', 'full_name', 'type',]
-    ordering = ['name',]
 
 
 class HousePhotoInline(admin.TabularInline):

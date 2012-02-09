@@ -21,6 +21,9 @@ class Street(models.Model):
     full_name = models.CharField(blank=True, max_length=250, verbose_name=_("Full name"))
     type = models.CharField(max_length=1, blank=True, choices=STREET_CHOICES, default='S', verbose_name=_("Type"))
 
+    class Meta:
+        ordering = ['name',]
+
     def __unicode__(self):
         return self.name
 
