@@ -7,6 +7,19 @@
 {% block content %}
 <h1>{{ house.street }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 
+{% if house.coord_x %}
+<div id="YMapsID" style="width:300px;height:200px;float:right"></div>
+<script type="text/javascript">
+	YMaps.jQuery(function () {
+		var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
+		map.setCenter(new YMaps.GeoPoint({{ house.coord_x|stringformat:"f" }}, {{ house.coord_y|stringformat:"f" }}), 15);
+		var house = new YMaps.Placemark(new YMaps.GeoPoint({{ house.coord_x|stringformat:"f" }}, {{ house.coord_y|stringformat:"f" }}));
+		house.name = "{{ house.street }}, {{ house.number }}";
+		map.addOverlay(house); 
+	})
+</script>
+{% endif %}
+
 <table>
 {% if house.kult_id %}
 	<tr>
@@ -18,12 +31,6 @@
 	<tr>
 		<th>В Википедии</th>
 		<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}">{{ house.ruwiki }}</a><td>
-	</tr>
-{% endif %}
-{% if house.coord_x %}
-	<tr>
-		<th>Карта</th>
-		<td>{{ house.coord_x }}, {{ house.coord_y }}<td>
 	</tr>
 {% endif %}
 {% if house.safety %}
