@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head %}
+<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YMAPS_KEY }}" type="text/javascript"></script>
+{% endblock %}
+
 {% block content %}
 <h1>{{ house.street }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 

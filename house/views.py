@@ -1,6 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.conf import settings
 
 from house.models import Street, House
 
@@ -29,5 +30,6 @@ def house(request, id):
 
     return render_to_response('house/house.html', {
         'house': h,
+        'YMAPS_KEY': settings.YMAPS_KEY,
         }, context_instance=RequestContext(request))
 
