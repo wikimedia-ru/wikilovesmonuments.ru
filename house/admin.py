@@ -85,6 +85,7 @@ class HouseAdmin(admin.ModelAdmin):
                 'results': 1,
                 #'ll': '39.89,59.22',
                 #'spn': '0.2,0.2',
+                'text': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
             }
             #url = "http://geocode-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
             url = "http://psearch-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
