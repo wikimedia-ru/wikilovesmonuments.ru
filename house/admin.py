@@ -52,6 +52,17 @@ class HouseAdmin(admin.ModelAdmin):
     addr.short_description = _("Address")
     addr.admin_order_field = 'street__name'
 
+    def map_pin(obj):
+        if obj.coord_x is None:
+            return '';
+        out = ("<a target='_blank' href='http://maps.yandex.ru/?text=%s,+%s&ll=%s,%s&z=15&l=map'>" % \
+            (obj.street.full_name, obj.number, obj.coord_x, obj.coord_y)) + \
+            "<img src='/static/admin/img/ext/icon-map-pin.png' /></a>"
+        return out
+    map_pin.short_description = _("Map")
+    map_pin.allow_tags = True
+    map_pin.admin_order_field = 'coord_x'
+
     def kult_url(obj):
         if obj.kult_id == 0:
             return '';
@@ -59,15 +70,15 @@ class HouseAdmin(admin.ModelAdmin):
         if obj.kult_checked:
             icon = 'yes'
         out = ("<img src='/static/admin/img/admin/icon-%s.gif' alt='%s' /> " % \
-                (icon, obj.kult_checked)) + \
+            (icon, obj.kult_checked)) + \
             ("<a href='http://kulturnoe-nasledie.ru/monuments.php?id=%s'>%s</a>" % \
-                (obj.kult_id, obj.kult_id))
+            (obj.kult_id, obj.kult_id))
         return out
     kult_url.short_description = _("ID Kulturnoe Nasledie")
     kult_url.allow_tags = True
     kult_url.admin_order_field = 'kult_id'
 
-    list_display = [addr, 'name', kult_url, 'safety', 'state',
+    list_display = [addr, 'name', map_pin, kult_url, 'safety', 'state',
         'usage', 'protection', 'ownership', 'pasport', 'obligation',
         'material', 'owner', 'tenant', 'extra_info',]
     ordering = ['street__name', 'number',]
@@ -85,10 +96,11 @@ class HouseAdmin(admin.ModelAdmin):
                 'results': 1,
                 #'ll': '39.89,59.22',
                 #'spn': '0.2,0.2',
-                'text': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
+                'geocode': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
+                #'text': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
             }
-            #url = "http://geocode-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
-            url = "http://psearch-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
+            url = "http://geocode-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
+            #url = "http://psearch-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
             fp = urllib.urlopen(url)
             answer = json.load(fp)
             answer = answer['response']['GeoObjectCollection']
