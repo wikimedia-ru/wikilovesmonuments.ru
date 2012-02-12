@@ -145,3 +145,24 @@ body:before {
 }
 /* Sticky Footer end */
 
+/* Icons begin */
+.safety-S,
+.safety-M,
+.safety-R,
+.safety-L,
+.state-R,
+.state-S,
+.state-A {
+	padding-left: 28px;
+	background: 6px 50% no-repeat;
+}
+
+.safety-S { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Building_Complete.svg/16px-Building_Complete.svg.png'); }
+.safety-M { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Building_Under_Construction.svg/16px-Building_Under_Construction.svg.png'); }
+.safety-R { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Building_Demolished.svg/16px-Building_Demolished.svg.png'); }
+.safety-L { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/7/75/Building_Destroyed.svg/16px-Building_Destroyed.svg.png'); }
+.state-R { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/0/04/Building_Under_Reconstruction.svg/16px-Building_Under_Reconstruction.svg.png'); }
+.state-S { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Building_Complete.svg/16px-Building_Complete.svg.png'); }
+.state-A { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Building_Damaged.svg/16px-Building_Damaged.svg.png'); }
+/* Icons end */
+

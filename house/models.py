@@ -40,7 +40,6 @@ class House(models.Model):
         ('R', _("Restored")),
         ('S', _("Satisfactory")),
         ('A', _("Accident")),
-        ('L', _("Losed")),
     )
     
     USAGE_CHOICES = (

@@ -35,45 +35,46 @@
 	</tr>
 {% endif %}
 {% if house.safety %}
+	{% if house.state and house.safety in 'S' %}
 	<tr>
-		<th>Сохранность</th>
-		<td>{{ house.get_safety_display }}</a></td>
+		<th>Сохранность и состояние</th>
+		<td class="state-{{ house.state }}">{{ house.get_safety_display }} ({{ house.get_state_display|lower }})</td>
 	</tr>
-{% endif %}
-{% if house.state and house.safety == 'S' %}
+	{% else %}
 	<tr>
-		<th>Состояние</th>
-		<td>{{ house.get_state_display }}</td>
+		<th>Сохранность и состояние</th>
+		<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
 	</tr>
+	{% endif %}
 {% endif %}
 {% if house.usage %}
 	<tr>
 		<th>Использование</th>
-		<td>{{ house.get_usage_display }}</a></td>
+		<td>{{ house.get_usage_display }}</td>
 	</tr>
 {% endif %}
 {% if house.protection %}
 	<tr>
 		<th>Категория охраны</th>
-		<td>{{ house.get_protection_display }}</a></td>
+		<td>{{ house.get_protection_display }}</td>
 	</tr>
 {% endif %}
 {% if house.pasport %}
 	<tr>
 		<th>Паспорт</th>
-		<td>{{ house.pasport }}</a></td>
+		<td>{{ house.pasport }}</td>
 	</tr>
 {% endif %}
 {% if house.material %}
 	<tr>
 		<th>Материал</th>
-		<td>{{ house.get_material_display }}</a></td>
+		<td>{{ house.get_material_display }}</td>
 	</tr>
 {% endif %}
 {% if house.extra_info %}
 	<tr>
 		<th>Дополнительная информация</th>
-		<td>{{ house.extra_info }}</a></td>
+		<td>{{ house.extra_info }}</td>
 	</tr>
 {% endif %}
 </table>

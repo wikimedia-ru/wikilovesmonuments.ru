@@ -11,7 +11,6 @@
 	<thead>
 		<tr>
 			<th>Номер</th>
-			<th>Сохранность</th>
 			<th>Состояние</th>
 			<th>Категория охраны</th>
 		</tr>
@@ -20,8 +19,11 @@
 	{% for house in list %}
 		<tr class="{% cycle 'odd' 'even' %}">
 			<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
-			<td>{{ house.get_safety_display }}</td>
-			<td>{{ house.get_state_display }}</td>
+		{% if house.state and house.safety == 'S' %}
+			<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
+		{% else %}
+			<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
+		{% endif %}
 			<td>{{ house.get_protection_display }}</td>
 		</tr>
 	{% endfor %}
