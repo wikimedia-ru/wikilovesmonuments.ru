@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/street_list.css" />
+{% endblock %}
+
 {% block content %}
 <ul>
 {% for street in list %}
-<li><a href="/street/{{ street.id }}">{{ street.name }}</a></li>
+	{% if street.house_count %}
+	<li><a href="/street/{{ street.id }}">{{ street.name }} ({{ street.house_count }})</a></li>
+	{% else %}
+	<li>{{ street.name }}</li>
+	{% endif %}
 {% endfor %}
 </ul>
 {% endblock %}

@@ -1,10 +1,30 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/street.css" />
+{% endblock %}
+
 {% block content %}
+<a href="/">↑</a>
 <h1>{{ street.full_name }}</h1>
-<ul>
-{% for house in list %}
-<li><a href="/house/{{ house.id }}">{{ house.number }}</a></li>
-{% endfor %}
-</ul>
+<table>
+	<thead>
+		<tr>
+			<th>Номер</th>
+			<th>Сохранность</th>
+			<th>Состояние</th>
+			<th>Категория охраны</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for house in list %}
+		<tr class="{% cycle 'odd' 'even' %}">
+			<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
+			<td>{{ house.get_safety_display }}</td>
+			<td>{{ house.get_state_display }}</td>
+			<td>{{ house.get_protection_display }}</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
 {% endblock %}

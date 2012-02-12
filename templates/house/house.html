@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/house.css" />
 <script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YMAPS_KEY }}" type="text/javascript"></script>
 {% endblock %}
 
 {% block content %}
-<h1>{{ house.street }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
+<h1><a href="/street/{{ house.street.id }}">{{ house.street }}</a>, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 
 {% if house.coord_x %}
 <div id="YMapsID" style="width:300px;height:200px;float:right"></div>
@@ -36,43 +37,43 @@
 {% if house.safety %}
 	<tr>
 		<th>Сохранность</th>
-		<td>{{ house.get_safety_display }}</a><td>
+		<td>{{ house.get_safety_display }}</a></td>
 	</tr>
 {% endif %}
 {% if house.state and house.safety == 'S' %}
 	<tr>
 		<th>Состояние</th>
-		<td>{{ house.get_state_display }}<td>
+		<td>{{ house.get_state_display }}</td>
 	</tr>
 {% endif %}
 {% if house.usage %}
 	<tr>
 		<th>Использование</th>
-		<td>{{ house.get_usage_display }}</a><td>
+		<td>{{ house.get_usage_display }}</a></td>
 	</tr>
 {% endif %}
 {% if house.protection %}
 	<tr>
 		<th>Категория охраны</th>
-		<td>{{ house.get_protection_display }}</a><td>
+		<td>{{ house.get_protection_display }}</a></td>
 	</tr>
 {% endif %}
 {% if house.pasport %}
 	<tr>
 		<th>Паспорт</th>
-		<td>{{ house.pasport }}</a><td>
+		<td>{{ house.pasport }}</a></td>
 	</tr>
 {% endif %}
 {% if house.material %}
 	<tr>
 		<th>Материал</th>
-		<td>{{ house.get_material_display }}</a><td>
+		<td>{{ house.get_material_display }}</a></td>
 	</tr>
 {% endif %}
 {% if house.extra_info %}
 	<tr>
 		<th>Дополнительная информация</th>
-		<td>{{ house.extra_info }}</a><td>
+		<td>{{ house.extra_info }}</a></td>
 	</tr>
 {% endif %}
 </table>
