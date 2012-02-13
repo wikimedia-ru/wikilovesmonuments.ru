@@ -24,7 +24,7 @@
 		{% else %}
 			<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
 		{% endif %}
-			<td>{{ house.get_protection_display }}</td>
+			<td {% if house.protection == 'N' %}class="shady"{% endif %}>{{ house.get_protection_display }}</td>
 		</tr>
 	{% endfor %}
 	</tbody>
