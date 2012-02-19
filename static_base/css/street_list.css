@@ -1,4 +1,6 @@
-li {
+ul {
 	color: #aaa;
+	list-style: none;
+	padding-left: 0;
 }
 

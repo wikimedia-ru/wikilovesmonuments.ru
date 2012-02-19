@@ -1,5 +1,14 @@
+body {
+	font-size: 2em;
+}
+
 article {
+	padding: 5px 5px 0;
+}
+
+article,
+footer {
 	max-width: auto;
-	width: 100%;
+	width: auto;
 }
 
