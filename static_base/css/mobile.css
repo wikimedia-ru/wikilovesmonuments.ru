@@ -1,0 +1,16 @@
+body {
+	font-size: 2em;
+}
+
+article {
+	padding-top: 5px;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+article,
+footer {
+	max-width: 540px;
+	width: auto;
+}
+
