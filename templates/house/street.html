@@ -2,11 +2,28 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/street.css" />
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
 {% block content %}
 <a href="/">↑</a>
 <h1>{{ street.full_name }}</h1>
+{% if map_center %}
+<div id="map" style="width:400px;height:300px;float:right"></div>
+<script type="text/javascript">
+	var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+	var cmAttr = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+	var map = new L.Map('map');
+	map
+		.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.long|stringformat:"f" }}), 15)
+		.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
+{% for house in list %}
+	map.addLayer(new L.Marker(new L.LatLng({{ house.coord_y|stringformat:"f" }}, {{ house.coord_x|stringformat:"f" }})));
+{% endfor %}
+</script>
+{% endif %}
 <table>
 	<thead>
 		<tr>
