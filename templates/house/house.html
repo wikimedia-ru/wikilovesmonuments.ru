@@ -2,22 +2,30 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/house.css" />
-<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YMAPS_KEY }}" type="text/javascript"></script>
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
 {% block content %}
 <h1><a href="/street/{{ house.street.id }}">{{ house.street }}</a>, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 
 {% if house.coord_x %}
-<div id="YMapsID" style="width:300px;height:200px;float:right"></div>
+<div id="map" style="width:300px;height:200px;float:right"></div>
 <script type="text/javascript">
-	YMaps.jQuery(function () {
-		var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
-		map.setCenter(new YMaps.GeoPoint({{ house.coord_x|stringformat:"f" }}, {{ house.coord_y|stringformat:"f" }}), 15);
-		var house = new YMaps.Placemark(new YMaps.GeoPoint({{ house.coord_x|stringformat:"f" }}, {{ house.coord_y|stringformat:"f" }}));
-		house.name = "{{ house.street }}, {{ house.number }}";
-		map.addOverlay(house); 
-	})
+	var map = new L.Map('map');
+
+	var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png',
+		cloudmadeAttrib = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+		cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib});
+
+	var place = new L.LatLng({{ house.coord_y|stringformat:"f" }}, {{ house.coord_x|stringformat:"f" }});
+	map.setView(place, 15).addLayer(cloudmade);
+
+	var markerLocation = new L.LatLng({{ house.coord_y|stringformat:"f" }}, {{ house.coord_x|stringformat:"f" }});
+
+	var marker = new L.Marker(markerLocation);
+	map.addLayer(marker);
 </script>
 {% endif %}
 

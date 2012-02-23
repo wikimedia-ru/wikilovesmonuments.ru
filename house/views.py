@@ -30,6 +30,6 @@ def house(request, id):
 
     return render_to_response('house/house.html', {
         'house': h,
-        'YMAPS_KEY': settings.YMAPS_KEY,
+        'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
