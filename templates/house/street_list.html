@@ -8,9 +8,7 @@
 <ul>
 {% for street in list %}
 	{% if street.house_count %}
-	<li><a href="/street/{{ street.id }}">{{ street.name }} ({{ street.house_count }})</a></li>
-	{% else %}
-	<li>{{ street.name }}</li>
+	<li><a href="/street/{{ street.id }}">{{ street.name }} <span>{{ street.house_count }}</span></a></li>
 	{% endif %}
 {% endfor %}
 </ul>
