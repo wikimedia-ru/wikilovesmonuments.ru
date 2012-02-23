@@ -2,5 +2,9 @@ ul {
 	color: #aaa;
 	list-style: none;
 	padding: 0;
+	max-width: 13em;
 }
 
+ul span {
+	float: right;
+}

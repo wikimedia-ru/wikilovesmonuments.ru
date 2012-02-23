@@ -1,10 +1,14 @@
 /* Reset begin */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 html,
 body {
 	width: 100%;
 	height: 100%;
-	margin: 0;
-	padding: 0;
 }
 
 body {
@@ -26,13 +30,8 @@ p {
 	margin: 1em 0;
 }
 
-abbr {
-	border: 0;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	font-weight: normal;
-	margin: 0;
 	overflow: hidden;
 	padding-top: 1em;
 	padding-bottom: .17em;
@@ -41,7 +40,6 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	border-bottom: 1px solid #aaa;
-	padding-top: 0;
 	margin-bottom: .5em;
 	font-size: 1.6em;
 }
@@ -80,7 +78,6 @@ footer {
 	background: transparent;
 	max-width: 800px;
 	border-top: 1px solid #ccc;
-	padding: 0;
 	margin: auto;
 	font-size: smaller;
 	color: #666;
