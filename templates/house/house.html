@@ -6,19 +6,13 @@
 {% if house.coord_lon %}
 <div id="map" class="map"></div>
 <script type="text/javascript">
+	var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+	var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 	var map = new L.Map('map');
-
-	var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png',
-		cloudmadeAttrib = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
-		cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib});
-
-	var place = new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
-	map.setView(place, 15).addLayer(cloudmade);
-
-	var markerLocation = new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
-
-	var marker = new L.Marker(markerLocation);
-	map.addLayer(marker);
+	map
+		.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 15)
+		.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
+		.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
 </script>
 {% endif %}
 

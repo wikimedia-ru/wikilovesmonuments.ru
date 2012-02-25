@@ -13,7 +13,9 @@
 		.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 
 {% for house in list %}
-	map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
+	{% if house.coord_lat %}
+		map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
+	{% endif %}
 {% endfor %}
 </script>
 {% endif %}
