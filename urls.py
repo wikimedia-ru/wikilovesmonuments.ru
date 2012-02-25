@@ -21,7 +21,7 @@ urlpatterns = patterns('',
 
     url(r'^robots.txt$', 'django.views.static.serve', {'path':"/robots.txt",'document_root': settings.STATIC_ROOT, 'show_indexes': False }),
 
-    url(r'^/?$', 'house.views.street_list'),
+    url(r'^/?$', 'house.views.index_page'),
     url(r'^street/(?P<id>[0-9]+)/?$', 'house.views.street'),
     url(r'^house/(?P<id>[0-9]+)/?$', 'house.views.house'),
 

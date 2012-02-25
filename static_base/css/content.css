@@ -1,0 +1,59 @@
+.content {
+	width: 400px;
+	float: right;
+}
+
+.map {
+	height: 250px;
+	margin-bottom: 20px;
+	border: 1px solid #ccc;
+}
+
+
+/* Street list */
+ul.sl {
+	color: #aaa;
+	list-style: none;
+	padding: 0;
+	max-width: 13em;
+}
+
+ul.sl span {
+	float: right;
+}
+
+
+/* Street view */
+table {
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid #ccc;
+	padding: 2px 6px;
+}
+
+tr.odd {
+	background: #fff;
+}
+
+tr.even {
+	background: #f3f3f3;
+}
+
+
+/* House view */
+table {
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid #ccc;
+	padding: 2px 6px;
+}
+
+th {
+	text-align: right;
+}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/content.css" />
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
+<script>
+$('a').live('click', function(e) {
+	e.preventDefault();
+	$('#content').load($(this).attr('href'));
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div id="content" class="content"></div>
+<ul class="sl">
+{% for street in list %}
+	{% if street.house_count %}
+	<li><a href="/street/{{ street.id }}" target="right">{{ street.name }} <span>{{ street.house_count }}</span></a></li>
+	{% endif %}
+{% endfor %}
+</ul>
+{% endblock %}

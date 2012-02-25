@@ -41,6 +41,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	border-bottom: 1px solid #aaa;
 	margin-bottom: .5em;
+	padding-top: 0;
 	font-size: 1.6em;
 }
 
@@ -128,7 +129,7 @@ article {
 footer {
 	position: relative;
 	margin-top: -50px;
-	height: 30px;
+	height: 29px;
 	padding-top: 20px;
 	clear: both;
 }

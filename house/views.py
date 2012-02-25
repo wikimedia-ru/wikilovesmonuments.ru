@@ -6,10 +6,10 @@ from django.db.models import Count, Max, Min
 from house.models import Street, House
 
 
-def street_list(request):
+def index_page(request):
     s_list = Street.objects.order_by('name').annotate(house_count=Count('house'))
 
-    return render_to_response('house/street_list.html', {
+    return render_to_response('house/index.html', {
         'list': s_list,
         }, context_instance=RequestContext(request))
 
