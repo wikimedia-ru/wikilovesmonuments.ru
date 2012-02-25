@@ -30,19 +30,28 @@ class HouseEventInline(admin.TabularInline):
 class HouseAdmin(admin.ModelAdmin):
     fieldsets = (
         (_("Main info"), {
-            'fields': ('street', 'number', 'name', 'material',)
+            'fields': ('name', 'name_alt', 'material', 'pasport',)
+        }),
+        (_("Location"), {
+            'fields': ('street', 'number', 'coord_lon', 'coord_lat', 'pasport_address',)
         }),
         (_("External sources"), {
-            'fields': ('kult_id', 'kult_checked', 'ruwiki',)
+            'fields': ('kult_id', 'kult_checked', 'kult_problems', 'gudea_checked', 'ruwiki',)
         }),
         (_("Safety"), {
             'fields': ('safety', 'state', 'protection',)
         }),
+        (_("Safety from pasport"), {
+            'fields': ('pasport_safety', 'pasport_state', 'pasport_protection',)
+        }),
         (_("Ownership"), {
-            'fields': ('usage', 'ownership', 'pasport', 'obligation', 'owner', 'tenant',)
+            'fields': ('usage', 'ownership', 'land_ownership', 'owner', 'obligation', 'lease', 'tenant',)
         }),
         (_("Additional"), {
-            'fields': ('extra_info',)
+            'fields': ('chronology', 'documents', 'monitoring', 'extra_info',)
+        }),
+        (_("Belong to complex"), {
+            'fields': ('complex', 'complex_name', 'complex_root', 'complex_kult_id',)
         }),
     )
     inlines = (HousePhotoInline, HouseEventInline,)

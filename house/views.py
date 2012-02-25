@@ -39,6 +39,7 @@ def house(request, id):
 
     return render_to_response('house/house.html', {
         'house': h,
+        'is_admin': True,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 

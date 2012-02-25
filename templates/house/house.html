@@ -23,12 +23,14 @@
 		<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}" target="_blank">{{ house.kult_id }}</a></td>
 	</tr>
 {% endif %}
+
 {% if house.ruwiki %}
 	<tr>
 		<th>В Википедии</th>
 		<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
 	</tr>
 {% endif %}
+
 {% if house.safety %}
 	{% if house.state and house.safety in 'S' %}
 	<tr>
@@ -42,34 +44,81 @@
 	</tr>
 	{% endif %}
 {% endif %}
+
+{% if house.pasport_safety %}
+	{% if house.pasport_state and house.pasport_safety in 'S' %}
+	<tr>
+		<th>Сохранность и состояние по паспорту</th>
+		<td class="state-{{ house.pasport_state }}">{{ house.get_pasport_safety_display }} ({{ house.get_pasport_state_display|lower }})</td>
+	</tr>
+	{% else %}
+	<tr>
+		<th>Сохранность и состояние по паспорту</th>
+		<td class="safety-{{ house.pasport_safety }}">{{ house.get_pasport_safety_display }}</td>
+	</tr>
+	{% endif %}
+{% endif %}
+
+{% if house.pasport_address %}
+	<tr>
+		<th>Адрес в паспорте</th>
+		<td>{{ house.pasport_address }}</td>
+	</tr>
+{% endif %}
+
 {% if house.usage %}
 	<tr>
 		<th>Использование</th>
 		<td>{{ house.get_usage_display }}</td>
 	</tr>
 {% endif %}
+
 {% if house.protection %}
 	<tr>
 		<th>Категория охраны</th>
 		<td>{{ house.get_protection_display }}</td>
 	</tr>
 {% endif %}
-{% if house.pasport %}
+
+{% if is_admin and house.pasport %}
 	<tr>
 		<th>Паспорт</th>
 		<td>{{ house.pasport }}</td>
 	</tr>
 {% endif %}
+
 {% if house.material %}
 	<tr>
-		<th>Материал</th>
+		<th>Тип</th>
 		<td>{{ house.get_material_display }}</td>
 	</tr>
 {% endif %}
+
+{% if house.chronology %}
+	<tr>
+		<th>Хронология</th>
+		<td>{{ house.chronology|linebreaksbr }}</td>
+	</tr>
+{% endif %}
+
+{% if is_admin and house.documents %}
+	<tr>
+		<th>Документооборот</th>
+		<td>{{ house.documents|linebreaksbr }}</td>
+	</tr>
+{% endif %}
+
+{% if is_admin and house.monitoring %}
+	<tr>
+		<th>Мониторинг</th>
+		<td>{{ house.monitoring|linebreaksbr }}</td>
+	</tr>
+{% endif %}
+
 {% if house.extra_info %}
 	<tr>
 		<th>Дополнительная информация</th>
-		<td>{{ house.extra_info }}</td>
+		<td>{{ house.extra_info|linebreaksbr }}</td>
 	</tr>
 {% endif %}
 </table>

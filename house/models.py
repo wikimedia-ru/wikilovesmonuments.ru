@@ -39,13 +39,13 @@ class House(models.Model):
     STATE_CHOICES = (
         ('R', _("Restored")),
         ('S', _("Satisfactory")),
+        ('U', _("Unsatisfactory")),
         ('A', _("Accident")),
     )
     
     USAGE_CHOICES = (
         ('H', _("Dwelling house")),
         ('O', _("Office building")),
-        ('L', _("Losed")),
     )
     
     PROTECTION_CHOICES = (
@@ -68,25 +68,55 @@ class House(models.Model):
         ('S', _("Stone")),
     )
     
+    LEASE_CHOICES = (
+        ('L', _("Lease")),
+        ('R', _("Rent")),
+    )
+    
     kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
-    kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked"))
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
+
     name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
+    name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
+    material = models.CharField(max_length=1, blank=True, choices=MATERIAL_CHOICES, verbose_name=_("Material"))
+    pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
+
     street = models.ForeignKey('Street', verbose_name=_("Street"))
     number = models.CharField(max_length=20, verbose_name=_("Number"))
     coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
+    pasport_address = models.CharField(max_length=250, blank=True, verbose_name=_("Address from pasport"))
+
     safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety"))
     state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
-    usage = models.CharField(max_length=1, blank=True, choices=USAGE_CHOICES, verbose_name=_("Usage"))
     protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
+
+    pasport_safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety from pasport"))
+    pasport_state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State from pasport"))
+    pasport_protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
+
+    usage = models.CharField(max_length=1, blank=True, choices=USAGE_CHOICES, verbose_name=_("Usage"))
     ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Ownership"))
-    pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
-    obligation = models.CharField(max_length=250, blank=True, verbose_name=_("Obligation"))
-    material = models.CharField(max_length=1, blank=True, choices=MATERIAL_CHOICES, verbose_name=_("Material"))
+    land_ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Land ownership"))
     owner = models.CharField(max_length=250, blank=True, verbose_name=_("Owner"))
+    obligation = models.DateField(blank=True, verbose_name=_("Obligation date"))
+    lease = models.CharField(max_length=1, blank=True, choices=LEASE_CHOICES, verbose_name=_("Lease/Rent"))
     tenant = models.CharField(max_length=250, blank=True, verbose_name=_("Tenant"))
+
+    chronology = models.TextField(blank=True, verbose_name=_("Cronology")) # temporary
+    documents = models.TextField(blank=True, verbose_name=_("Documents")) # temporary
+    monitoring = models.TextField(blank=True, verbose_name=_("Monitoring")) # temporary
+
+    complex = models.BooleanField(blank=True, verbose_name=_("Complex"))
+    complex_root = models.ForeignKey('House', blank=True, verbose_name=_("Belong to complex"))
+    complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
+    complex_kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie")) # temporary
+
     extra_info = models.TextField(blank=True, verbose_name=_("Additional"))
+
+    kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked")) # temporary
+    kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
+    gudea_checked = models.BooleanField(default=False, verbose_name=_("Gudea base checked")) # temporary
 
     def __unicode__(self):
         return self.street.name + ', ' + self.number
