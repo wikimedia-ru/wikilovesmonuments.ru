@@ -16,17 +16,17 @@
 </script>
 {% endif %}
 
-<table>
+<table class="info">
 {% if house.kult_id %}
 	<tr>
 		<th>На сайте Культурного наследия</th>
-		<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}">{{ house.kult_id }}</a></td>
+		<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}" target="_blank">{{ house.kult_id }}</a></td>
 	</tr>
 {% endif %}
 {% if house.ruwiki %}
 	<tr>
 		<th>В Википедии</th>
-		<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}">{{ house.ruwiki }}</a></td>
+		<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
 	</tr>
 {% endif %}
 {% if house.safety %}

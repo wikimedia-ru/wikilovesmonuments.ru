@@ -24,12 +24,16 @@ ul.sl span {
 
 
 /* Street view */
-table {
+table.info {
 	width: 100%;
 }
 
-th,
-td {
+.info th {
+	text-align: right;
+}
+
+.info th,
+.info td {
 	border: 1px solid #ccc;
 	padding: 2px 6px;
 }
@@ -42,18 +46,36 @@ tr.even {
 	background: #f3f3f3;
 }
 
-
-/* House view */
-table {
-	width: 100%;
+/* Icons begin */
+.safety-S,
+td.safety-S,
+.safety-M,
+td.safety-M,
+.safety-R,
+td.safety-R,
+.safety-L,
+td.safety-L,
+.state-R,
+td.state-R,
+.state-S,
+td.state-S,
+.state-A,
+td.state-A {
+	padding-left: 24px;
+	background-position: 6px 50%;
+	background-repeat: no-repeat;
 }
 
-th,
-td {
-	border: 1px solid #ccc;
-	padding: 2px 6px;
-}
+.safety-S { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Building_Complete.svg/12px-Building_Complete.svg.png'); }
+.safety-M { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Building_Under_Construction.svg/12px-Building_Under_Construction.svg.png'); }
+.safety-R { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Building_Demolished.svg/12px-Building_Demolished.svg.png'); }
+.safety-L { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/7/75/Building_Destroyed.svg/12px-Building_Destroyed.svg.png'); }
+.state-R { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/0/04/Building_Under_Reconstruction.svg/12px-Building_Under_Reconstruction.svg.png'); }
+.state-S { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Building_Complete.svg/12px-Building_Complete.svg.png'); }
+.state-A { background-image: url('//upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Building_Damaged.svg/12px-Building_Damaged.svg.png'); }
+/* Icons end */
 
-th {
-	text-align: right;
+/* Other */
+.shady {
+	color: #aaa;
 }
