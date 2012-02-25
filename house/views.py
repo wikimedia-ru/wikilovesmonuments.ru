@@ -17,11 +17,11 @@ def street_list(request):
 def street(request, id):
     s = Street.objects.get(pk=id)
     h_list = House.objects.filter(street=id).order_by('number')
-    map_border = h_list.aggregate(Max('coord_x'), Min('coord_x'), Max('coord_y'), Min('coord_y'))
-    if map_border['coord_y__max'] != None:
+    map_border = h_list.aggregate(Max('coord_lon'), Min('coord_lon'), Max('coord_lat'), Min('coord_lat'))
+    if map_border['coord_lat__max'] != None:
         map_center = {
-            'lat': (map_border['coord_y__max'] + map_border['coord_y__min']) / 2,
-            'long': (map_border['coord_x__max'] + map_border['coord_x__min']) / 2,
+            'lat': (map_border['coord_lat__max'] + map_border['coord_lat__min']) / 2,
+            'lon': (map_border['coord_lon__max'] + map_border['coord_lon__min']) / 2,
         }
     else:
         map_center = False

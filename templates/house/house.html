@@ -10,7 +10,7 @@
 {% block content %}
 <h1><a href="/street/{{ house.street.id }}">{{ house.street }}</a>, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
 
-{% if house.coord_x %}
+{% if house.coord_lon %}
 <div id="map" style="width:300px;height:200px;float:right"></div>
 <script type="text/javascript">
 	var map = new L.Map('map');
@@ -19,10 +19,10 @@
 		cloudmadeAttrib = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
 		cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttrib});
 
-	var place = new L.LatLng({{ house.coord_y|stringformat:"f" }}, {{ house.coord_x|stringformat:"f" }});
+	var place = new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
 	map.setView(place, 15).addLayer(cloudmade);
 
-	var markerLocation = new L.LatLng({{ house.coord_y|stringformat:"f" }}, {{ house.coord_x|stringformat:"f" }});
+	var markerLocation = new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
 
 	var marker = new L.Marker(markerLocation);
 	map.addLayer(marker);

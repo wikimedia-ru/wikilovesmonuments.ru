@@ -51,13 +51,20 @@ class House(models.Model):
     PROTECTION_CHOICES = (
         ('F', _("Federal")),
         ('R', _("Regional")),
-        ('O', _("OPOKN")),
+        ('L', _("Local")),
         ('D', _("Determined")),
+        ('O', _("OPOKN")),
         ('N', _("No")),
     )
     
+    OWNERSHIP_CHOICES = (
+        ('F', _("Federal")),
+        ('R', _("Regional")),
+        ('M', _("Municipal")),
+    )
+    
     MATERIAL_CHOICES = (
-        ('W', _("Wood")),
+        ('W', _("Wooden")),
         ('S', _("Stone")),
     )
     
@@ -67,13 +74,13 @@ class House(models.Model):
     name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
     street = models.ForeignKey('Street', verbose_name=_("Street"))
     number = models.CharField(max_length=20, verbose_name=_("Number"))
-    coord_x = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Coord X"))
-    coord_y = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Coord Y"))
+    coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
+    coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
     safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety"))
     state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
     usage = models.CharField(max_length=1, blank=True, choices=USAGE_CHOICES, verbose_name=_("Usage"))
     protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
-    ownership = models.CharField(max_length=250, blank=True, verbose_name=_("Ownership"))
+    ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Ownership"))
     pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
     obligation = models.CharField(max_length=250, blank=True, verbose_name=_("Obligation"))
     material = models.CharField(max_length=1, blank=True, choices=MATERIAL_CHOICES, verbose_name=_("Material"))
