@@ -95,35 +95,6 @@ class HouseAdmin(admin.ModelAdmin):
     list_filter = ['safety', 'state', 'usage', 'protection', 'material',]
     search_fields = ['kult_id',]
 
-    def save_model(self, request, obj, form, change):
-        # Find house coordinates
-        if obj.coord_x == '' or obj.coord_y == '':
-            param = {
-                'key': settings.YMAPS_KEY,
-                'lang': 'ru-RU',
-                'format': 'json',
-                'results': 1,
-                #'ll': '39.89,59.22',
-                #'spn': '0.2,0.2',
-                'geocode': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
-                #'text': (u'Вологда, ' + obj.street.full_name + ', ' + obj.number).encode('utf-8'),
-            }
-            url = "http://geocode-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
-            #url = "http://psearch-maps.yandex.ru/1.x/?%s" % urllib.urlencode(param)
-            fp = urllib.urlopen(url)
-            answer = json.load(fp)
-            answer = answer['response']['GeoObjectCollection']
-            fp.close()
-
-            if answer['metaDataProperty']['PSearchMetaData']['PSearchResponse']['found'] != '0':
-                coord = answer['featureMember'][0]['GeoObject']['Point']['pos']
-                coord = coord.split()
-                obj.coord_x = float(coord[0])
-                obj.coord_y = float(coord[1])
-
-        obj.save()
-
-
 admin.site.register(Street, StreetAdmin)
 admin.site.register(House, HouseAdmin)
 
