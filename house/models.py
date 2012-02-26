@@ -108,7 +108,7 @@ class House(models.Model):
     monitoring = models.TextField(blank=True, verbose_name=_("Monitoring")) # temporary
 
     complex = models.BooleanField(blank=True, verbose_name=_("Complex"))
-    complex_root = models.ForeignKey('House', blank=True, verbose_name=_("Belong to complex"))
+    complex_root = models.ForeignKey('House', blank=True, null=True, verbose_name=_("Belong to complex"))
     complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
     complex_kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie")) # temporary
 
