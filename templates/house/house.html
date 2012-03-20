@@ -127,7 +127,8 @@
 <table class="info photo">
 {% for p in photo %}
 	<tr class="{% cycle 'even' 'odd' %}"><td>
-		<a href="{{ p.file.src }}" title="Автор: {{ p.author }}" target="_blank"><img src="{{ p.file.src_300 }}" alt="Автор: {{ p.author }}" /></a>
+		<a href="{{ p.file.src }}" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
+		<p>{% if p.title %}{{ p.title }}<br/> {% endif %}Автор: {{ p.author }}</p>
 	</td></tr>
 {% endfor %}
 </table>

@@ -43,6 +43,10 @@ table.info.photo {
 	padding: 2px 6px;
 }
 
+.info.photo td {
+	padding-top: 1.5em;
+}
+
 tr.odd {
 	background: #fff;
 }
