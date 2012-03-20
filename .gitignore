@@ -1,4 +1,7 @@
 *~
 *.pyc
 /settings_local.py
+/gunicorn.conf.py
 /static/*
+/media/*
+/yafotki/*

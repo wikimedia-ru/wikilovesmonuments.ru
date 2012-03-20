@@ -3,6 +3,8 @@ import os.path
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from yafotki.fields import YFField
+
 
 
 class Street(models.Model):
@@ -99,7 +101,7 @@ class House(models.Model):
     ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Ownership"))
     land_ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Land ownership"))
     owner = models.CharField(max_length=250, blank=True, verbose_name=_("Owner"))
-    obligation = models.DateField(blank=True, verbose_name=_("Obligation date"))
+    obligation = models.DateField(blank=True, null=True, verbose_name=_("Obligation date"))
     lease = models.CharField(max_length=1, blank=True, choices=LEASE_CHOICES, verbose_name=_("Lease/Rent"))
     tenant = models.CharField(max_length=250, blank=True, verbose_name=_("Tenant"))
 
@@ -123,19 +125,17 @@ class House(models.Model):
 
 
 class HousePhoto(models.Model):
-    def make_upload_path(instance, filename):
-        path = u"%u%s" % (instance.house.pk, os.path.splitext(filename)[1])
-        i = 0
-        while (os.path.isfile(path)):
-            path = u"%u_%u%s" % (instance.page.code1, i, os.path.splitext(filename)[1])
+    def make_upload_folder(instance, filename):
+        dir_name, image_name = os.path.split(filename)
+        path = u"%d/%s" % (instance.house.pk, image_name)
         return path
 
     house = models.ForeignKey('House', verbose_name=_("House"))
-    file = models.FileField(upload_to=make_upload_path, blank=True, null=True, verbose_name=_("File"))
+    file = YFField(upload_to=make_upload_folder)
     title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
 
     def __unicode__(self):
-        return '[' + self.house + ']' + self.title
+        return self.title
 
 
 class HouseEvent(models.Model):
@@ -152,5 +152,5 @@ class HouseEvent(models.Model):
     comment = models.CharField(max_length=250, blank=True, verbose_name=_("Comment"))
 
     def __unicode__(self):
-        return '[' + self.house + ']' + ' ' + self.date + ' - ' + self.text
+        return self.date + ' - ' + self.text
 
