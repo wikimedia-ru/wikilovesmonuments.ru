@@ -122,4 +122,15 @@
 	</tr>
 {% endif %}
 </table>
+
+{% if house.kult_id %}
+<table class="info photo">
+{% for p in photo %}
+	<tr class="{% cycle 'even' 'odd' %}"><td>
+		<a href="{{ p.file.src }}" title="Автор: {{ p.author }}" target="_blank"><img src="{{ p.file.src_300 }}" alt="Автор: {{ p.author }}" /></a>
+	</td></tr>
+{% endfor %}
+</table>
+{% endif %}
+
 {% endblock %}

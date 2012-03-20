@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
 from django.db.models import Count, Max, Min
-from house.models import Street, House
+from house.models import *
 
 
 def index_page(request):
@@ -36,9 +36,11 @@ def street(request, id):
 
 def house(request, id):
     h = House.objects.get(pk=id)
+    photo = HousePhoto.objects.filter(house=h)
 
     return render_to_response('house/house.html', {
         'house': h,
+        'photo': photo,
         'is_admin': True,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))

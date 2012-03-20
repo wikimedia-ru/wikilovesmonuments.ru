@@ -28,6 +28,11 @@ table.info {
 	width: 100%;
 }
 
+table.info.photo {
+	text-align: center;
+	margin-top: -1px;
+}
+
 .info th {
 	text-align: right;
 }

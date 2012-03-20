@@ -133,6 +133,7 @@ class HousePhoto(models.Model):
     house = models.ForeignKey('House', verbose_name=_("House"))
     file = YFField(upload_to=make_upload_folder)
     title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
+    author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
 
     def __unicode__(self):
         return self.title
