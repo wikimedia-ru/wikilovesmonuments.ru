@@ -22,6 +22,7 @@ class Street(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("Name"))
     full_name = models.CharField(blank=True, max_length=250, verbose_name=_("Full name"))
     type = models.CharField(max_length=1, blank=True, choices=STREET_CHOICES, default='S', verbose_name=_("Type"))
+    description = models.TextField(blank=True, verbose_name=_("Description"))
 
     class Meta:
         ordering = ['name',]

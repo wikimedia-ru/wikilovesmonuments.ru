@@ -12,7 +12,7 @@ from house.models import Street, House, HousePhoto, HouseEvent
 class StreetAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('name', 'full_name', 'type',)
+            'fields': ('name', 'full_name', 'type', 'description',)
         }),
     )
 

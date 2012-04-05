@@ -19,6 +19,13 @@
 {% endfor %}
 </script>
 {% endif %}
+
+{% if street.description %}
+<div class="text">
+	{{ street.description }}
+</div>
+{% endif %}
+
 <table class="info">
 	<thead>
 		<tr>
