@@ -1,7 +1,22 @@
-{% extends "empty.html" %}
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/content.css" />
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
+{% endblock %}
 
 {% block content %}
 <h1>{{ street.full_name }}</h1>
+<ul class="sl">
+{% for street in street_list %}
+	{% if street.house_count %}
+	<li><a href="/street/{{ street.id }}">{{ street.name }} <span>{{ street.house_count }}</span></a></li>
+	{% endif %}
+{% endfor %}
+</ul>
+
 {% if map_center %}
 <div id="map" class="map"></div>
 <script type="text/javascript">
@@ -12,7 +27,7 @@
 		.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 15)
 		.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 
-{% for house in list %}
+{% for house in house_list %}
 	{% if house.coord_lat %}
 		map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
 	{% endif %}
@@ -35,7 +50,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	{% for house in list %}
+	{% for house in house_list %}
 		<tr class="{% cycle 'odd' 'even' %}">
 			<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
 		{% if house.state and house.safety == 'S' %}

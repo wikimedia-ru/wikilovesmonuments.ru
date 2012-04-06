@@ -5,22 +5,11 @@
 <link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
 <!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
 <script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
-<script>
-$('a').live('click', function(e) {
-	var a = $(this);
-	if (a.attr('target') == '_blank' || /^https?:\/\//.test(a.attr('href'))) {
-		return;
-	}
-	e.preventDefault();
-	$('#content').load(a.attr('href'));
-});
-</script>
 {% endblock %}
 
 {% block content %}
-<div id="content" class="content"></div>
 <ul class="sl">
-{% for street in list %}
+{% for street in street_list %}
 	{% if street.house_count %}
 	<li><a href="/street/{{ street.id }}">{{ street.name }} <span>{{ street.house_count }}</span></a></li>
 	{% endif %}

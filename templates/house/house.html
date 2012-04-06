@@ -1,4 +1,11 @@
-{% extends "empty.html" %}
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/content.css" />
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
+{% endblock %}
 
 {% block content %}
 <h1><a href="/street/{{ house.street.id }}">{{ house.street }}</a>, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h1>
@@ -10,7 +17,7 @@
 	var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 	var map = new L.Map('map');
 	map
-		.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 15)
+		.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 16)
 		.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
 		.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
 </script>
@@ -124,14 +131,14 @@
 </table>
 
 {% if house.kult_id %}
-<table class="info photo">
+<ul class="photo">
 {% for p in photo %}
-	<tr class="{% cycle 'even' 'odd' %}"><td>
+	<li>
 		<a href="{{ p.file.src }}" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
 		<p>{% if p.title %}{{ p.title }}<br/> {% endif %}Автор: {{ p.author }}</p>
-	</td></tr>
+	</li>
 {% endfor %}
-</table>
+</ul>
 {% endif %}
 
 {% endblock %}

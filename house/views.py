@@ -10,12 +10,13 @@ def index_page(request):
     s_list = Street.objects.order_by('name').annotate(house_count=Count('house'))
 
     return render_to_response('house/index.html', {
-        'list': s_list,
+        'street_list': s_list,
         }, context_instance=RequestContext(request))
 
 
 def street(request, id):
     s = Street.objects.get(pk=id)
+    s_list = Street.objects.order_by('name').annotate(house_count=Count('house'))
     h_list = House.objects.filter(street=id).order_by('number')
     map_border = h_list.aggregate(Max('coord_lon'), Min('coord_lon'), Max('coord_lat'), Min('coord_lat'))
     if map_border['coord_lat__max'] != None:
@@ -28,7 +29,8 @@ def street(request, id):
 
     return render_to_response('house/street.html', {
         'street': s,
-        'list': h_list,
+        'street_list': s_list,
+        'house_list': h_list,
         'map_center': map_center,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
@@ -36,10 +38,12 @@ def street(request, id):
 
 def house(request, id):
     h = House.objects.get(pk=id)
+    s_list = Street.objects.order_by('name').annotate(house_count=Count('house'))
     photo = HousePhoto.objects.filter(house=h)
 
     return render_to_response('house/house.html', {
         'house': h,
+        'street_list': s_list,
         'photo': photo,
         'is_admin': True,
         'CMADE_KEY': settings.CMADE_KEY,

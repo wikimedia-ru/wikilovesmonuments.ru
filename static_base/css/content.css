@@ -15,7 +15,9 @@ ul.sl {
 	color: #aaa;
 	list-style: none;
 	padding: 0;
-	max-width: 13em;
+	width: 13em;
+	float: left;
+	margin-right: 7em;
 }
 
 ul.sl span {
@@ -25,12 +27,6 @@ ul.sl span {
 
 /* Street view */
 table.info {
-	width: 100%;
-}
-
-table.info.photo {
-	text-align: center;
-	margin-top: -1px;
 }
 
 .info th {
@@ -43,8 +39,12 @@ table.info.photo {
 	padding: 2px 6px;
 }
 
-.info.photo td {
-	padding-top: 1.5em;
+.photo li {
+	float: left;
+	list-style: none;
+	text-align: center;
+	width: 40%;
+	margin: 10px 5%;
 }
 
 tr.odd {
