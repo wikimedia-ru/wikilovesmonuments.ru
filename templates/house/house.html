@@ -104,28 +104,28 @@
 {% if house.chronology %}
 	<tr>
 		<th>Хронология</th>
-		<td>{{ house.chronology|linebreaksbr }}</td>
+		<td>{{ house.chronology|safe }}</td>
 	</tr>
 {% endif %}
 
 {% if is_admin and house.documents %}
 	<tr>
 		<th>Документооборот</th>
-		<td>{{ house.documents|linebreaksbr }}</td>
+		<td>{{ house.documents|safe }}</td>
 	</tr>
 {% endif %}
 
 {% if is_admin and house.monitoring %}
 	<tr>
 		<th>Мониторинг</th>
-		<td>{{ house.monitoring|linebreaksbr }}</td>
+		<td>{{ house.monitoring|safe }}</td>
 	</tr>
 {% endif %}
 
 {% if house.extra_info %}
 	<tr>
 		<th>Дополнительная информация</th>
-		<td>{{ house.extra_info|linebreaksbr }}</td>
+		<td>{{ house.extra_info|safe }}</td>
 	</tr>
 {% endif %}
 </table>

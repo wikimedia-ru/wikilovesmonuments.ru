@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ street.full_name }}</h1>
 <ul class="sl">
 {% for street in street_list %}
 	{% if street.house_count %}
@@ -17,6 +16,7 @@
 {% endfor %}
 </ul>
 
+<h1>{{ street.full_name }}</h1>
 {% if map_center %}
 <div id="map" class="map"></div>
 <script type="text/javascript">
@@ -36,8 +36,8 @@
 {% endif %}
 
 {% if street.description %}
-<div class="text">
-	{{ street.description }}
+<div class="desc text">
+	{{ street.description|safe }}
 </div>
 {% endif %}
 
