@@ -154,6 +154,13 @@ LOGGING = {
     }
 }
 
+TINYMCE_DEFAULT_CONFIG = {
+    'plugins': "table,spellchecker,paste,searchreplace",
+    'theme': "advanced",
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 10,
+}
+
 # Local settings
 from settings_local import *
 
