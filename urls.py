@@ -19,8 +19,9 @@ urlpatterns = patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.STATIC_ROOT}),
 
-    url(r'^robots.txt$', 'django.views.static.serve', {'path':"/robots.txt",'document_root': settings.STATIC_ROOT, 'show_indexes': False }),
+    (r'^tinymce/', include('tinymce.urls')),
 
+    url(r'^robots.txt$', 'django.views.static.serve', {'path':"/robots.txt",'document_root': settings.STATIC_ROOT, 'show_indexes': False }),
     url(r'^base/?$', 'house.views.index_page'),
     url(r'^street/(?P<id>[0-9]+)/?$', 'house.views.street'),
     url(r'^house/(?P<id>[0-9]+)/?$', 'house.views.house'),

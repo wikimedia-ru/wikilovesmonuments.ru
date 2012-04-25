@@ -3,6 +3,7 @@ import os.path
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+from tinymce import models as tinymce_models
 from yafotki.fields import YFField
 
 
@@ -22,7 +23,7 @@ class Street(models.Model):
     name = models.CharField(max_length=250, verbose_name=_("Name"))
     full_name = models.CharField(blank=True, max_length=250, verbose_name=_("Full name"))
     type = models.CharField(max_length=1, blank=True, choices=STREET_CHOICES, default='S', verbose_name=_("Type"))
-    description = models.TextField(blank=True, verbose_name=_("Description"))
+    description = tinymce_models.HTMLField(blank=True, verbose_name=_("Description"))
 
     class Meta:
         ordering = ['name',]
@@ -106,16 +107,16 @@ class House(models.Model):
     lease = models.CharField(max_length=1, blank=True, choices=LEASE_CHOICES, verbose_name=_("Lease/Rent"))
     tenant = models.CharField(max_length=250, blank=True, verbose_name=_("Tenant"))
 
-    chronology = models.TextField(blank=True, verbose_name=_("Cronology")) # temporary
-    documents = models.TextField(blank=True, verbose_name=_("Documents")) # temporary
-    monitoring = models.TextField(blank=True, verbose_name=_("Monitoring")) # temporary
+    chronology = tinymce_models.HTMLField(blank=True, verbose_name=_("Cronology")) # temporary
+    documents = tinymce_models.HTMLField(blank=True, verbose_name=_("Documents")) # temporary
+    monitoring = tinymce_models.HTMLField(blank=True, verbose_name=_("Monitoring")) # temporary
 
     complex = models.BooleanField(blank=True, verbose_name=_("Complex"))
     complex_root = models.ForeignKey('House', blank=True, null=True, verbose_name=_("Belong to complex"))
     complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
     complex_kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie")) # temporary
 
-    extra_info = models.TextField(blank=True, verbose_name=_("Additional"))
+    extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
 
     kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked")) # temporary
     kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
