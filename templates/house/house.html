@@ -7,6 +7,8 @@
 <script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
+{% block title %}{{ house.street.name }}, {{ house.number }} — {% endblock %}
+
 {% block content %}
 <ul class="breadcrumb">
 	<li>
@@ -33,7 +35,7 @@
 
 	<div class="span9">
 		<div class="well">
-			<h2>{{ house.street }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h2>
+			<h2>{{ house.street.full_name }}, {{ house.number }}{% if house.name %} ({{ house.name }}){% endif %}</h2>
 
 			{% if house.coord_lon %}
 			<div id="map" class="map"></div>

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}{{ flatpage.title }} — Старая Вологда{% endblock %}
+{% block title %}{% if flatpage.title != '-' %}{{ flatpage.title }} —{% endif %}{% endblock %}
 
 {% block content %}
 <div class="well">
-	<h2>{{ flatpage.title }}</h2>
+	{% if flatpage.title != '-' %}<h2>{{ flatpage.title }}</h2>{% endif %}
 	{{ flatpage.content }}
 </div>
 {% endblock %}
