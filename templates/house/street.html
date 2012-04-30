@@ -8,59 +8,78 @@
 {% endblock %}
 
 {% block content %}
-<ul class="sl">
-{% for street in street_list %}
-	{% if street.house_count %}
-	<li><a href="/street/{{ street.id }}">{{ street.name }} <span>{{ street.house_count }}</span></a></li>
-	{% endif %}
-{% endfor %}
+<ul class="breadcrumb">
+	<li>
+		<a href="/base/">База домов</a> <span class="divider">/</span>
+	</li>
+	<li class="active">{{ street.full_name }}</li>
 </ul>
 
-<h1>{{ street.full_name }}</h1>
-{% if map_center %}
-<div id="map" class="map"></div>
-<script type="text/javascript">
-	var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-	var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-	var map = new L.Map('map');
-	map
-		.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 15)
-		.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
+<div class="row">
+	<div class="span3">
+		<div class="well sidebar-nav">
+			<ul class="nav nav-list">
+			{% for s in street_list %}
+				{% if s.house_count %}
+				<li {% if s.id == street.id %}class="active"{% endif %}><a href="/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
+				{% endif %}
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 
-{% for house in house_list %}
-	{% if house.coord_lat %}
-		map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
-	{% endif %}
-{% endfor %}
-</script>
-{% endif %}
+	<div class="span9">
+		<div class="well">
+			<h2>{{ street.full_name }}</h2>
+			{% if map_center %}
+			<div id="map" class="map"></div>
+			<script type="text/javascript">
+				var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+				var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
+				var map = new L.Map('map');
+				map
+					.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 15)
+					.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 
-{% if street.description %}
-<div class="desc text">
-	{{ street.description|safe }}
+			{% for house in house_list %}
+				{% if house.coord_lat %}
+					map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
+				{% endif %}
+			{% endfor %}
+			</script>
+			{% endif %}
+
+			{% if street.description %}
+			<div class="desc text">
+				{{ street.description|safe }}
+			</div>
+			{% endif %}
+
+		</div>
+		<div class="well">
+			<table class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Номер</th>
+						<th>Состояние</th>
+						<th>Категория охраны</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for house in house_list %}
+					<tr class="{% cycle 'odd' 'even' %}">
+						<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
+					{% if house.state and house.safety == 'S' %}
+						<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
+					{% else %}
+						<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
+					{% endif %}
+						<td {% if house.protection == 'N' %}class="shady"{% endif %}>{{ house.get_protection_display }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
-{% endif %}
-
-<table class="info">
-	<thead>
-		<tr>
-			<th>Номер</th>
-			<th>Состояние</th>
-			<th>Категория охраны</th>
-		</tr>
-	</thead>
-	<tbody>
-	{% for house in house_list %}
-		<tr class="{% cycle 'odd' 'even' %}">
-			<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
-		{% if house.state and house.safety == 'S' %}
-			<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
-		{% else %}
-			<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
-		{% endif %}
-			<td {% if house.protection == 'N' %}class="shady"{% endif %}>{{ house.get_protection_display }}</td>
-		</tr>
-	{% endfor %}
-	</tbody>
-</table>
 {% endblock %}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xml:lang="ru">
+<html lang="ru">
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Language" content="ru" />
@@ -7,17 +7,11 @@
 	<title>Старая Вологда</title>
 	<link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
 
-	<!--[if gte IE 7]><!-->
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css" />
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mobile.css" media="only screen and (max-device-width:540px)" />
-	<!--<![endif]-->
+	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style-bs.css" />
 
 	<!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-
-	<!--[if IE 7]>
-	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/ie7.css" />
 	<![endif]-->
 
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
@@ -26,14 +20,24 @@
 	{% endblock %}
 </head>
 <body>
-	<div id="wrap">
-		<article>
-		{% block content %}
-			Empty!
-		{% endblock %}
-		</article>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="/">Старая Вологда</a>
+			</div>
+		</div>
 	</div>
-	<footer>
-	</footer>
+	<div class="container">
+		{% block content %}
+		<div class="hero-unit">
+			<h1>Тут ничего нет!</h1>
+		</div>
+		{% endblock %}
+	</div>
 </body>
 </html>
