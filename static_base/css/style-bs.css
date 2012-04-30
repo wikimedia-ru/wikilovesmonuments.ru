@@ -6,3 +6,7 @@ body {
 .count {
 	float: right;
 }
+
+.table-well {
+	background: whiteSmoke;
+}

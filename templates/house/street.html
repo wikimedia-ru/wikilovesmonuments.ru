@@ -54,32 +54,30 @@
 				{{ street.description|safe }}
 			</div>
 			{% endif %}
+		</div>
 
-		</div>
-		<div class="well">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th>Номер</th>
-						<th>Состояние</th>
-						<th>Категория охраны</th>
-					</tr>
-				</thead>
-				<tbody>
-				{% for house in house_list %}
-					<tr class="{% cycle 'odd' 'even' %}">
-						<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
-					{% if house.state and house.safety == 'S' %}
-						<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
-					{% else %}
-						<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
-					{% endif %}
-						<td {% if house.protection == 'N' %}class="shady"{% endif %}>{{ house.get_protection_display }}</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-		</div>
+		<table class="table table-well table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>Номер</th>
+					<th>Состояние</th>
+					<th>Категория охраны</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for house in house_list %}
+				<tr class="{% cycle 'odd' 'even' %}">
+					<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
+				{% if house.state and house.safety == 'S' %}
+					<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
+				{% else %}
+					<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
+				{% endif %}
+					<td {% if house.protection == 'N' %}class="shady"{% endif %}>{{ house.get_protection_display }}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
 	</div>
 </div>
 {% endblock %}
