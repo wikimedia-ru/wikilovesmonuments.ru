@@ -29,6 +29,13 @@
 					<span class="icon-bar"></span>
 				</a>
 				<a class="brand" href="/">Вологодское ВООПИиК</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+					{% for item in menu %}
+						<li {% if item.url == request.path %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
+					{% endfor %}
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
