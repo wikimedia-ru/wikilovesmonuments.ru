@@ -10,11 +10,12 @@ from menu.models import MenuItem
 class MenuAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
-            'fields': ('name', 'url',)
+            'fields': ('name', 'url', 'order',)
         }),
     )
 
-    list_display = ['name', 'url',]
+    list_display = ['name', 'url', 'order',]
+    ordering = ['order',]
 
 admin.site.register(MenuItem, MenuAdmin)
 
