@@ -23,7 +23,7 @@
 			<ul class="nav nav-list">
 			{% for s in street_list %}
 				{% if s.house_count %}
-				<li {% if s.id == street.id %}class="active"{% endif %}><a href="/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
+				<li {% if s.id == street.id %}class="active"{% endif %}><a href="/base/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
 				{% endif %}
 			{% endfor %}
 			</ul>
@@ -69,7 +69,7 @@
 			<tbody>
 			{% for house in house_list %}
 				<tr class="{% cycle 'odd' 'even' %}">
-					<th><a href="/house/{{ house.id }}">{{ house.number }}</a></th>
+					<th><a href="/base/house/{{ house.id }}">{{ house.number }}</a></th>
 				{% if house.state and house.safety == 'S' %}
 					<td class="state-{{ house.state }}">{{ house.get_state_display }}</td>
 				{% else %}

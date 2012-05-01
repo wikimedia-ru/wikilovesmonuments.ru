@@ -16,7 +16,7 @@
 			<ul class="nav nav-list">
 			{% for street in street_list %}
 				{% if street.house_count %}
-				<li><a href="/street/{{ street.id }}">{{ street.name }} <span class="count">{{ street.house_count }}</span></a></li>
+				<li><a href="/base/street/{{ street.id }}">{{ street.name }} <span class="count">{{ street.house_count }}</span></a></li>
 				{% endif %}
 			{% endfor %}
 			</ul>

@@ -23,8 +23,8 @@ urlpatterns = patterns('',
 
     url(r'^robots.txt$', 'django.views.static.serve', {'path':"/robots.txt",'document_root': settings.STATIC_ROOT, 'show_indexes': False }),
     url(r'^base/?$', 'house.views.index_page'),
-    url(r'^street/(?P<id>[0-9]+)/?$', 'house.views.street'),
-    url(r'^house/(?P<id>[0-9]+)/?$', 'house.views.house'),
+    url(r'^base/street/(?P<id>[0-9]+)/?$', 'house.views.street'),
+    url(r'^base/house/(?P<id>[0-9]+)/?$', 'house.views.house'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

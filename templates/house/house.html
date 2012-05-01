@@ -15,7 +15,7 @@
 		<a href="/base/">База домов</a> <span class="divider">/</span>
 	</li>
 	<li>
-		<a href="/street/{{ house.street.id }}/">{{ house.street.full_name }}</a> <span class="divider">/</span>
+		<a href="/base/street/{{ house.street.id }}/">{{ house.street.full_name }}</a> <span class="divider">/</span>
 	</li>
 	<li class="active">{{ house.number }}</li>
 </ul>
@@ -26,7 +26,7 @@
 			<ul class="nav nav-list">
 			{% for s in street_list %}
 				{% if s.house_count %}
-				<li {% if s.id == house.street.id %}class="active"{% endif %}><a href="/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
+				<li {% if s.id == house.street.id %}class="active"{% endif %}><a href="/base/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
 				{% endif %}
 			{% endfor %}
 			</ul>
@@ -61,7 +61,7 @@
 			{% if house.ruwiki %}
 				<tr>
 					<th>В Википедии</th>
-					<td><a href="http://ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
+					<td><a href="//ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
 				</tr>
 			{% endif %}
 
