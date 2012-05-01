@@ -9,6 +9,9 @@
 	border: 1px solid #ccc;
 }
 
+.map-big {
+	height: 550px;
+}
 
 /* Street list */
 ul.sl {
