@@ -3,6 +3,31 @@ body {
 	padding-bottom: 40px;
 }
 
+.navbar-inner {
+	/* David R. Tribble, CC-BY-SA-3.0, http://commons.wikimedia.org/wiki/File:WoodDeck-9912.jpg */
+	background: url('../img/menu-bg.jpg') 0 0 repeat-x;
+	background-size: 100%;
+}
+
+.navbar .brand {
+	color: #000;
+	text-shadow: 0 1px 1px #fff;
+}
+
+.navbar .nav > li > a {
+	font-size: 16px;
+	color: #000;
+	text-shadow: 0 1px 1px #fff;
+	line-height: 22px;
+}
+
+.navbar .nav > li > a:hover,
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover {
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUCNdjYGBgSAcAAGwAaMzMRCoAAAAASUVORK5CYII=') 0 0 repeat;
+	text-shadow: 0 1px 1px #000;
+}
+
 .count {
 	float: right;
 }
