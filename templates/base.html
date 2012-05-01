@@ -32,7 +32,7 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 					{% for item in menu %}
-						<li {% if item.url == request.path %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
+						<li {% if item.active %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
 					{% endfor %}
 					</ul>
 				</div>
