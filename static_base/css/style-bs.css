@@ -1,5 +1,5 @@
 body {
-	background: url('../img/bg.png') 0 0 repeat;
+	background: url(../img/bg.png) 0 0 repeat;
 	color: #333;
 }
 
@@ -45,7 +45,42 @@ header a.brand {
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
-	background: url('../img/logo.png') 0 0 no-repeat;
+	background: url(../img/logo.png) 0 0 no-repeat;
+}
+
+.date {
+	display: block;
+	text-align: center;
+	width: 96px;
+	height: 62px;
+	padding-top: 25px;
+	background: url(../img/date-braces.png) 0 0 no-repeat;
+}
+
+header .date {
+	float: right;
+	width: 131px;
+	height: 86px;
+	background-image: url(../img/date-braces-head.png)
+}
+
+.date-d,
+.date-m,
+.date-y {
+	display: block;
+}
+
+.date-d {
+	font-size: 42px;
+}
+
+.date-m {
+	margin-top: 5px;
+	font-size: 13px;
+}
+
+.date-y {
+	font-size: 18px;
 }
 
 a {
