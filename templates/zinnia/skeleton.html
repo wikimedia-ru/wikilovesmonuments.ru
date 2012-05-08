@@ -14,11 +14,11 @@
 {% endblock %}
 
 {% block main %}
-	<ul class="breadcrumb">
+	<!--ul class="breadcrumb">
 		<li>
 			{% block breadcrumbs %}{% endblock %}
 		</li>
-	</ul>
+	</ul-->
 
 	<div class="row">
 		<div class="span12">
@@ -34,10 +34,8 @@
 		</div>
 
 		<div class="span3">
-			<div class="well">
-				{% block sidebar %}
-				{% endblock %}
-			</div>
+			{% block sidebar %}
+			{% endblock %}
 		</div>
 	</div>
 {% endblock %}

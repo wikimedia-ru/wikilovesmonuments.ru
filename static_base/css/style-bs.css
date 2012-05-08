@@ -127,6 +127,14 @@ header .nav > .active > a {
 	color: #e31e24;
 }
 
+.block-title {
+	color: #fff;
+	background: #333;
+	text-transform: lowercase;
+	text-align: center;
+	font-size: 16px;
+}
+
 .count {
 	float: right;
 }
