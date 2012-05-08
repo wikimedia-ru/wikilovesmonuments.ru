@@ -22,48 +22,12 @@
 {% endblock %}
 
 {% block sidebar %}
-<div id="widget-search" class="widget">
-  <h3 class="block-title">{% trans "Search" %}</h3>
-  {% include "zinnia/tags/search_form.html" %}
-</div>
-<div id="widget-categories" class="widget">
-  <h3 class="block-title">{% trans "Categories" %}</h3>
-  {% get_categories %}
-</div>
-<div id="widget-authors" class="widget">
-  <h3 class="block-title">{% trans "Authors" %}</h3>
-  {% get_authors %}
-</div>
-<div id="widget-calendar" class="widget">
-  <h3 class="block-title">{% trans "Calendar" %}</h3>
-  {% get_calendar_entries %}
-</div>
-<div id="widget-tags" class="widget">
-  <h3 class="block-title">{% trans "Tags" %}</h3>
-  {% get_tag_cloud %}
-</div>
-<div id="widget-recents" class="widget">
-  <h3 class="block-title">{% trans "Recent entries" %}</h3>
-  {% get_recent_entries 5 %}
-</div>
-<div id="widget-comments" class="widget">
-  <h3 class="block-title">{% trans "Recent comments" %}</h3>
-  {% get_recent_comments 5 %}
-</div>
-<div id="widget-linkbacks" class="widget">
-  <h3 class="block-title">{% trans "Recent linkbacks" %}</h3>
-  {% get_recent_linkbacks 5 %}
-</div>
-<div id="widget-randoms" class="widget">
-  <h3 class="block-title">{% trans "Random entries" %}</h3>
-  {% get_random_entries 5 %}
-</div>
 <div id="widget-populars" class="widget">
-  <h3 class="block-title">{% trans "Popular entries" %}</h3>
+  <h3 class="block-title">Популярные статьи</h3>
   {% get_popular_entries 5 %}
 </div>
 <div id="widget-archives" class="widget">
-  <h3 class="block-title">{% trans "Archives" %}</h3>
+  <h3 class="block-title">Архив</h3>
   {% get_archives_entries_tree %}
 </div>
 {% if user.is_authenticated %}
