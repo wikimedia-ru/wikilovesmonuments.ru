@@ -1,31 +1,95 @@
 body {
-	padding-top: 60px;
-	padding-bottom: 40px;
+	background: url('../img/bg.png') 0 0 repeat;
+	color: #333;
 }
 
-.navbar-inner {
-	/* David R. Tribble, CC-BY-SA-3.0, http://commons.wikimedia.org/wiki/File:WoodDeck-9912.jpg */
-	background: url('../img/menu-bg.jpg') 0 0 repeat-x;
-	background-size: 100%;
+.container {
+	padding: 40px 43px 40px 60px;
+	background: #fff;
 }
 
-.navbar .brand {
-	color: #000;
-	text-shadow: 0 1px 1px #fff;
+.header-top {
+	position: relative;
+	height: 187px;
+	margin-left: 104px;
+	margin-bottom: 10px;
+	padding-left: 45px;
+	border-bottom: 3px solid #e31e24;
 }
 
-.navbar .nav > li > a {
+header .quote {
+	font-weight: normal;
+	font-style: italic;
+	font-size: 24px;
+	line-height: 28px;
+}
+
+header h2 {
+	display: block;
+	position: absolute;
+	bottom: 20px;
+	font-size: 12px;
+	line-height: 14px;
+	padding-left: 10px;
+	border-left: 3px solid #333;
+}
+
+header a.brand {
+	display: block;
+	position: absolute;
+	left: -109px;
+	bottom: -3px;
+	width: 115px;
+	height: 190px;
+	padding: 0;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	background: url('../img/logo.png') 0 0 no-repeat;
+}
+
+a {
+	color: #e31e24;
+}
+
+a:hover {
+	color: #a3161a;
+}
+
+.nav-list > .active > a,
+.nav-list > .active > a:hover {
+	background: #e31e24;
+}
+
+header .nav > li {
+	margin-top: 5px;
+	margin-right: -7px;
+}
+
+header .nav > li > a {
 	font-size: 16px;
-	color: #000;
-	text-shadow: 0 1px 1px #fff;
-	line-height: 22px;
+	font-weight: bold;
+	color: #333;
+	border: solid #333;
+	border-width: 0 7px;
+	border-radius: 0;
+	margin: 0;
+	padding-left: 30px;
+	padding-right: 30px;
 }
 
-.navbar .nav > li > a:hover,
-.navbar .nav .active > a,
-.navbar .nav .active > a:hover {
-	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUCNdjYGBgSAcAAGwAaMzMRCoAAAAASUVORK5CYII=') 0 0 repeat;
-	text-shadow: 0 1px 1px #000;
+header .nav > .active > a,
+header .nav > li > a:hover,
+header .nav > .active > a:hover {
+	color: #a3161a;
+	border-color: #e31e24;
+	background: transparent;
+	position: relative;
+	z-index: 2;
+}
+
+header .nav > .active > a {
+	color: #e31e24;
 }
 
 .count {

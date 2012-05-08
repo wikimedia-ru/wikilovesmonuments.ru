@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load zinnia_tags i18n %}
+{% load url from future %}
+{% get_tags as entry_tags %}
+
+{% block head %}
+	<meta name="description" content="{% block meta-description %}Demonstration of the Zinnia Blog application.{% endblock %}" />
+	<meta name="keywords" content="{% block meta-keywords %}django, blog, zinnia, {{ entry_tags|join:", "}}{% endblock %}" />
+	<meta name="author" content="Fantomas42" />
+	{% block meta %}{% endblock %}
+	<link rel="pingback" href="/xmlrpc/" />
+	{% block link %}{% endblock %}
+	{% block script %}{% endblock %}
+{% endblock %}
+
+{% block main %}
+	<ul class="breadcrumb">
+		<li>
+			{% block breadcrumbs %}{% endblock %}
+		</li>
+	</ul>
+
+	<div class="row">
+		<div class="span12">
+			{% block slider %}{% endblock %}
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span9">
+			<div class="well">
+				{% block content %}{% endblock %}
+			</div>
+		</div>
+
+		<div class="span3">
+			<div class="well">
+				{% block sidebar %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

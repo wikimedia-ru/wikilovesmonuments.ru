@@ -4,8 +4,8 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Language" content="ru" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>{% block title %}{% endblock %} Старая Вологда</title>
-	<link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
+	<title>{% block title %}{% endblock %} ВОО ВООПИиК</title>
+	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" />
 
 	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/style-bs.css" />
@@ -20,30 +20,27 @@
 	{% endblock %}
 </head>
 <body>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</a>
-				<a class="brand" href="/">Старая Вологда</a>
-				<div class="nav-collapse">
-					<ul class="nav">
-					{% for item in menu %}
-						<li {% if item.active %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
-					{% endfor %}
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="container">
+		<header>
+			<div class="header-top">
+				<h1><a class="brand" href="/">ВОО ВООПИиК</a></h1>
+				<div class="quote">Сшит колпак, да не по-колпаковски,<br />Вылит колокол, да не по-колоколовски…</div>
+				<h2>Вологодское областное отделение<br />Всероссийского общества охраны<br />Памятников истории и культуры</h2>
+			</div>
+
+			<ul class="nav nav-pills">
+			{% for item in menu %}
+				<li {% if item.active %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
+			{% endfor %}
+			</ul>
+		</header>
+
+		{% block main %}
 		{% block content %}
 		<div class="hero-unit">
 			<h1>Тут ничего нет!</h1>
 		</div>
+		{% endblock %}
 		{% endblock %}
 	</div>
 </body>
