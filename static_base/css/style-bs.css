@@ -6,6 +6,7 @@ body {
 .container {
 	padding: 40px 43px 40px 60px;
 	background: #fff;
+	box-shadow: 0 0 10px #999;
 }
 
 .header-top {
