@@ -24,31 +24,23 @@
 	</div>
 
 	<div class="span9">
-		<div class="well">
-			{% if map_center %}
-			<div id="map" class="map map-big"></div>
-			<script type="text/javascript">
-				var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-				var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-				var map = new L.Map('map');
-				map
-					.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 14)
-					.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
+		{% if map_center %}
+		<div id="map" class="map map-big"></div>
+		<script type="text/javascript">
+			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
+			var map = new L.Map('map');
+			map
+				.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 14)
+				.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 
-			{% for house in house_list %}
-				{% if house.coord_lat %}
-					map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/base/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
-				{% endif %}
-			{% endfor %}
-			</script>
+		{% for house in house_list %}
+			{% if house.coord_lat %}
+				map.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/base/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
 			{% endif %}
-
-			{% if street.description %}
-			<div class="desc text">
-				{{ street.description|safe }}
-			</div>
-			{% endif %}
-		</div>
+		{% endfor %}
+		</script>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}

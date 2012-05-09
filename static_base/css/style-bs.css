@@ -138,29 +138,31 @@ header .nav > .active > a {
 }
 
 .entry-block {
-	padding-left: 110px;
+	padding-left: 106px;
 	padding-right: 40px;
 }
 
 .entry-block .date {
 	float: left;
-	margin-left: -116px;
+	margin-left: -112px;
 }
 
-.entry-header {
-	margin-bottom: 5px;
-	padding: 6px 24px 1px;
+.block-header {
+	margin-bottom: 10px;
+	padding: 5px 24px;
 	background: #e31e24;
-	color: #fff;
-}
-
-.entry-header a,
-.entry-header a:hover {
-	color: #fff;
-}
-
-.entry-info {
 	font-weight: bold;
+	color: #fff;
+}
+
+.block-header a,
+.block-header a:hover {
+	color: #fff;
+}
+
+.entry-block .block-header {
+	margin-bottom: 5px;
+	padding-top: 6px;
 }
 
 .count {
