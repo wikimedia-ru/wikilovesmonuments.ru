@@ -147,6 +147,10 @@ header .nav > .active > a {
 	margin-left: -112px;
 }
 
+.entry-footer {
+	padding: 10px 0 30px;
+}
+
 .block-header {
 	margin-bottom: 10px;
 	padding: 5px 24px;

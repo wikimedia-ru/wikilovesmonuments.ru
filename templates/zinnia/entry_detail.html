@@ -67,28 +67,14 @@
   </div>
   {% endif %}
   {% endwith %}
-  {% if object.related_published %}
-  <div class="entry-related">
-    <h3>{% trans "Related entries" %}</h3>
-    <ul>
-      {% for entry in object.related_published %}
-      <li>
-	<a href="{{ entry.get_absolute_url }}" title="{{ entry.title }}" rel="bookmark">{{ entry.title }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endif %}
-  <div class="entry-similar">
-    <h3>{% trans "Similar entries" %}</h3>
-    {% get_similar_entries 5 %}
-  </div>
 </div>
 {% endblock %}
 
 {% block entry-comments %}
 <div id="comments">
-  <h3>{% trans "Comments" %}</h3>
+	<div class="block-header">
+		<h3>{% trans "Comments" %}</h3>
+	</div>
   {% with comment_list=object.comments %}
   {% if comment_list.count %}
   <ol id="comment-list">
@@ -124,73 +110,6 @@
   {% endif %}
   {% endwith %}
 </div>
-{% endblock %}
-
-{% block entry-pingbacks %}
-<div id="pingbacks">
-  <h3>{% trans "Pingbacks" %}</h3>
-  {% with pingback_list=object.pingbacks %}
-  {% if pingback_list.count %}
-  <ol id="pingback-list">
-    {% for pingback in pingback_list %}
-    <li id="pingback_{{ pingback.pk }}" class="pingback vcard {% cycle box1,box2 %}">
-      <p class="pingback-info">
-	<a href="{{ pingback.url }}" rel="external nofollow"
-           class="fn url org">{{ pingback.user_name }}</a>
-	{% trans "on" %}
-        <abbr class="pingback-published" title="{{ pingback.submit_date|date:"c" }}Z">
-          {{ pingback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-      </p>
-      <p class="pingback-content">
-	{{ pingback.comment }}
-      </p>
-    </li>
-    {% endfor %}
-  </ol>
-  {% endif %}
-    {% if object.pingback_enabled %}
-  <p>{% trans "Pingbacks are open." %}</p>
-    {% else %}
-  <p>{% trans "Pingbacks are closed." %}</p>
-    {% endif %}
-  {% endwith %}
-</div>
-{% endblock %}
-
-{% block entry-trackbacks %}
-{% with trackback_list=object.trackbacks %}
-{% if trackback_list.count or object.pingback_enabled %}
-<div id="trackbacks">
-  <h3>{% trans "Trackbacks" %}</h3>
-  {% if trackback_list.count %}
-  <ol id="trackback-list">
-    {% for trackback in trackback_list %}
-    <li id="trackback_{{ trackback.pk }}" class="trackback vcard {% cycle box1,box2 %}">
-      <p class="trackback-info">
-	<a href="{{ trackback.url }}" rel="external nofollow"
-           class="fn url org">{{ trackback.user_name }}</a>
-	{% trans "on" %}
-        <abbr class="trackback-published" title="{{ trackback.submit_date|date:"c" }}Z">
-          {{ trackback.submit_date|date:"SHORT_DATETIME_FORMAT" }}
-        </abbr>
-      </p>
-      <p class="trackback-content">
-	{{ trackback.comment }}
-      </p>
-    </li>
-    {% endfor %}
-  </ol>
-  {% endif %}
-    {% if object.pingback_enabled %}
-  <p>
-    <a href="{% url 'zinnia_entry_trackback' object.pk %}" rel="trackback">
-      {% trans "Trackback URL" %}</a>
-  </p>
-    {% endif %}
-</div>
-{% endif %}
-{% endwith %}
 {% endblock %}
 
 {% block entry-comments-form %}
