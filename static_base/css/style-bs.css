@@ -1,4 +1,5 @@
 body {
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 	background: url(../img/bg.png) 0 0 repeat;
 	color: #333;
 }
@@ -134,6 +135,32 @@ header .nav > .active > a {
 	text-transform: lowercase;
 	text-align: center;
 	font-size: 16px;
+}
+
+.entry-block {
+	padding-left: 110px;
+	padding-right: 40px;
+}
+
+.entry-block .date {
+	float: left;
+	margin-left: -116px;
+}
+
+.entry-header {
+	margin-bottom: 5px;
+	padding: 6px 24px 1px;
+	background: #e31e24;
+	color: #fff;
+}
+
+.entry-header a,
+.entry-header a:hover {
+	color: #fff;
+}
+
+.entry-info {
+	font-weight: bold;
 }
 
 .count {
