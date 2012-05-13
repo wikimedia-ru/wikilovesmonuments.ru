@@ -9,37 +9,19 @@ from house.models import *
 def index_page(request):
     h_list = House.objects.all()[:30]
     p_list = HousePhoto.objects.all()[:30]
-    map_border = h_list.aggregate(Max('coord_lon'), Min('coord_lon'), Max('coord_lat'), Min('coord_lat'))
-    if map_border['coord_lat__max'] != None:
-        map_center = {
-            'lat': (map_border['coord_lat__max'] + map_border['coord_lat__min']) / 2,
-            'lon': (map_border['coord_lon__max'] + map_border['coord_lon__min']) / 2,
-        }
-    else:
-        map_center = False
 
     return render_to_response('house/index.html', {
         'house_list': h_list,
         'photo_list': p_list,
-        'map_center': map_center,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
 
 def upload(request):
     h_list = House.objects.all()
-    map_border = h_list.aggregate(Max('coord_lon'), Min('coord_lon'), Max('coord_lat'), Min('coord_lat'))
-    if map_border['coord_lat__max'] != None:
-        map_center = {
-            'lat': (map_border['coord_lat__max'] + map_border['coord_lat__min']) / 2,
-            'lon': (map_border['coord_lon__max'] + map_border['coord_lon__min']) / 2,
-        }
-    else:
-        map_center = False
 
     return render_to_response('house/upload.html', {
         'house_list': h_list,
-        'map_center': map_center,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
@@ -47,19 +29,10 @@ def upload(request):
 def add(request):
     h_list = House.objects.all()
     p_list = HousePhoto.objects.all()[:30]
-    map_border = h_list.aggregate(Max('coord_lon'), Min('coord_lon'), Max('coord_lat'), Min('coord_lat'))
-    if map_border['coord_lat__max'] != None:
-        map_center = {
-            'lat': (map_border['coord_lat__max'] + map_border['coord_lat__min']) / 2,
-            'lon': (map_border['coord_lon__max'] + map_border['coord_lon__min']) / 2,
-        }
-    else:
-        map_center = False
 
     return render_to_response('house/add.html', {
         'house_list': h_list,
         'photo_list': p_list,
-        'map_center': map_center,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 

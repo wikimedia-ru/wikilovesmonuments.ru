@@ -59,7 +59,7 @@
 			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 			var map = new L.Map('map');
 			map
-				.setView(new L.LatLng({{ map_center.lat|stringformat:"f" }}, {{ map_center.lon|stringformat:"f" }}), 3)
+				.setView(new L.LatLng(66, 94), 3)
 				.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 			var clusterer = new LeafClusterer(map);
 
