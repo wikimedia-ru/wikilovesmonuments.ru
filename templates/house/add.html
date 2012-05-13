@@ -93,7 +93,6 @@
 			</div>
 		</div>
 
-		{% if map_center %}
 		<div id="map" class="map map-big"></div>
 		<script type="text/javascript">
 			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
@@ -110,7 +109,6 @@
 			{% endif %}
 		{% endfor %}
 		</script>
-		{% endif %}
 	</div>
 	<div style="clear:both"></div>
 </div>

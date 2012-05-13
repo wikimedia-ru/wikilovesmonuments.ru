@@ -2,7 +2,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-from django.db.models import Count, Max, Min
 from house.models import *
 
 
@@ -18,7 +17,7 @@ def index_page(request):
 
 
 def upload(request):
-    h_list = House.objects.all()
+    h_list = House.objects.all()[:30]
 
     return render_to_response('house/upload.html', {
         'house_list': h_list,
@@ -27,7 +26,7 @@ def upload(request):
 
 
 def add(request):
-    h_list = House.objects.all()
+    h_list = House.objects.all()[:30]
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/add.html', {
@@ -40,7 +39,7 @@ def add(request):
 
 def house(request, id):
     h = House.objects.get(pk=id)
-    photo = HousePhoto.objects.filter(house=h)
+    photo = HousePhoto.objects.filter(house=h)[:30]
 
     return render_to_response('house/house.html', {
         'house': h,
