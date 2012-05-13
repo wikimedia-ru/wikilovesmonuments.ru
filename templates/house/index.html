@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="row">
-	<div class="span2">
+	<div class="span3">
 		<div class="btn-group">
 			<a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
 				Регион
@@ -45,10 +45,10 @@
 		</div>
 	</div>
 
-	<div class="span10">
+	<div class="span9">
 		<div class="controls">
 			<div class="input-append">
-				<input class="span8" id="appendedInputButtons" placeholder="Введите название памятника" size="16" type="text"><button class="btn pull-right" id="monumentSearchBtn" type="button"><i class="icon-search"></i> Найти памятник</button>
+				<input class="span7" id="appendedInputButtons" placeholder="Введите название памятника" size="16" type="text"><button class="btn pull-right" id="monumentSearchBtn" type="button"><i class="icon-search"></i> Найти памятник</button>
 			</div>
 		</div>
 
@@ -70,7 +70,8 @@
 		{% endfor %}
 		</script>
 
-                <ul class="thumbnails">
+                <ul class="thumbnails" id="foundThumbs">
+                <h3>Найденные фотографии</h3>
 		{% for photo in photo_list %}
                         <li class="span1">
                                 <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src_100 }}" alt="" /></a>
@@ -78,6 +79,18 @@
                 {% endfor %}
                 </ul>
 		{% endif %}
+	</div>
+	<div class="span3">
+		<h3>Наиболее популярные</h3>
+		
+	</div>
+	<div class="span3">
+		<h3>Самые новые</h3>
+		
+	</div>
+	<div class="span3">
+		<h3>Без оценки</h3>
+		
 	</div>
 </div>
 {% endblock %}
