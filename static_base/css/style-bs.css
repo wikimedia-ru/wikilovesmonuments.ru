@@ -6,4 +6,4 @@ body {
 #monumentSearchBtn {height:36px;}
 #foundThumbs img {height:37px!important;}
 h1 {height:50px; line-height:50px}
-h1 a {text-indent:-9999px; background:url(../img/wlm_logo.png) no-repeat; height:130px; padding-left:70px; color:#8f0000;}
+h1 a {text-indent:-9999px; background:url(../img/wlm_logo.png) no-repeat; height:130px; padding:10px 0 10px 70px ; color:#8f0000;}
