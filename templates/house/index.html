@@ -81,7 +81,7 @@
 	
 	<div class="span3 offset3">
 		<h3>Наиболее популярные</h3>
-		<ul class="thumbnails" id="foundThumbs">
+		<ul>
 		{% for photo in photo_list %}
                         <li>
                                 <a href="/house/{{ photo.house.id }}" >{{ photo.house.name }}</a>
