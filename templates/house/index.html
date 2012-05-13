@@ -69,9 +69,8 @@
 			{% endif %}
 		{% endfor %}
 		</script>
-
+		<h3>Найденные фотографии</h3>
                 <ul class="thumbnails" id="foundThumbs">
-                <h3>Найденные фотографии</h3>
 		{% for photo in photo_list %}
                         <li class="span1">
                                 <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src_100 }}" alt="" /></a>
@@ -83,7 +82,14 @@
 	</div>
 	
 	<div class="span3 offset3">
-		<h3>Наиболее популярные</h3>	
+		<h3>Наиболее популярные</h3>
+		<ul class="thumbnails" id="foundThumbs">
+		{% for photo in photo_list %}
+                        <li>
+                                <a href="/house/{{ photo.house.id }}" >{{ photo.house.name }}</a>
+                        </li>
+                {% endfor %}
+                </ul>
 	</div>
 	<div class="span3">
 		<h3>Самые новые</h3>
