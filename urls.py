@@ -22,12 +22,10 @@ urlpatterns = patterns('',
     (r'^tinymce/', include('tinymce.urls')),
 
     url(r'^robots.txt$', 'django.views.static.serve', {'path':"/robots.txt",'document_root': settings.STATIC_ROOT, 'show_indexes': False }),
-    url(r'^base/?$', 'house.views.index_page'),
-    url(r'^base/street/(?P<id>[0-9]+)/?$', 'house.views.street'),
-    url(r'^base/house/(?P<id>[0-9]+)/?$', 'house.views.house'),
-
-    url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^', include('zinnia.urls')),
+    url(r'^/?$', 'house.views.index_page'),
+    url(r'^upload/?$', 'house.views.upload'),
+    url(r'^add/?$', 'house.views.add'),
+    url(r'^house/(?P<id>[0-9]+)/?$', 'house.views.house'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

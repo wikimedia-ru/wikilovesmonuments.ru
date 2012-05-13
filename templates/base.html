@@ -4,11 +4,12 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Language" content="ru" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>{% block title %}{% endblock %} ВОО ВООПИиК</title>
+	<title>{% block title %}{% endblock %} WikiLovesMonuments</title>
 	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" />
 
 	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/style-bs.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/content.css" />
 
 	<!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -16,36 +17,30 @@
 
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
+	<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->        
+	<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
+	<script src="//api.oldvologda.ru/leafclusterer/leafclusterer.js"></script>  
+
 	{% block head %}
 	{% endblock %}
 </head>
 <body>
 	<div class="container">
-		<header>
-			<div class="header-top">
-				<h1><a class="brand" href="/">ВОО ВООПИиК</a></h1>
-				<div class="quote">Сшит колпак, да не по-колпаковски,<br />Вылит колокол, да не по-колоколовски…</div>
-				<h2>Вологодское областное отделение<br />Всероссийского общества охраны<br />Памятников истории и культуры</h2>
-				<div class="date">
-					<span class="date-d">{% now "j" %}</span>
-					<span class="date-m">{% now "E" %}</span>
-					<span class="date-y">{% now "Y" %}</span>
+		<div class="row">
+			<div class="span12">
+				<div class="pull-right">
+					<a class="btn btn-large btn-primary" href="/upload"><i class="icon-upload icon-white"></i> Загрузить фото</a>
+					<a class="btn btn-large btn-primary" href="/add"><i class="icon-plus icon-white"></i> Добавить объект</a>
 				</div>
+				<h1><a href="/">WikiLovesMonuments</a></h1>
+				<br /><br />
 			</div>
-
-			<ul class="nav nav-pills">
-			{% for item in menu %}
-				<li {% if item.active %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.name }}</a></li>
-			{% endfor %}
-			</ul>
-		</header>
-
-		{% block main %}
+		</div>
 		{% block content %}
 		<div class="hero-unit">
 			<h1>Тут ничего нет!</h1>
 		</div>
-		{% endblock %}
 		{% endblock %}
 	</div>
 </body>

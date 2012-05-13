@@ -105,7 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-ROOT_URLCONF = 'vologda.urls'
+ROOT_URLCONF = 'monuments.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.comments',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -130,10 +129,6 @@ INSTALLED_APPS = (
     'flatpages',
     'tinymce',
     'yafotki',
-
-    'tagging',
-    'mptt',
-    'zinnia',
 
     'house',
     'menu',

@@ -10,35 +10,22 @@
 {% block title %}{{ house.street.name }}, {{ house.number }} — {% endblock %}
 
 {% block content %}
-<ul class="breadcrumb">
-	<li>
-		<a href="/base/">База домов</a> <span class="divider">/</span>
-	</li>
-	<li>
-		<a href="/base/street/{{ house.street.id }}/">{{ house.street.full_name }}</a> <span class="divider">/</span>
-	</li>
-	<li class="active">{{ house.number }}</li>
-</ul>
-
 <div class="row">
-	<div class="span3">
-		<div class="well sidebar-nav">
-			<ul class="nav nav-list">
-			{% for s in street_list %}
-				{% if s.house_count %}
-				<li {% if s.id == house.street.id %}class="active"{% endif %}><a href="/base/street/{{ s.id }}">{{ s.name }} <span class="count">{{ s.house_count }}</span></a></li>
-				{% endif %}
-			{% endfor %}
-			</ul>
-		</div>
+	<div class="span6">
+	{% if photo %}
+		<ul class="thumbnails">
+		{% for p in photo %}
+			<li class="span{% if forloop.first %}6{% else %}3{% endif %}">
+				<a href="{{ p.file.src }}" class="thumbnail" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
+				{% if p.title %}<h5>{{ p.title }}</h5>{% endif %}
+				<p>Автор: {{ p.author }}</p>
+			</li>
+		{% endfor %}
+		</ul>
+	{% endif %}
 	</div>
 
-	<div class="span9">
-		<div class="block-header">
-			<h2>{{ house.street.full_name }}, {{ house.number }}</h2>
-			{% if house.name %}<p>{{ house.name }}</p>{% endif %}
-		</div>
-
+	<div class="span6">
 		{% if house.coord_lon %}
 		<div id="map" class="map"></div>
 		<script type="text/javascript">
@@ -51,6 +38,11 @@
 				.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
 		</script>
 		{% endif %}
+
+		<div class="block-header">
+			<h2>{{ house.street.full_name }}, {{ house.number }}</h2>
+			{% if house.name %}<p>{{ house.name }}</p>{% endif %}
+		</div>
 
 		<table class="table">
 		{% if house.kult_id %}
@@ -159,17 +151,6 @@
 		{% endif %}
 		</table>
 
-	{% if photo %}
-		<ul class="thumbnails">
-		{% for p in photo %}
-			<li class="span3">
-				<a href="{{ p.file.src }}" class="thumbnail" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
-				{% if p.title %}<h5>{{ p.title }}</h5>{% endif %}
-				<p>Автор: {{ p.author }}</p>
-			</li>
-		{% endfor %}
-		</ul>
-	{% endif %}
 	</div>
 </div>
 {% endblock %}

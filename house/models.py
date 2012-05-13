@@ -7,6 +7,13 @@ from tinymce import models as tinymce_models
 from yafotki.fields import YFField
 
 
+class Region(models.Model):
+    name = models.CharField(max_length=250, verbose_name=_("Name"))
+    coord = models.CharField(max_length=20, verbose_name=_("Coordinates"))
+
+    def __unicode__(self):
+        return self.name
+
 
 class Street(models.Model):
     STREET_CHOICES = (
