@@ -5,3 +5,4 @@ body {
 #appendedInputButtons {height:36px; font-size:20px;}
 #monumentSearchBtn {height:36px;}
 #foundThumbs img {height:37px!important;}
+h1 a {text-indent:-9999px; background:url(../img/wlm_logo.png) no-repeat; height:70px;}
