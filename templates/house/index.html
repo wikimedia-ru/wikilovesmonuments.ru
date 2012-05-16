@@ -72,7 +72,7 @@
                 <ul class="thumbnails" id="foundThumbs">
 		{% for photo in photo_list %}
                         <li class="span1">
-                                <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src_100 }}" alt="" /></a>
+                                <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src }}" alt="" /></a>
                         </li>
                 {% endfor %}
                 </ul>
