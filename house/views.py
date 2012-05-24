@@ -6,7 +6,7 @@ from house.models import *
 
 
 def index_page(request):
-    h_list = House.objects.all()[:30]
+    h_list = House.objects.all()
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/index.html', {
@@ -17,7 +17,7 @@ def index_page(request):
 
 
 def upload(request):
-    h_list = House.objects.all()[:30]
+    h_list = House.objects.all()
 
     return render_to_response('house/upload.html', {
         'house_list': h_list,
@@ -26,7 +26,7 @@ def upload(request):
 
 
 def add(request):
-    h_list = House.objects.all()[:30]
+    h_list = House.objects.all()
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/add.html', {
