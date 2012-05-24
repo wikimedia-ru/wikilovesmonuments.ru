@@ -129,6 +129,9 @@ class House(models.Model):
     kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
     gudea_checked = models.BooleanField(default=False, verbose_name=_("Gudea base checked")) # temporary
 
+    ato = models.CharField(max_length=250, blank=True, verbose_name=_("ATO"))
+    address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
+
     def __unicode__(self):
         return self.street.name + ', ' + self.number
 
