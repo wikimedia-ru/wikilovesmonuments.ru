@@ -62,13 +62,14 @@
 				.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 			var clusterer = new LeafClusterer(map);
 
+			var markers = [];
 		{% for house in house_list %}
-			{% if house.coord_lat %}
-				clusterer.addMarker(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
-			{% endif %}
+			markers.push(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
 		{% endfor %}
+			clusterer.addMarkers(markers);
 		</script>
 		<h3>Найденные фотографии</h3>
+		{{ time }}<br />{{ elapsed_h }}<br />{{ elapsed_p }}
                 <ul class="thumbnails" id="foundThumbs">
 		{% for photo in photo_list %}
                         <li class="span1">
