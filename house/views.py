@@ -6,7 +6,7 @@ from house.models import *
 
 
 def index_page(request):
-    h_list = House.objects.all()
+    h_list = House.objects.exclude(coord_lon=None).select_related()
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/index.html', {
