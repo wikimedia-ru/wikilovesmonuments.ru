@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 from tinymce import models as tinymce_models
-from yafotki.fields import YFField
 
 
 class Region(models.Model):
@@ -143,7 +142,7 @@ class HousePhoto(models.Model):
         return path
 
     house = models.ForeignKey('House', verbose_name=_("House"))
-    file = YFField(upload_to=make_upload_folder)
+    #file = YFField(upload_to=make_upload_folder)
     title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
     author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
 
