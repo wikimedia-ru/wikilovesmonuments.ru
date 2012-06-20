@@ -7,108 +7,218 @@
 
 {% block content %}
 <div class="row">
-	<div class="span3">
-		<div class="btn-group">
-			<a class="btn span2 dropdown-toggle btn-info btn-large" id="findRegionBtn" data-toggle="dropdown" href="#">
-				Регион
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-			{% for region in regions %}
-				<li><a href="#" data-id="{{ region.id }}" data-coord="{{ region.long }},{{ region.lat }}">{{ region.name }}</a></li>
-			{% endfor %}
-			</ul>
-		</div>
-		<br />
-		<div class="btn-group">
-			<a class="btn span2 dropdown-toggle btn-large" data-toggle="dropdown" href="#">
-				Город
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-			{% for region in regions %}
-				<li><a href="#" data-id="{{ region.id }}" data-coord="{{ region.long }},{{ region.lat }}">{{ region.name }}</a></li>
-			{% endfor %}
-			</ul>
-		</div>
-		<br />
-		<div class="btn-group">
-			<a class="btn dropdown-toggle span2 btn-large" data-toggle="dropdown" href="#">
-				Улица
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-			{% for region in regions %}
-				<li><a href="#" data-id="{{ region.id }}" data-coord="{{ region.long }},{{ region.lat }}">{{ region.name }}</a></li>
-			{% endfor %}
-			</ul>
-		</div>
-	</div>
-
-	<div class="span9">
-		<div class="controls">
-			<div class="input-append">
-				<input class="span7" id="appendedInputButtons" placeholder="Введите название памятника" size="16" type="text"><button class="btn pull-right" id="monumentSearchBtn" type="button"><i class="icon-search"></i> Найти памятник</button>
+	<div id="main" class="span9">
+		<div id="about" class="row show-grid">
+			<div class="span9">
+				<h1>О проекте</h1>
+				<div class="content">
+					<p>Википедия любит Петербург – часть организуемого региональными отделениями Викимедиа международного фотосоревнования Wiki Loves Monuments'2011, проходящего в Европе в сентябре 2011 года.</p>
+					<p>В конкурсе участвуют самостоятельно сделанные и в сентябре 2011 года самостоятельно загруженные под свободной лицензией на Викисклад фотографии, на которых запечатлён памятник архитектуры из специального списка</p>	
+				</div>
 			</div>
 		</div>
 
-		<div id="map" class="map map-big"></div>
-		<script type="text/javascript">
-			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-			var map = new L.Map('map');
-			map
-				.setView(new L.LatLng(66, 94), 3)
-				.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
-			var clusterer = new LeafClusterer(map);
+		<div id="find" class="row show-grid">
+			<div class="span9">
+				<div class="content">
+					<h1>Найдите памятник</h1>
 
-			var markers = [];
-		{% for house in house_list %}
-			markers.push(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
-		{% endfor %}
-			clusterer.addMarkers(markers);
-		</script>
-		<h3>Найденные фотографии</h3>
-		{{ time }}<br />{{ elapsed_h }}<br />{{ elapsed_p }}
-                <ul class="thumbnails" id="foundThumbs">
-		{% for photo in photo_list %}
-                        <li class="span1">
-                                <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src }}" alt="" /></a>
-                        </li>
-                {% endfor %}
-                </ul>
+					<div class="row">
+						<div id="boxPlace" class="span3">
+							<div class="content">
+								<p class="title"><i class="icon-screenshot"></i>Введите регион и город вручную</p>
+								<div class="controls">
+									<label class="control-label" for="region">Выберите регион</label>
+									<select id="town" name="region">
+										<option>something</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div>
+								<div class="controls">
+									<label class="control-label" for="town">Выберите город</label>
+									<select id="town" name="town">
+										<option>something</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+									</select>
+								</div>
+								<p>
+									<button class="btn btn-large btn-primary">Искать</button>
+								</p>
+							</div>
+						</div>
+						<!-- <div id="boxLine" class="span1 b-line">
+							<p>или</p>
+						</div> -->
+						<div id="boxMap" class="span6">
+							<div class="content">
+								<p class="title">Воспользуйтесь поиском</p>
+								<form class="form-search">
+									<input type="text" class="input-xlarge search-query">
+									<button type="submit" class="btn">Найти памятник</button>
+								</form>
+								<div id="map" class="map map-big"></div>
+								<script type="text/javascript">
+									var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+									var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
+									var map = new L.Map('map');
+									map
+										.setView(new L.LatLng(66, 94), 2)
+										.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
+									var clusterer = new LeafClusterer(map);
+
+									var markers = [];
+								{% for house in house_list %}
+									markers.push(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
+								{% endfor %}
+									clusterer.addMarkers(markers);
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="result">
+			<h1>Результаты поиска</h1>
+			<div class="content">
+
+				<!-- .element-result -->
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<!-- .element-result -->
+
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<div id="foto-81" class="element-result">
+					<a class="foto-link" href="http://opora.me/alboms/lesnoe-konobeevo/">
+						<img height="118" width="169" style="position: absolute;" src="{{ STATIC_URL }}img/fotoFx.png">
+						<img height="118" width="169" title="" alt="" class="" src="{{ STATIC_URL }}img/simpleimg.jpg">
+					</a>
+						<p><a href="#" class="title-link">Фоторафия 1</a></p>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="sidebar" class="span3">
+		<h2>Фотографии с наиболее высокими оченками</h2>
 		
-	</div>
-	
-	<div class="span3 offset3">
-		<h3>Наиболее популярные</h3>
-		<ul>
-		{% for photo in photo_list %}
-                        <li>
-                                <a href="/house/{{ photo.house.id }}" >{{ photo.house.name }}</a>
-                        </li>
-                {% endfor %}
-                </ul>
-	</div>
-	<div class="span3">
-		<h3>Самые новые</h3>
-		<ul>
-		{% for photo in photo_list %}
-                        <li>
-                                <a href="/house/{{ photo.house.id }}" >{{ photo.house.name }}</a>
-                        </li>
-                {% endfor %}
-                </ul>
-	</div>
-	<div class="span3">
-		<h3>Без оценки</h3>
-		<ul>
-		{% for photo in photo_list %}
-                        <li>
-                                <a href="/house/{{ photo.house.id }}" >{{ photo.house.name }}</a>
-                        </li>
-                {% endfor %}
-                </ul>
+		<!-- .content -->
+		<div class="content">
+
+			<!-- .element-sidebar -->
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating">Голосов за: 315</p>
+				</div>
+			</div>
+			<!-- /.element-sidebar -->
+
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating">Голосов за: 315</p>
+				</div>
+			</div>
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating">Голосов за: 315</p>
+				</div>
+			</div>
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating">Голосов за: 315</p>
+				</div>
+			</div>
+		</div>
+		<!-- /.content -->
+
+
+		<h2>Фотографии без оценок</h2>
+		
+		<!-- .content -->
+		<div class="content">
+
+			<!-- .element-sidebar -->
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating"></p>
+				</div>
+			</div>
+			<!-- /.element-sidebar -->
+
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating"></p>
+				</div>
+			</div>
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating"></p>
+				</div>
+			</div>
+			<div class="element-sidebar clearfix">
+				<img height="39" width="51" src="{{ STATIC_URL }}img/simpleimg.jpg" alt="">
+				<div>
+					<p class="title"><a href="#">Памятник Пушкину</a></p>
+					<p class="rating"></p>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}

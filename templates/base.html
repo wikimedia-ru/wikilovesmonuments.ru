@@ -2,14 +2,16 @@
 <html lang="ru">
 <head>
 	<meta charset="utf-8" />
+	<title>{% block title %}{% endblock %} Wiki Loves Monuments</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Language" content="ru" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>{% block title %}{% endblock %} WikiLovesMonuments</title>
-	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" />
 
+	<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/style-bs.css" />
-	<link rel="stylesheet" href="{{ STATIC_URL }}css/content.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/docs.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
 
 	<!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,7 +20,7 @@
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 	<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->        
+	<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->		
 	<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 	<script src="{{ STATIC_URL }}js/script.js"></script>
 	<script src="//api.oldvologda.ru/leafclusterer/leafclusterer.js"></script>  
@@ -26,23 +28,70 @@
 	{% block head %}
 	{% endblock %}
 </head>
-<body>
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
 	<div class="container">
-		<div class="row">
-			<div class="span12">
-				<div class="pull-right">
-					<a class="btn btn-large btn-primary" href="/upload"><i class="icon-upload icon-white"></i> Загрузить фото</a>
-					<a class="btn" href="/add"><i class="icon-plus"></i> Добавить объект</a>
+		<header class="jumbotron subhead" id="overview">
+			<div class="row">
+				<div class="span7">
+					<a href="/"><img class="logo" src="{{ STATIC_URL }}img/logo.png" alt=""></a>
 				</div>
-				<h1><a href="/">WikiLovesMonuments</a></h1>
-				<br /><br />
+				<div class="span3">
+					<a class="btn btn-large" href="#">
+						<i class="upload-my"></i>
+						Загрузить фото
+					</a>
+				</div>
+				<div class="span2">
+					<a href="mailto:info@wikimedia.ru">info@wikimedia.ru</a>
+					<br>
+					<a href="https://twitter.com/#!/search/realtime/%23wlm2012">#wlm2011</a>
+				</div>
 			</div>
-		</div>
+			<!-- .subnav -->
+			<div class="subnav">
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#">О конкурсе</a></li>
+					<li><a href="#">Правила, жюри, призы</a></li>
+					<li><a href="#">База объектов</a></li>
+					<!--<li><a href="#">[Итоги]</a></li>-->
+					<li><a href="#">В 2011-м</a></li>
+					<li><a href="#">Блог</a></li>
+				</ul>
+			</div>
+			<!-- /.subnav -->
+		</header>
+
 		{% block content %}
 		<div class="hero-unit">
 			<h1>Тут ничего нет!</h1>
 		</div>
 		{% endblock %}
+
+		<footer>
+			<div class="row">
+				<div class="span11">
+					<a class="license-link" href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-ShareAlike 3.0 Unported" rel="license"><img border="0" src="{{ STATIC_URL }}img/licenses.png" alt="Creative Commons Attribution-ShareAlike 3.0 Unported"></a>
+					<p>Использованные работы и сайт wikilovesmonuments.ru распространяются под свободной лицензией <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-ShareAlike 3.0 Unported">CC-BY-SA 3.0</a>.<br />
+					Проект разработан при поддержке <a href="">«Теплицы социальных технологий»</a></p>
+				</div>
+				<div class="span1">
+					<a href="http://te-st.ru/"><img src="{{ STATIC_URL }}img/te-st.png" alt=""></a>
+				</div>
+			</div>
+		</footer>
 	</div>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-transition.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-alert.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-modal.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-dropdown.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-scrollspy.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-tab.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-tooltip.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-popover.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-button.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-collapse.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-carousel.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-typeahead.js"></script>
+	<script src="{{ STATIC_URL }}bootstrap/js/application.js"></script>
 </body>
 </html>
