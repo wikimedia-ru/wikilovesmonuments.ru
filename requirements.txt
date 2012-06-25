@@ -1,0 +1,6 @@
+Django==1.4
+MySQL-python==1.2.3
+argparse==1.2.1
+distribute==0.6.24
+django-tinymce==1.5.1b2
+wsgiref==0.1.2

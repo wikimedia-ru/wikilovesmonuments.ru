@@ -1,5 +1,5 @@
 # Local settings for vologda project.
-
+LOCAL_SETTINGS = True
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 

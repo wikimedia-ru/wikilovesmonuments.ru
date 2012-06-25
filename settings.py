@@ -174,5 +174,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 # Local settings
-from settings_local import *
-
+try: 
+    LOCAL_SETTINGS
+except NameError:
+    try:
+        from settings_local import *
+    except:
+        pass

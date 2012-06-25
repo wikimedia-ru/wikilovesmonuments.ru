@@ -6,3 +6,6 @@
 /media/*
 /flatpages/*
 /tinymce
+/venv/
+.*
+local_settings.py

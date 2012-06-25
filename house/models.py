@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 import os.path
 
 from django.utils.translation import ugettext_lazy as _
@@ -45,19 +46,19 @@ class House(models.Model):
         ('R', _("Ruins")),
         ('L', _("Losed")),
     )
-    
+
     STATE_CHOICES = (
         ('R', _("Restored")),
         ('S', _("Satisfactory")),
         ('U', _("Unsatisfactory")),
         ('A', _("Accident")),
     )
-    
+
     USAGE_CHOICES = (
         ('H', _("Dwelling house")),
         ('O', _("Office building")),
     )
-    
+
     PROTECTION_CHOICES = (
         ('F', _("Federal")),
         ('R', _("Regional")),
@@ -66,23 +67,23 @@ class House(models.Model):
         ('O', _("OPOKN")),
         ('N', _("No")),
     )
-    
+
     OWNERSHIP_CHOICES = (
         ('F', _("Federal")),
         ('R', _("Regional")),
         ('M', _("Municipal")),
     )
-    
+
     MATERIAL_CHOICES = (
         ('W', _("Wooden")),
         ('S', _("Stone")),
     )
-    
+
     LEASE_CHOICES = (
         ('L', _("Lease")),
         ('R', _("Rent")),
     )
-    
+
     kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
 
@@ -157,7 +158,7 @@ class HouseEvent(models.Model):
         ('R', _("Restored")),
         ('D', _("Demolished")),
     )
-    
+
     house = models.ForeignKey('House', verbose_name=_("House"))
     date = models.CharField(max_length=250, blank=True, verbose_name=_("Date"))
     type = models.CharField(max_length=1, blank=True, choices=TYPE_CHOICES, verbose_name=_("Event type"))
