@@ -8,6 +8,9 @@ from tinymce import models as tinymce_models
 
 
 class Region(models.Model):
+    ''' Region description. 
+    XXX Shoul this be moved to another application ?
+    '''
     name = models.CharField(max_length=250, verbose_name=_("Name"))
     coord = models.CharField(max_length=20, verbose_name=_("Coordinates"))
 
@@ -16,6 +19,9 @@ class Region(models.Model):
 
 
 class Street(models.Model):
+    ''' One street definition
+    XXX Is this object required ?
+    '''
     STREET_CHOICES = (
         ('S', _("Street")),
         ('L', _("Lane")),
@@ -40,6 +46,10 @@ class Street(models.Model):
 
 
 class House(models.Model):
+    ''' Main class for working.
+    This one contains complete definition for one building. It's a heart
+    for application.
+    '''
     SAFETY_CHOICES = (
         ('S', _("Saved")),
         ('M', _("Modern replica")),
@@ -84,27 +94,22 @@ class House(models.Model):
         ('R', _("Rent")),
     )
 
-    kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
 
     name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
     name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
     material = models.CharField(max_length=1, blank=True, choices=MATERIAL_CHOICES, verbose_name=_("Material"))
-    pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
+    pasport = models.OneToOneField('Passport', verbose_name = _("Passport status"))
+    #pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
 
-    street = models.ForeignKey('Street', verbose_name=_("Street"))
+    #street = models.ForeignKey('Street', verbose_name=_("Street"))
     number = models.CharField(max_length=20, verbose_name=_("Number"))
     coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
-    pasport_address = models.CharField(max_length=250, blank=True, verbose_name=_("Address from pasport"))
 
     safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety"))
     state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
     protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
-
-    pasport_safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety from pasport"))
-    pasport_state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State from pasport"))
-    pasport_protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
 
     usage = models.CharField(max_length=1, blank=True, choices=USAGE_CHOICES, verbose_name=_("Usage"))
     ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Ownership"))
@@ -118,23 +123,63 @@ class House(models.Model):
     documents = tinymce_models.HTMLField(blank=True, verbose_name=_("Documents")) # temporary
     monitoring = tinymce_models.HTMLField(blank=True, verbose_name=_("Monitoring")) # temporary
 
-    complex = models.BooleanField(blank=True, verbose_name=_("Complex"))
-    complex_root = models.ForeignKey('House', blank=True, null=True, verbose_name=_("Belong to complex"))
-    complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
-    complex_kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie")) # temporary
+    complex = models.ForeignKey('Complex', blank=True, verbose_name=_("Complex"))
 
     extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
 
-    kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked")) # temporary
-    kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
     gudea_checked = models.BooleanField(default=False, verbose_name=_("Gudea base checked")) # temporary
 
     ato = models.CharField(max_length=250, blank=True, verbose_name=_("ATO"))
     address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
 
     def __unicode__(self):
-        return self.street.name + ', ' + self.number
+        return self.name + ', ' + self.number
 
+class Complex(models.Model):
+    ''' This is union of buildings '''
+    root = models.ForeignKey(House, verbose_name = _("Complex"), related_name = 'complex_root')
+    complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
+    cult_id = models.PositiveIntegerField(verbose_name = _("ID Kulturnoe Nasledie"))
+    
+    def __unicode__(self):
+        return self.complex_name
+
+class Passport(models.Model):
+    '''Oficial House passport'''
+    PROTECTION_CHOICES = (
+        ('F', _("Federal")),
+        ('R', _("Regional")),
+        ('L', _("Local")),
+        ('D', _("Determined")),
+        ('O', _("OPOKN")),
+        ('N', _("No")),
+    )
+    SAFETY_CHOICES = (
+        ('S', _("Saved")),
+        ('M', _("Modern replica")),
+        ('R', _("Ruins")),
+        ('L', _("Losed")),
+    )
+
+    STATE_CHOICES = (
+        ('R', _("Restored")),
+        ('S', _("Satisfactory")),
+        ('U', _("Unsatisfactory")),
+        ('A', _("Accident")),
+    )
+    pasport_address = models.CharField(max_length=250, blank=True, verbose_name=_("Address from pasport"))
+    pasport_safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety from pasport"))
+    pasport_state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State from pasport"))
+    pasport_protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
+
+class CulturalInformation(models.Model):
+    '''This is main data, that can be captured from or verified with site
+    http://kulturnoe-nasledie.ru
+    '''
+    building = models.OneToOneField(House)
+    kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
+    kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked")) # temporary
+    kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
 
 class HousePhoto(models.Model):
     def make_upload_folder(instance, filename):
