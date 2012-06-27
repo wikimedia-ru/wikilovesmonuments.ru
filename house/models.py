@@ -50,13 +50,6 @@ class House(models.Model):
     This one contains complete definition for one building. It's a heart
     for application.
     '''
-    SAFETY_CHOICES = (
-        ('S', _("Saved")),
-        ('M', _("Modern replica")),
-        ('R', _("Ruins")),
-        ('L', _("Losed")),
-    )
-
     STATE_CHOICES = (
         ('R', _("Restored")),
         ('S', _("Satisfactory")),
@@ -64,122 +57,60 @@ class House(models.Model):
         ('A', _("Accident")),
     )
 
-    USAGE_CHOICES = (
-        ('H', _("Dwelling house")),
-        ('O', _("Office building")),
-    )
-
-    PROTECTION_CHOICES = (
-        ('F', _("Federal")),
-        ('R', _("Regional")),
-        ('L', _("Local")),
-        ('D', _("Determined")),
-        ('O', _("OPOKN")),
-        ('N', _("No")),
-    )
-
-    OWNERSHIP_CHOICES = (
-        ('F', _("Federal")),
-        ('R', _("Regional")),
-        ('M', _("Municipal")),
-    )
-
-    MATERIAL_CHOICES = (
-        ('W', _("Wooden")),
-        ('S', _("Stone")),
-    )
-
-    LEASE_CHOICES = (
-        ('L', _("Lease")),
-        ('R', _("Rent")),
-    )
-
-    ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
-
-    name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
-    name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
-    material = models.CharField(max_length=1, blank=True, choices=MATERIAL_CHOICES, verbose_name=_("Material"))
-    pasport = models.OneToOneField('Passport', verbose_name = _("Passport status"))
-    #pasport = models.BooleanField(blank=True, verbose_name=_("Pasport status"))
-
-    #street = models.ForeignKey('Street', verbose_name=_("Street"))
-    number = models.CharField(max_length=20, verbose_name=_("Number"))
+   )
+    #minimal required fields
+    # Geospatial
+    region = models.IntegerField(verbose_name = _("Region of RF"))
+    city = models.IntegerField(verbose_name = _("City"), blank = True, null = True)
+    street = models.IntegerField(verbose_name = _("Street"), blank = True, null = True)
     coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
-
-    safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety"))
-    state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
-    protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
-
-    usage = models.CharField(max_length=1, blank=True, choices=USAGE_CHOICES, verbose_name=_("Usage"))
-    ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Ownership"))
-    land_ownership = models.CharField(max_length=1, blank=True, choices=OWNERSHIP_CHOICES, verbose_name=_("Land ownership"))
-    owner = models.CharField(max_length=250, blank=True, verbose_name=_("Owner"))
-    obligation = models.DateField(blank=True, null=True, verbose_name=_("Obligation date"))
-    lease = models.CharField(max_length=1, blank=True, choices=LEASE_CHOICES, verbose_name=_("Lease/Rent"))
-    tenant = models.CharField(max_length=250, blank=True, verbose_name=_("Tenant"))
-
-    chronology = tinymce_models.HTMLField(blank=True, verbose_name=_("Cronology")) # temporary
-    documents = tinymce_models.HTMLField(blank=True, verbose_name=_("Documents")) # temporary
-    monitoring = tinymce_models.HTMLField(blank=True, verbose_name=_("Monitoring")) # temporary
-
-    complex = models.ForeignKey('Complex', blank=True, verbose_name=_("Complex"))
-
-    extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
-
-    gudea_checked = models.BooleanField(default=False, verbose_name=_("Gudea base checked")) # temporary
-
-    ato = models.CharField(max_length=250, blank=True, verbose_name=_("ATO"))
+    
+    #Name and address
+    name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
+    name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
     address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
-
+    
+    #Additional info, may be helpful during administration...
+    extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
+    state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
+    
+    #External link to Wiki
+    ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
+    #External link to kulturnoe-nasledie.ru
+    kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
+    
+    #Mark this true mean "We check all data"
+    verified = models.BooleanField(default = False, verbose_name = _("Verified"))
+    #End of minimal required fields
+    
     def __unicode__(self):
-        return self.name + ', ' + self.number
+        return "%s, %s" % (self.name, self.address)
 
 class Complex(models.Model):
     ''' This is union of buildings '''
-    root = models.ForeignKey(House, verbose_name = _("Complex"), related_name = 'complex_root')
-    complex_name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) # temporary
-    cult_id = models.PositiveIntegerField(verbose_name = _("ID Kulturnoe Nasledie"))
     
+    #One complex may be part of another complex
+    parent = models.ForeignKey(Complex, blank = True, null = True, verbose_name = _("Parent complex"))
+    # Geospatial
+    region = models.IntegerField(verbose_name = _("Region of RF"))
+    city = models.IntegerField(verbose_name = _("City"), blank = True, null = True)
+    street = models.IntegerField(verbose_name = _("Street"), blank = True, null = True)
+    
+    name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) 
+    address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
+    
+    #External link to Wiki
+    ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
+    #External link to kulturnoe-nasledie.ru
+    kult_id = models.PositiveIntegerField(verbose_name = _("ID Kulturnoe Nasledie"))
+    
+    #Mark this true mean "We check all data"
+    verified = models.BooleanField(default = False, verbose_name = _("Verified"))
+ 
     def __unicode__(self):
-        return self.complex_name
+        return self.name
 
-class Passport(models.Model):
-    '''Oficial House passport'''
-    PROTECTION_CHOICES = (
-        ('F', _("Federal")),
-        ('R', _("Regional")),
-        ('L', _("Local")),
-        ('D', _("Determined")),
-        ('O', _("OPOKN")),
-        ('N', _("No")),
-    )
-    SAFETY_CHOICES = (
-        ('S', _("Saved")),
-        ('M', _("Modern replica")),
-        ('R', _("Ruins")),
-        ('L', _("Losed")),
-    )
-
-    STATE_CHOICES = (
-        ('R', _("Restored")),
-        ('S', _("Satisfactory")),
-        ('U', _("Unsatisfactory")),
-        ('A', _("Accident")),
-    )
-    pasport_address = models.CharField(max_length=250, blank=True, verbose_name=_("Address from pasport"))
-    pasport_safety = models.CharField(max_length=1, blank=True, choices=SAFETY_CHOICES, verbose_name=_("Safety from pasport"))
-    pasport_state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State from pasport"))
-    pasport_protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
-
-class CulturalInformation(models.Model):
-    '''This is main data, that can be captured from or verified with site
-    http://kulturnoe-nasledie.ru
-    '''
-    building = models.OneToOneField(House)
-    kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
-    kult_checked = models.BooleanField(default=False, verbose_name=_("ID Kulturnoe Nasledie checked")) # temporary
-    kult_problems = models.CharField(max_length=20, blank=True, verbose_name=_("Kulturnoe Nasledie problems")) # temporary
 
 class HousePhoto(models.Model):
     def make_upload_folder(instance, filename):
@@ -194,7 +125,6 @@ class HousePhoto(models.Model):
 
     def __unicode__(self):
         return self.title
-
 
 class HouseEvent(models.Model):
     TYPE_CHOICES = (
