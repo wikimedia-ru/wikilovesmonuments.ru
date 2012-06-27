@@ -45,7 +45,7 @@ class Street(models.Model):
         return self.name
 
 
-class House(models.Model):
+class Monument(models.Model):
     ''' Main class for working.
     This one contains complete definition for one building. It's a heart
     for application.

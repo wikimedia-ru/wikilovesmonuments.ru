@@ -125,8 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # 'django.contrib.admindocs',
     'tinymce',
-
-    'house',
+    'wlm',
     'menu',
 )
 
