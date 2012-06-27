@@ -6,44 +6,35 @@ from django.db import models
 
 from tinymce import models as tinymce_models
 
-
 class Region(models.Model):
-    ''' Region description. 
-    XXX Shoul this be moved to another application ?
-    '''
-    name = models.CharField(max_length=250, verbose_name=_("Name"))
-    coord = models.CharField(max_length=20, verbose_name=_("Coordinates"))
+    ''' One region of RF'''
+    class Meta():
+        ordering = ['order']
+
+    code = models.IntegerField()
+    name = models.CharField(max_length = 200)
+    order = models.IntegerField()
 
     def __unicode__(self):
         return self.name
 
+class City(models.Model):
+    '''One RF city'''
+
+    region = models.ForeignKey(Region)
+    name = models.CharField(max_length = 200)
+
+    def __unicode__(self):
+        return "%s, %s" % (self.region, self.name)
 
 class Street(models.Model):
-    ''' One street definition
-    XXX Is this object required ?
-    '''
-    STREET_CHOICES = (
-        ('S', _("Street")),
-        ('L', _("Lane")),
-        ('H', _("Highway")),
-        ('Q', _("Square")),
-        ('E', _("Embankment")),
-        ('P', _("Passage")),
-        ('A', _("Avenue")),
-        ('B', _("Blind alley")),
-    )
-
-    name = models.CharField(max_length=250, verbose_name=_("Name"))
-    full_name = models.CharField(blank=True, max_length=250, verbose_name=_("Full name"))
-    type = models.CharField(max_length=1, blank=True, choices=STREET_CHOICES, default='S', verbose_name=_("Type"))
-    description = tinymce_models.HTMLField(blank=True, verbose_name=_("Description"))
-
-    class Meta:
-        ordering = ['name',]
+    '''One city street'''
+    region = models.ForeignKey(Region)
+    city = models.ForeignKey(City)
+    name = models.CharField(max_length = 200)
 
     def __unicode__(self):
-        return self.name
-
+        return "%s, %s, %s" % (self.region, self.city, self.name)
 
 class Monument(models.Model):
     ''' Main class for working.
@@ -70,20 +61,20 @@ class Monument(models.Model):
         ('A', _("Architectural")),
         ('H', _("Historical")),
     )
-   
+
     #minimal required fields
     # Geospatial
-    region = models.IntegerField(verbose_name = _("Region of RF"))
-    city = models.IntegerField(verbose_name = _("City"), blank = True, null = True)
-    street = models.IntegerField(verbose_name = _("Street"), blank = True, null = True)
+    region = models.ForeignKey(Region, verbose_name = _("Region of RF"))
+    city = models.ForeignKey(City, verbose_name = _("City"), blank = True, null = True)
+    street = models.ForeignKey(Street, verbose_name = _("Street"), blank = True, null = True)
     coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
-    
+
     #Name and address
     name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
     name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
     address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
-    
+
     #Is this building a part of complex?
     complex_root = models.ForeignKey('self', blank = True, null = True, verbose_name = _("Belong to complex"))
     complex = models.BooleanField(default = False, verbose_name = _("Complex"))
@@ -92,19 +83,18 @@ class Monument(models.Model):
     state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
     protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
     type = models.CharField(max_length = 1, choices = TYPE_CHOICES, verbose_name = _("Type class"))
-    
+
     #External link to Wiki
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
     #External link to kulturnoe-nasledie.ru
     kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
-    
+
     #Mark this true mean "We check all data"
     verified = models.BooleanField(default = False, verbose_name = _("Verified"))
     #End of minimal required fields
-    
+
     def __unicode__(self):
         return "%s, %s" % (self.name, self.address)
-
 
 class HousePhoto(models.Model):
     def make_upload_folder(instance, filename):
@@ -112,7 +102,7 @@ class HousePhoto(models.Model):
         path = u"%d/%s" % (instance.house.pk, image_name)
         return path
 
-    house = models.ForeignKey('House', verbose_name=_("House"))
+    house = models.ForeignKey('Monument', verbose_name=_("House"))
     #file = YFField(upload_to=make_upload_folder)
     title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
     author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
@@ -128,7 +118,7 @@ class HouseEvent(models.Model):
         ('D', _("Demolished")),
     )
 
-    house = models.ForeignKey('House', verbose_name=_("House"))
+    house = models.ForeignKey('Monument', verbose_name=_("House"))
     date = models.CharField(max_length=250, blank=True, verbose_name=_("Date"))
     type = models.CharField(max_length=1, blank=True, choices=TYPE_CHOICES, verbose_name=_("Event type"))
     comment = models.CharField(max_length=250, blank=True, verbose_name=_("Comment"))
