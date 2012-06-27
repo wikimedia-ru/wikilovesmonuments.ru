@@ -57,7 +57,20 @@ class House(models.Model):
         ('A', _("Accident")),
     )
 
-   )
+    PROTECTION_CHOICES = (
+        ('F', _("Federal")),
+        ('R', _("Regional")),
+        ('L', _("Local")),
+        ('D', _("Determined")),
+        ('O', _("OPOKN")),
+        ('N', _("No")),
+    )
+    TYPE_CHOICES = (
+        ('C', _("Cultural")),
+        ('A', _("Architectural")),
+        ('H', _("Historical")),
+    )
+   
     #minimal required fields
     # Geospatial
     region = models.IntegerField(verbose_name = _("Region of RF"))
@@ -71,9 +84,14 @@ class House(models.Model):
     name_alt = models.CharField(max_length=250, blank=True, verbose_name=_("Alternative name"))
     address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
     
+    #Is this building a part of complex?
+    complex_root = models.ForeignKey('self', blank = True, null = True, verbose_name = _("Belong to complex"))
+    complex = models.BooleanField(default = False, verbose_name = _("Complex"))
     #Additional info, may be helpful during administration...
     extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
     state = models.CharField(max_length=1, blank=True, choices=STATE_CHOICES, verbose_name=_("State"))
+    protection = models.CharField(max_length=1, blank=True, choices=PROTECTION_CHOICES, verbose_name=_("Protection class"))
+    type = models.CharField(max_length = 1, choices = TYPE_CHOICES, verbose_name = _("Type class"))
     
     #External link to Wiki
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
@@ -86,30 +104,6 @@ class House(models.Model):
     
     def __unicode__(self):
         return "%s, %s" % (self.name, self.address)
-
-class Complex(models.Model):
-    ''' This is union of buildings '''
-    
-    #One complex may be part of another complex
-    parent = models.ForeignKey(Complex, blank = True, null = True, verbose_name = _("Parent complex"))
-    # Geospatial
-    region = models.IntegerField(verbose_name = _("Region of RF"))
-    city = models.IntegerField(verbose_name = _("City"), blank = True, null = True)
-    street = models.IntegerField(verbose_name = _("Street"), blank = True, null = True)
-    
-    name = models.CharField(max_length=250, blank=True, verbose_name=_("Name")) 
-    address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
-    
-    #External link to Wiki
-    ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
-    #External link to kulturnoe-nasledie.ru
-    kult_id = models.PositiveIntegerField(verbose_name = _("ID Kulturnoe Nasledie"))
-    
-    #Mark this true mean "We check all data"
-    verified = models.BooleanField(default = False, verbose_name = _("Verified"))
- 
-    def __unicode__(self):
-        return self.name
 
 
 class HousePhoto(models.Model):
