@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-from house.models import *
+from models import *
 
 
 def index_page(request):

@@ -11,7 +11,6 @@ class Region(models.Model):
     class Meta():
         ordering = ['order']
 
-    code = models.IntegerField()
     name = models.CharField(max_length = 200)
     order = models.IntegerField()
 
@@ -22,10 +21,12 @@ class City(models.Model):
     '''One RF city'''
 
     region = models.ForeignKey(Region)
-    name = models.CharField(max_length = 200)
+    name = models.CharField(max_length=200)
+    latitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
+    longitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
 
     def __unicode__(self):
-        return "%s, %s" % (self.region, self.name)
+        return "%s, %s" % (self.region.name, self.name)
 
 class Street(models.Model):
     '''One city street'''
@@ -34,7 +35,7 @@ class Street(models.Model):
     name = models.CharField(max_length = 200)
 
     def __unicode__(self):
-        return "%s, %s, %s" % (self.region, self.city, self.name)
+        return "%s, %s, %s" % (self.region.name, self.city.name, self.name)
 
 class Monument(models.Model):
     ''' Main class for working.
@@ -95,6 +96,9 @@ class Monument(models.Model):
 
     def __unicode__(self):
         return "%s, %s" % (self.name, self.address)
+
+    def show_name(self):
+        return self.name or "Неизвестно"
 
 class HousePhoto(models.Model):
     def make_upload_folder(instance, filename):
