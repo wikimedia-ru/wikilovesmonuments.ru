@@ -31,7 +31,7 @@ class MonumentAdmin(admin.ModelAdmin):
             'fields': ('region', 'city', 'street', 'address','coord_lon', 'coord_lat',)# 'pasport_address',)
         }),
         (_("Complex"), {
-            'fields': ('complex_root', 'complex')
+            'fields': ('complex',)
         }),
         (_("Safety"), {
             'fields': ('state', 'protection', 'type',)
@@ -42,7 +42,7 @@ class MonumentAdmin(admin.ModelAdmin):
 
     )
     list_filter = ['complex', 'region']
-    list_display = ['show_name', 'region', 'city', 'verified',]
+    list_display = ['show_name', 'region', 'city', 'show_wiki', 'verified',]
 
 admin.site.register(Street, StreetAdmin)
 admin.site.register(Monument, MonumentAdmin)

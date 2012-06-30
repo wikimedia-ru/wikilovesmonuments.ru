@@ -2,11 +2,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-from models import *
+from models import Monument, HousePhoto
 
 
 def index_page(request):
-    h_list = House.objects.exclude(coord_lon=None).select_related()
+    h_list = Monument.objects.exclude(coord_lon=None).select_related()
+    h_list = h_list.filter(city_id=34)
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/index.html', {
@@ -17,7 +18,7 @@ def index_page(request):
 
 
 def upload(request):
-    h_list = House.objects.all()
+    h_list = Monument.objects.all()
 
     return render_to_response('house/upload.html', {
         'house_list': h_list,
@@ -26,7 +27,7 @@ def upload(request):
 
 
 def add(request):
-    h_list = House.objects.all()
+    h_list = Monument.objects.all()
     p_list = HousePhoto.objects.all()[:30]
 
     return render_to_response('house/add.html', {
@@ -38,7 +39,7 @@ def add(request):
 
 
 def house(request, id):
-    h = House.objects.get(pk=id)
+    h = Monument.objects.get(pk=id)
     photo = HousePhoto.objects.filter(house=h)[:30]
 
     return render_to_response('house/house.html', {

@@ -77,7 +77,7 @@ class Monument(models.Model):
     address = models.CharField(max_length=250, blank=True, verbose_name=_("Address"))
 
     #Is this building a part of complex?
-    complex_root = models.ForeignKey('self', blank = True, null = True, verbose_name = _("Belong to complex"))
+    complex_root = models.ForeignKey('self', blank=True, null = True, verbose_name = _("Belong to complex"))
     complex = models.BooleanField(default = False, verbose_name = _("Complex"))
     #Additional info, may be helpful during administration...
     extra_info = tinymce_models.HTMLField(blank=True, verbose_name=_("Additional"))
@@ -99,6 +99,9 @@ class Monument(models.Model):
 
     def show_name(self):
         return self.name or "Неизвестно"
+
+    def show_wiki(self):
+        return self.ruwiki
 
 class HousePhoto(models.Model):
     def make_upload_folder(instance, filename):
