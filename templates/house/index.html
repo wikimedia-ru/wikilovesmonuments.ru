@@ -41,11 +41,10 @@
 									<label class="control-label" for="town">Выберите город</label>
 									<select id="town" name="town">
 										<option>something</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-									</select>
+										{% for c in cities%}
+                                        <option value='{{c.id}}'>{{c.name}}</option>
+									    {%endfor%}
+                                    </select>
 								</div>
 								<p>
 									<button class="btn btn-large btn-primary">Искать</button>
@@ -64,19 +63,23 @@
 								</form>
 								<div id="map" class="map map-big"></div>
 								<script type="text/javascript">
-									var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+									//var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+									var cmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 									var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 									var map = new L.Map('map');
 									map
 										.setView(new L.LatLng(66, 94), 2)
 										.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 									var clusterer = new LeafClusterer(map);
-
-									var markers = [];
-								{% for house in house_list %}
-									markers.push(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
-								{% endfor %}
-									clusterer.addMarkers(markers);
+                                    $.getJSON('/ajax/markers/2/2/1', function(data){
+                                        var markers = [];
+                                        $.each(data.markers, function(key, val){
+                                            markers.push(new L.Marker(new L.LatLng(val.lat, val.lon)).bindPopup('<p><a href="/house/' + val.id + '">' + val.name +'</p>'));
+                                        });
+                                        clusterer.addMarkers(markers);
+                                    }).error(function(){
+                                        alert('Error!');
+                                    });
 								</script>
 							</div>
 						</div>

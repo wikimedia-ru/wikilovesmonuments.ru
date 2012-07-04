@@ -2,7 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-from models import Monument, HousePhoto
+from wlm.models import City, Monument, HousePhoto
 
 
 def index_page(request):
@@ -13,6 +13,7 @@ def index_page(request):
     return render_to_response('house/index.html', {
         'house_list': h_list,
         'photo_list': p_list,
+        'cities': City.objects.values('id', 'name').all(),
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 

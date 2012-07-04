@@ -29,4 +29,5 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^ajax/markers/(?P<zoom>\d{1,2})/(?P<x_tile>\d+)/(?P<y_tile>\d+$)', 'wlm.ajax.get_tile_markers'),
 )

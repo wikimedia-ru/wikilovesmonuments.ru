@@ -10,6 +10,7 @@ class Region(models.Model):
     ''' One region of RF'''
     class Meta():
         ordering = ['order']
+        verbose_name = _("Region of RF")
 
     name = models.CharField(max_length = 200)
     order = models.IntegerField()
@@ -19,6 +20,10 @@ class Region(models.Model):
 
 class City(models.Model):
     '''One RF city'''
+
+    class Meta():
+        ordering = ['name']
+        verbose_name = _("City")
 
     region = models.ForeignKey(Region)
     name = models.CharField(max_length=200)
