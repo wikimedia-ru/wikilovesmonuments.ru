@@ -71,15 +71,45 @@
 										.setView(new L.LatLng(66, 94), 2)
 										.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 									var clusterer = new LeafClusterer(map);
-                                    $.getJSON('/ajax/markers/2/2/1', function(data){
-                                        var markers = [];
-                                        $.each(data.markers, function(key, val){
-                                            markers.push(new L.Marker(new L.LatLng(val.lat, val.lon)).bindPopup('<p><a href="/house/' + val.id + '">' + val.name +'</p>'));
-                                        });
-                                        clusterer.addMarkers(markers);
-                                    }).error(function(){
-                                        alert('Error!');
-                                    });
+                                    
+                                    //Now will do a some trick - get markers only for tile 256 x 256
+                                    var pix_bounds = map.getPixelBounds();
+                                    var zoom = map.getZoom();
+                                    var x_min = Math.floor(pix_bounds.min.x / 256);
+                                    var x_max = Math.floor(pix_bounds.max.x / 256);
+                                    var y_min = Math.floor(pix_bounds.min.y / 256);
+                                    var y_max = Math.floor(pix_bounds.max.y / 256);
+                                    //var markers = [];
+
+                                    for (y = y_min; y <= y_max; y++){
+                                        for (x = x_min; x <= x_max; x++){
+                                            //Next level optimization:
+                                            // Get count of markers on tile and get all markers by chunks
+                                            var count_url = '/ajax/markerscount/' + zoom + '/' + x + '/' + y;
+                                            var count = 0;
+                                            $.ajax({ url: count_url, success: function(res){
+                                                    count = res.count;
+                                                }, async: false,
+                                            });
+                                            var first = -1;
+                                            while (count > 0){
+                                                first = first + 1;
+                                                last = first + Math.min(10000, count);
+                                                var url = '/ajax/markers/' + zoom + '/' + x + '/' + y + '/' + first + '/' + last;
+                                                $.getJSON(url, function(data){
+                                                    markers = [];
+                                                    $.each(data.markers, function(key, val){
+                                                        markers.push(new L.Marker(new L.LatLng(val.lat, val.lon)).bindPopup('<p><a href="/house/' + val.id + '">' + val.name +'</p>'));
+                                                    });
+                                                    clusterer.addMarkers(markers);
+                                                }).error(function(){
+                                                    alert('Error!');
+                                                });
+                                                count = count - 10000;
+                                                first = last;
+                                            }
+                                        }
+                                    }
 								</script>
 							</div>
 						</div>
