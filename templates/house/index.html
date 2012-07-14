@@ -94,7 +94,7 @@
                                             var first = -1;
                                             while (count > 0){
                                                 first = first + 1;
-                                                last = first + Math.min(10000, count);
+                                                last = first + Math.min(20000, count);
                                                 var url = '/ajax/markers/' + zoom + '/' + x + '/' + y + '/' + first + '/' + last;
                                                 $.getJSON(url, function(data){
                                                     markers = [];
@@ -105,7 +105,7 @@
                                                 }).error(function(){
                                                     alert('Error!');
                                                 });
-                                                count = count - 10000;
+                                                count = count - 20000;
                                                 first = last;
                                             }
                                         }
