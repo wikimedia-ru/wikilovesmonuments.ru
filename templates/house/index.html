@@ -28,23 +28,21 @@
 							<div class="content">
 								<p class="title"><i class="icon-screenshot"></i>Введите регион и город вручную</p>
 								<div class="controls">
-									<label class="control-label" for="region">Выберите регион</label>
-									<select id="town" name="region">
-										<option>something</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
+									<label class="control-label" for="filter-region">Выберите регион</label>
+									<select id="filter-region" name="region">
+										{% for r in regions %}
+										<option value='{{r.id}}'>{{r.name}}</option>
+										{%endfor%}
 									</select>
 								</div>
 								<div class="controls">
-									<label class="control-label" for="town">Выберите город</label>
-									<select id="town" name="town">
-										<option>something</option>
-										{% for c in cities%}
-                                        <option value='{{c.id}}'>{{c.name}}</option>
-									    {%endfor%}
-                                    </select>
+									<label class="control-label" for="filter-city">Выберите город</label>
+									<select id="filter-city" name="city">
+										<option></option>
+										{% for c in cities %}
+										<option value='{{c.id}}'>{{c.name}}</option>
+										{%endfor%}
+									</select>
 								</div>
 								<p>
 									<button class="btn btn-large btn-primary">Искать</button>
@@ -64,52 +62,41 @@
 								<div id="map" class="map map-big"></div>
 								<script type="text/javascript">
 									//var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-									var cmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-									var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-									var map = new L.Map('map');
-									map
-										.setView(new L.LatLng(66, 94), 2)
-										.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
-									var clusterer = new LeafClusterer(map);
-                                    
-                                    //Now will do a some trick - get markers only for tile 256 x 256
-                                    var pix_bounds = map.getPixelBounds();
-                                    var zoom = map.getZoom();
-                                    var x_min = Math.floor(pix_bounds.min.x / 256);
-                                    var x_max = Math.floor(pix_bounds.max.x / 256);
-                                    var y_min = Math.floor(pix_bounds.min.y / 256);
-                                    var y_max = Math.floor(pix_bounds.max.y / 256);
-                                    //var markers = [];
+									var cloudmade = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+										maxZoom: 18,
+										minZoom: 4,
+										attribution: 'карта &copy; OpenStreetMap, рендер &copy; CloudMade'
+									});
+									var map = new L.Map('map', {
+										center: new L.LatLng(66, 94),
+										zoom: 4,
+										layers: [cloudmade]
+									});
 
-                                    for (y = y_min; y <= y_max; y++){
-                                        for (x = x_min; x <= x_max; x++){
-                                            //Next level optimization:
-                                            // Get count of markers on tile and get all markers by chunks
-                                            var count_url = '/ajax/markerscount/' + zoom + '/' + x + '/' + y;
-                                            var count = 0;
-                                            $.ajax({ url: count_url, success: function(res){
-                                                    count = res.count;
-                                                }, async: false,
-                                            });
-                                            var first = -1;
-                                            while (count > 0){
-                                                first = first + 1;
-                                                last = first + Math.min(20000, count);
-                                                var url = '/ajax/markers/' + zoom + '/' + x + '/' + y + '/' + first + '/' + last;
-                                                $.getJSON(url, function(data){
-                                                    markers = [];
-                                                    $.each(data.markers, function(key, val){
-                                                        markers.push(new L.Marker(new L.LatLng(val.lat, val.lon)).bindPopup('<p><a href="/house/' + val.id + '">' + val.name +'</p>'));
-                                                    });
-                                                    clusterer.addMarkers(markers);
-                                                }).error(function(){
-                                                    alert('Error!');
-                                                });
-                                                count = count - 20000;
-                                                first = last;
-                                            }
-                                        }
-                                    }
+									var markers = [];
+									var regionMarkers = function(region) {
+										if (typeof markers[region] !== 'undefined') {
+											return;
+										}
+										markers[region] = new L.MarkerClusterGroup();
+										$.ajax({
+											url: '/ajax/markersregion/' + region,
+											success: function(data){
+												for (var key in data) {
+													var val = data[key];
+													var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
+													marker
+														.bindPopup(val.name)
+														.addTo(markers[region]);
+												}
+												map.addLayer(markers[region]);
+											}
+										});
+									}
+									regionMarkers($('#filter-region option:selected').val());
+									$('#filter-region').change(function(){
+										regionMarkers($('option:selected', $(this)).val());
+									});
 								</script>
 							</div>
 						</div>

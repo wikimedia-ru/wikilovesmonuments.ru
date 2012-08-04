@@ -13,6 +13,7 @@ class Region(models.Model):
         verbose_name = _("Region of RF")
 
     name = models.CharField(max_length = 200)
+    district = models.IntegerField(verbose_name=_("Federal district of RF"))
     order = models.IntegerField()
 
     def __unicode__(self):

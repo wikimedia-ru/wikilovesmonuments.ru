@@ -19,11 +19,13 @@
 
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
-	<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->		
-	<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
-	<script src="{{ STATIC_URL }}js/script.js"></script>
-	<script src="//api.oldvologda.ru/leafclusterer/leafclusterer.js"></script>  
+	<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.4.2/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.4.2/leaflet.ie.css" /><![endif]-->
+	<script src="//cdn.leafletjs.com/leaflet-0.4.2/leaflet.js"></script>
+
+	<link rel="stylesheet" href="//danzel.github.com/Leaflet.markercluster/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="//danzel.github.com/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+	<script src="//danzel.github.com/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 
 	{% block head %}
 	{% endblock %}

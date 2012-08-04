@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
-from wlm.models import City, Monument, HousePhoto
+from wlm.models import Region, City, Monument, HousePhoto
 
 
 def index_page(request):
@@ -14,6 +14,7 @@ def index_page(request):
     return render_to_response('house/index.html', {
         'house_list': h_list,
         'photo_list': p_list,
+        'regions': Region.objects.values('id', 'name').exclude(id=77),
         'cities': City.objects.values('id', 'name').all(),
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
