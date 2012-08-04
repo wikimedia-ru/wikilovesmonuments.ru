@@ -1,9 +1,21 @@
 # -*- encoding: utf-8 -*-
 
+import json
+
 from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from utils.leaflet_transform import Point, Tile
 
 from wlm.models import Monument
+
+
+def get_region_markers(request, region):
+    monuments = Monument.objects.select_related().filter(
+        region_id=region,
+        coord_lat__isnull=False,
+        coord_lon__isnull=False,
+        ).values("id", "coord_lon", "coord_lat", "name")
+    return HttpResponse(json.dumps(list(monuments)), mimetype="application/json")
 
 
 def get_tile_markers(request, x_tile, y_tile, zoom, first, last):
