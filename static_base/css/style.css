@@ -129,8 +129,25 @@ header .btn-large:hover {
 	border: 1px solid #AAAAAA;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 0 3px #000000 inset;
-	width: 100%;
-	height: 267px;
+	width: 98%;
+	height: 400px;
+	margin: 0 auto 8px;
+}
+#location {
+	padding: 10px;
+	background-color: #f5d83a; /* Old browsers */
+	background-repeat: repeat-x; /* Repeat the gradient */
+	background-image: -moz-linear-gradient(top, #f5eb80 0%, #f5d83a 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5eb80), color-stop(100%,#f5d83a)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* Chrome 10+,Safari 5.1+ */
+	background-image: -ms-linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* IE10+ */
+	background-image: -o-linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* Opera 11.10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5eb80', endColorstr='#f5d83a',GradientType=0 ); /* IE6-9 */
+	background-image: linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* W3C */
+	border: 1px solid #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 }
 
 #about.show-grid [class*="span"] {
