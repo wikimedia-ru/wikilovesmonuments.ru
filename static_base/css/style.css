@@ -270,3 +270,8 @@ footer p {
 #find.show-grid [class*="span"] {
 	text-align: left !important;
 }
+
+
+.contacts {
+	padding-top: 19px;
+}
