@@ -8,16 +8,17 @@ L.Control.Search = L.Control.extend({
 
 	onAdd: function (map) {
 		var className = 'leaflet-control-search',
-			container = L.DomUtil.create('div', className);
+			container = L.DomUtil.create('div', className),
+			form = L.DomUtil.create('form', 'input-append', container);
 		L.DomEvent.disableClickPropagation(container);
 
-		var input = L.DomUtil.create('input', className + '-input', container);
+		var input = L.DomUtil.create('input', className + '-input input-medium', form);
 		input.type = 'search';
 		input.placeholder = 'Воспользуйтесь поиском';
 
-		var submit = L.DomUtil.create('input', className + '-submit', container);
+		var submit = L.DomUtil.create('button', className + '-submit btn', form);
 		submit.type = 'submit';
-		submit.value = 'Найти памятник';
+		submit.innerHTML = 'Найти памятник';
 
 		return container;
 	}
