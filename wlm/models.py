@@ -15,7 +15,10 @@ class Region(models.Model):
     name = models.CharField(max_length = 200)
     district = models.IntegerField(verbose_name=_("Federal district of RF"))
     order = models.IntegerField()
-
+    latitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
+    longitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
+    scale = models.IntegerField(verbose_name=_("Scale"))
+ 
     def __unicode__(self):
         return self.name
 

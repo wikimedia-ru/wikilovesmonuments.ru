@@ -14,7 +14,7 @@ def index_page(request):
     return render_to_response('house/index.html', {
         'house_list': h_list,
         'photo_list': p_list,
-        'regions': Region.objects.values('id', 'name').exclude(id=77),
+        'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
         'cities': City.objects.values('id', 'name').all(),
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
