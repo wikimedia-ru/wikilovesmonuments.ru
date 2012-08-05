@@ -11,8 +11,17 @@ body {
 header > div.row {
 	padding: 30px 0
 }
-header img.logo {
-	width: 100%;
+header .logo {
+	margin-bottom: 0;
+}
+header .logo a {
+	display: inline-block;
+	width: 670px;
+	height: 62px;
+	background: url("../img/logo.png") no-repeat 0 0;
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
 }
 header a {
 	color: #828282;
@@ -49,29 +58,31 @@ header .btn-large:hover {
 	width: 26px;
 }
 #about {
-		color: #fff;
+	color: #fff;
 }
-#about h1, 
-#find h1 {
+#about h2, 
+#find h2 {
 	font-size: 24px;
-		padding: 0 50px 0 62px;
+	padding: 0 50px 0 62px;
+	margin: 8px 0;
 }
-#find h1 {
+#find h2 {
 	background: url("../img/gl-search.png") no-repeat scroll 28px 6px transparent;
 }
-#result h1 {
+#result h2 {
 	background: url("../img/glyphicons_081_refresh.png") no-repeat scroll 23px 7px transparent;
 }
-#about h1{
-		text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
-		background: url("../img/gl-info.png") no-repeat scroll 28px 6px transparent;
+#about h2 {
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, .5);
+	background: url("../img/gl-info.png") no-repeat scroll 28px 6px transparent;
 }
-#find h1,
-#result h1 {
+#find h2,
+#result h2 {
 	text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
 }
 #about .content {
-	margin: 0 50px 0 62px;
+	margin: 0 20px;
+	padding-bottom: 8px;
 }
 #find p.title {
 	font-weight: bold;
@@ -92,7 +103,7 @@ header .btn-large:hover {
 	width: 100%;
 }
 #boxPlace select {
-		width: 100%;
+	width: 100%;
 }
 
 #boxLine.w-line {
@@ -175,6 +186,7 @@ header .btn-large:hover {
 }
 #result {
 	margin: -21px auto 0;
+	padding-top: 8px;
 	width: 98%;
 	background-color: #4d9676; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
@@ -186,7 +198,7 @@ header .btn-large:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#41dd99', endColorstr='#4d9676',GradientType=0 ); /* IE6-9 */
 	background-image: linear-gradient(top, #41dd99 0%,#4d9676 100%); /* W3C */
 }
-#result h1 {
+#result h2 {
 	font-size: 24px;
 	padding: 0 50px 0 54px;
 }
@@ -219,7 +231,7 @@ header .btn-large:hover {
 	margin: 8px 0 0 20px;
 }
 #sidebar .content {
-	margin: 5px 0px 15px 20px;
+	margin: 5px 20px 15px 20px;
 }
 #sidebar .element-sidebar {
 	padding: 13px 0px;
@@ -248,7 +260,7 @@ header .btn-large:hover {
 }
 
 footer {
-	margin: 184px 0px 40px 0px;
+	margin: 84px 0px 40px 0px;
 }
 footer .license-link {
 	float: left;
@@ -273,5 +285,5 @@ footer p {
 
 
 .contacts {
-	padding-top: 19px;
+	padding-top: 17px;
 }
