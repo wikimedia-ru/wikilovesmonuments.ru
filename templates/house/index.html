@@ -58,7 +58,11 @@
 								var markers = [];
 								var regionMarkers = function(region) {
 									if (typeof markers[region] !== 'undefined') {
-										return;
+										for (key in markers){
+                                            map.removeLayer(markers[key]);
+                                        }
+                                        map.addLayer(markers[region]);
+                                        return;
 									}
 									markers[region] = new L.MarkerClusterGroup();
 									$.ajax({
@@ -71,7 +75,10 @@
 													.bindPopup(val.name)
 													.addTo(markers[region]);
 											}
-											map.addLayer(markers[region]);
+											for (key in markers){
+                                                map.removeLayer(markers[key]);
+                                            }
+                                            map.addLayer(markers[region]);
 										}
 									});
 								}

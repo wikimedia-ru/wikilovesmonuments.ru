@@ -1,3 +1,4 @@
+from django.db import connection
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -51,3 +52,23 @@ def house(request, id):
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
+def coordinates_doubled(request):
+    query = '''select count(id), coord_lat, coord_lon from wlm_monument
+        group by coord_lat, coord_lon
+        having count(id) > 1;'''
+    cursor = connection.cursor()
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    return render_to_response('coord_doubles.html', {'doubles':rows,})
+
+def monuments_double_coordinates(request):
+    if request.GET['lat']:
+        lat = float(request.GET.get('lat'))
+    else:
+        lat = None
+    if request.GET['lon']:
+        lon = float(request.GET.get('lon'))
+    else:
+        lon = None
+    monuments = Monument.objects.filter(coord_lat=lat, coord_lon=lon)
+    return render_to_response('monuments_double.html', {'monuments': monuments,})
