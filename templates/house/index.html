@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
+<script type='text/javascript' src='{{STATIC_URL}}/js/wlm.js'></script>
 {% endblock %}
 
 {% block title %}{% endblock %}
@@ -47,57 +48,11 @@
                                     {%endfor%}
                                 };
 
-                                //var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-								var cloudmade = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-									maxZoom: 18,
-									minZoom: 3,
-									attribution: 'карта &copy; OpenStreetMap, рендер &copy; CloudMade'
-								});
-								var map = new L.Map('map', {
-									center: new L.LatLng(66, 94),
-									zoom: 3,
-									zoomControl: false,
-									layers: [cloudmade]
-								});
-								map.zoomControl = new L.Control.Zoom({ position: 'bottomleft' });
-
-								var markers = [];
-								var regionMarkers = function(region) {
-									if (typeof markers[region] !== 'undefined') {
-										for (key in markers){
-                                            map.removeLayer(markers[key]);
-                                        }
-                                        data = regions[region];
-                                        map.addLayer(markers[region]);
-                                        map.panTo(new L.LatLng(data['latitude'], data['longitude']))
-                                        map.setZoom(data['scale'])
-                                        return;
-									}
-									markers[region] = new L.MarkerClusterGroup();
-									$.ajax({
-										url: '/ajax/markersregion/' + region,
-										success: function(data){
-											for (var key in data) {
-												var val = data[key];
-												var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
-												marker
-													.bindPopup(val.name)
-													.addTo(markers[region]);
-											}
-											for (key in markers){
-                                                map.removeLayer(markers[key]);
-                                            }
-                                            map.addLayer(markers[region]);
-                                            data = regions[region];
-                                            map.addLayer(markers[region]);
-                                            map.panTo(new L.LatLng(data['latitude'], data['longitude']))
-                                            map.setZoom(data['scale'])
-                                        }
-									});
-								}
-								regionMarkers($('#filter-region option:selected').val());
+								
+                                WLM.map.init_map('map');
+                                WLM.map.regionMarkers($('#filter-region option:selected').val());
 								$('#filter-region').change(function(){
-									regionMarkers($('option:selected', $(this)).val());
+									WLM.map.regionMarkers($('option:selected', $(this)).val());
 								});
 							</script>
 						</div>
