@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^ajax/markers/(?P<zoom>\d{1,2})/(?P<x_tile>\d+)/(?P<y_tile>\d+)/(?P<first>\d+)/(?P<last>\d+)$', 'wlm.ajax.get_tile_markers'),
     url(r'^ajax/markerscount/(?P<zoom>\d{1,2})/(?P<x_tile>\d+)/(?P<y_tile>\d+)$', 'wlm.ajax.get_tile_markers_count'),
     url(r'^ajax/markersregion/(?P<region>\d+)$', 'wlm.ajax.get_region_markers'),
+    url(r'^ajax/citiesregion/(?P<region>\d+)$', 'wlm.ajax.get_region_cities'),
 
     url(r'^doubles$', 'wlm.views.coordinates_doubled'),
     url(r'^doubles/find$', 'wlm.views.monuments_double_coordinates'),

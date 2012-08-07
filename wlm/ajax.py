@@ -6,8 +6,12 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from utils.leaflet_transform import Point, Tile
 
-from wlm.models import Monument
+from wlm.models import Monument, City
 
+
+def get_region_cities(request, region):
+    cities = City.objects.filter(region=region).values('id', 'name')
+    return HttpResponse(json.dumps(list(cities)), mimetype="application/json")
 
 def get_region_markers(request, region):
     monuments = Monument.objects.select_related().filter(

@@ -1,13 +1,34 @@
 //Base module
 var WLM = (function(){
     var version = "1.0";
-    return {
-        version: version
+    
+    //Cache for region cities
+    var cities = []
+    
+    var getRegionCities = function(region, callback){
+        if (typeof cities[region] !== 'undefined'){
+            if (callback) {
+                callback(cities[region]);
+            } else{
+                return cities[region];    
+            }
+        } else {
+            $.ajax({url: '/ajax/citiesregion/' + region,
+                success: function(data){
+                    cities[region] = data;
+                    if (callback) {callback(cities[region]);}
+                }
+            });
+        }
     }
-})();
 
-var WLM = (function(p, $){
-    p.map = p.map || {}
+    return {
+        version: version,
+        getRegionCities: getRegionCities
+    }
+})(jQuery);
+
+WLM.map = (function($){
     
     var minZoom = 3;
     var maxZoom = 18;
@@ -22,7 +43,7 @@ var WLM = (function(p, $){
     var map;
 
     //Initialise map code.
-    p.map.init_map = function(item_name){
+    init_map = function(item_name){
         map = new L.Map(item_name, {
             center: new L.LatLng(66, 94),
             zoom: 3,
@@ -38,8 +59,6 @@ var WLM = (function(p, $){
         map.panTo(new L.LatLng(data['latitude'], data['longitude']))
         map.setZoom(data['scale']);
     }
-    //Make function public
-    p.map.setPosition = setPosition;
 
     //Clear map layers
     var clearMap = function(){
@@ -62,7 +81,6 @@ var WLM = (function(p, $){
         }
 
     }
-    p.map.regionMarkers = regionMarkers;
 
 
     //Get markers from site and put it in cache
@@ -82,7 +100,11 @@ var WLM = (function(p, $){
                 }
         });
     }
-    return p;
-})(WLM, jQuery);
+    return {
+        init_map: init_map,
+        regionMarkers: regionMarkers,
+        setPosition: setPosition
+    };
+})(jQuery);
 
 
