@@ -75,9 +75,10 @@ WLM.map = (function($){
         if (typeof markers[region] !== 'undefined') {
             clearMap();
             setPosition(region);
+            map.addLayer(markers[region]);
             return;
         } else {
-            getMarkers(region)
+            getMarkers(region);
         }
 
     }
