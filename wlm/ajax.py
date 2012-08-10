@@ -13,6 +13,7 @@ def get_region_cities(request, region):
     cities = City.objects.filter(region=region).values('id', 'name')
     return HttpResponse(json.dumps(list(cities)), mimetype="application/json")
 
+
 def get_region_markers(request, region):
     monuments = Monument.objects.select_related().filter(
         region_id=region,
@@ -21,6 +22,14 @@ def get_region_markers(request, region):
         ).values("id", "coord_lon", "coord_lat", "name")
     return HttpResponse(json.dumps(list(monuments)), mimetype="application/json")
 
+
+def get_city_markers(request, city):
+    monuments = Monument.objects.select_related().filter(
+        city_id=city,
+        coord_lat__isnull=False,
+        coord_lon__isnull=False,
+        ).values("id", "coord_lon", "coord_lat", "name")
+    return HttpResponse(json.dumps(list(monuments)), mimetype="application/json")
 
 def get_tile_markers(request, x_tile, y_tile, zoom, first, last):
     point = Point(int(x_tile), int(y_tile))

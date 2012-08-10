@@ -58,6 +58,14 @@
 									WLM.map.regionMarkers($('option:selected', $(this)).val());
                                     WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
 								});
+                                $('#filter-city').change(function(){
+                                    var city = $('option:selected', $(this)).val();
+                                    if (city){
+                                        WLM.map.cityMarkers(city);
+                                    }else{
+                                        WLM.map.regionMarkers($('#filter-region option:selected').val());
+                                    }
+                                });
 							</script>
 						</div>
 					</div>

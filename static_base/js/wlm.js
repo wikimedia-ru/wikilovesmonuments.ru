@@ -69,18 +69,43 @@ WLM.map = (function($){
 
     //Markers cache
     var markers = [];
+    var cluster;
 
     //Get markers for selected region
     regionMarkers = function(region) {
         if (typeof markers[region] !== 'undefined') {
-            clearMap();
+            if (cluster){
+                map.removeLayer(cluster);
+            }
             setPosition(region);
-            map.addLayer(markers[region]);
+            cluster = markers[region];
+            map.addLayer(cluster);
             return;
         } else {
             getMarkers(region);
         }
 
+    }
+
+    cityMarkers = function(city_id){
+        if (cluster) {
+            map.removeLayer(cluster);    
+        }
+        cluster = new L.MarkerClusterGroup();
+        $.ajax({
+            url: '/ajax/markerscity/' + city_id,
+            success: function(data){
+                for (var key in data){
+                    var val = data[key];
+                    var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
+                        marker.bindPopup(val.name)
+                            .addTo(cluster);
+                }
+                clearMap();
+                map.addLayer(cluster);
+            }
+
+        });
     }
 
 
@@ -95,8 +120,11 @@ WLM.map = (function($){
                         marker.bindPopup(val.name)
                             .addTo(markers[region]);
                     }
-					clearMap();
-                    map.addLayer(markers[region]);
+					if (cluster){
+                        map.removeLayer(cluster);
+                    }
+                    cluster = markers[region];
+                    map.addLayer(cluster);
                     setPosition(region);
                 }
         });
@@ -104,6 +132,7 @@ WLM.map = (function($){
     return {
         init_map: init_map,
         regionMarkers: regionMarkers,
+        cityMarkers: cityMarkers,
         setPosition: setPosition
     };
 })(jQuery);
