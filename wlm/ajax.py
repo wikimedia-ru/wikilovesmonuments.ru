@@ -10,7 +10,7 @@ from wlm.models import Monument, City
 
 
 def get_region_cities(request, region):
-    cities = City.objects.filter(region=region).values('id', 'name')
+    cities = City.objects.filter(region=region).values('id', 'name', 'latitude', 'longitude')
     return HttpResponse(json.dumps(list(cities)), mimetype="application/json")
 
 

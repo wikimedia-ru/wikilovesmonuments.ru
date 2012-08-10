@@ -48,7 +48,9 @@
 								var setCities = function(data){
                                     $('#filter-city option:gt(0)').remove();
                                     $.each(data, function(key, value){
-                                        $('#filter-city').append($("<option></option>").attr("value", value.id).text(value.name));
+                                        $('#filter-city').append($("<option></option>")
+                                            .attr("value", value.id)
+                                            .text(value.name));
                                     });
                                 }
                                 WLM.map.init_map('map');

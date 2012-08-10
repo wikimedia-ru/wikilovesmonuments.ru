@@ -3,9 +3,11 @@ var WLM = (function(){
     var version = "1.0";
     
     //Cache for region cities
-    var cities = []
+    var cities = [];
+    var cur_region;
     
     var getRegionCities = function(region, callback){
+        cur_region = region;
         if (typeof cities[region] !== 'undefined'){
             if (callback) {
                 callback(cities[region]);
@@ -22,9 +24,21 @@ var WLM = (function(){
         }
     }
 
+    var getCity = function(city_id){
+        var city;
+        $.each(cities[cur_region], function(key, val){
+            if (val.id == city_id){
+                city = val;
+                return false;
+            }
+        });
+        return city;
+    }
+
     return {
         version: version,
-        getRegionCities: getRegionCities
+        getRegionCities: getRegionCities,
+        getCity: getCity
     }
 })(jQuery);
 
@@ -102,6 +116,10 @@ WLM.map = (function($){
                             .addTo(cluster);
                 }
                 clearMap();
+                city = WLM.getCity(city_id);
+                if (city){
+                    map.panTo(new L.LatLng(city.latitude, city.longitude))
+                }
                 map.addLayer(cluster);
             }
 
