@@ -67,11 +67,21 @@ WLM.map = (function($){
         map.zoomControl = new L.Control.Zoom({ position: 'bottomleft' });
     }
 
-    //Pan and zoom map
-    setPosition = function(region){
+    //Pan and zoom map to region
+    var setRegionPosition = function(region){
         var data = regions[region];
         map.panTo(new L.LatLng(data['latitude'], data['longitude']))
         map.setZoom(data['scale']);
+    }
+
+    //Pan map to coordinates
+    var setPosition = function(lat, lon){
+        map.panTo(new L.LatLng(lat, lon))
+    }
+
+    //Zoom map to lvl
+    var setZoom = function(lvl){
+        map.setZoom(lvl);
     }
 
     //Clear map layers
@@ -91,7 +101,7 @@ WLM.map = (function($){
             if (cluster){
                 map.removeLayer(cluster);
             }
-            setPosition(region);
+            setRegionPosition(region);
             cluster = markers[region];
             map.addLayer(cluster);
             return;
@@ -134,7 +144,7 @@ WLM.map = (function($){
                 success: function(data){
                     for (var key in data) {
                         var val = data[key];
-                        var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
+                        var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: "<a href='/house/" + val.id +"'>" + val.name + '</a>' });
                         marker.bindPopup(val.name)
                             .addTo(markers[region]);
                     }
@@ -143,7 +153,7 @@ WLM.map = (function($){
                     }
                     cluster = markers[region];
                     map.addLayer(cluster);
-                    setPosition(region);
+                    setRegionPosition(region);
                 }
         });
     }
@@ -151,7 +161,8 @@ WLM.map = (function($){
         init_map: init_map,
         regionMarkers: regionMarkers,
         cityMarkers: cityMarkers,
-        setPosition: setPosition
+        setPosition: setPosition,
+        setZoom:setZoom
     };
 })(jQuery);
 

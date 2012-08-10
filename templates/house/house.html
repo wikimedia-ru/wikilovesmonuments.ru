@@ -29,14 +29,21 @@
 		{% if house.coord_lon %}
 		<div id="map" class="map"></div>
 		<script type="text/javascript">
-			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+			$(function(){
+                WLM.map.init_map('map');
+                WLM.map.setPosition({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
+                WLM.map.setZoom(10);
+            });
+            /*
+            var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
 			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 			var map = new L.Map('map');
 			map
 				.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 16)
 				.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
 				.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
-		</script>
+		    */
+        </script>
 		{% endif %}
 
 		<div class="block-header">
