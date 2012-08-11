@@ -30,8 +30,15 @@
 		<div id="map" class="map"></div>
 		<script type="text/javascript">
 			$(function(){
+                var item = {
+                    "id": {{house.id}},
+                    "coord_lat": {{house.coord_lat|stringformat:"f"}},
+                    "coord_lon": {{house.coord_lon|stringformat:"f"}},
+                    "name": "{{house.name|default:'Неизвестно'}}"
+                }
                 WLM.map.init_map('map');
                 WLM.map.setPosition({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
+                WLM.map.addMarker(item);
                 WLM.map.setZoom(10);
             });
             /*

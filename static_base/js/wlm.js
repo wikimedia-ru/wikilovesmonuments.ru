@@ -115,6 +115,12 @@ WLM.map = (function($){
         return "<a href='/house/" + item.id + "'>" + item.name + "</a>";
     }
 
+    var addMarker = function(item){
+        var marker = new L.Marker(new L.LatLng(item.coord_lat, item.coord_lon),
+            {title: item.name});
+        marker.addTo(map);
+    }
+
     var cityMarkers = function(city_id){
         if (cluster) {
             map.removeLayer(cluster);    
@@ -163,6 +169,7 @@ WLM.map = (function($){
     }
     return {
         init_map: init_map,
+        addMarker: addMarker,
         regionMarkers: regionMarkers,
         cityMarkers: cityMarkers,
         setPosition: setPosition,
