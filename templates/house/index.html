@@ -40,33 +40,34 @@
 							<div id="map" class="map map-big"></div>
 							<script type="text/javascript">
 								var regions = {
-                                    {%for r in regions%}
-                                    "{{r.id}}" : {"latitude":{{r.latitude|stringformat:"f"}}, "longitude":{{r.longitude|stringformat:"f"}}, "scale":{{r.scale}} }{%if not r.last%},{%endif%}
-                                    {%endfor%}
-                                };
-
-								var setCities = function(data){
-                                    $('#filter-city option:gt(0)').remove();
-                                    $.each(data, function(key, value){
-                                        $('#filter-city').append($("<option></option>")
-                                            .attr("value", value.id)
-                                            .text(value.name));
-                                    });
-                                }
-                                WLM.map.init_map('map');
-                                WLM.map.regionMarkers($('#filter-region option:selected').val());
-								WLM.getRegionCities($('option:selected').val(), setCities);
-                                $('#filter-region').change(function(){
-									WLM.map.regionMarkers($('option:selected', $(this)).val());
-                                    WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
-								});
-                                $('#filter-city').change(function(){
-                                    var city = $('option:selected', $(this)).val();
-                                    if (city){
-                                        WLM.map.cityMarkers(city);
-                                    }else{
-                                        WLM.map.regionMarkers($('#filter-region option:selected').val());
+                                        {%for r in regions%}
+                                        "{{r.id}}" : {"latitude":{{r.latitude|stringformat:"f"}}, "longitude":{{r.longitude|stringformat:"f"}}, "scale":{{r.scale}} }{%if not r.last%},{%endif%}
+                                        {%endfor%}
+                                    };
+                                $(function(){
+                                    var setCities = function(data){
+                                        $('#filter-city option:gt(0)').remove();
+                                        $.each(data, function(key, value){
+                                            $('#filter-city').append($("<option></option>")
+                                                .attr("value", value.id)
+                                                .text(value.name));
+                                        });
                                     }
+                                    WLM.map.init_map('map');
+                                    WLM.map.regionMarkers($('#filter-region option:selected').val());
+                                    WLM.getRegionCities($('option:selected').val(), setCities);
+                                    $('#filter-region').change(function(){
+                                        WLM.map.regionMarkers($('option:selected', $(this)).val());
+                                        WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
+                                    });
+                                    $('#filter-city').change(function(){
+                                        var city = $('option:selected', $(this)).val();
+                                        if (city){
+                                            WLM.map.cityMarkers(city);
+                                        }else{
+                                            WLM.map.regionMarkers($('#filter-region option:selected').val());
+                                        }
+                                    });
                                 });
 							</script>
 						</div>

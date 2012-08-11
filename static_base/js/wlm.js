@@ -111,7 +111,11 @@ WLM.map = (function($){
 
     }
 
-    cityMarkers = function(city_id){
+    var buildPopup = function(item){
+        return "<a href='/house/" + item.id + "'>" + item.name + "</a>";
+    }
+
+    var cityMarkers = function(city_id){
         if (cluster) {
             map.removeLayer(cluster);    
         }
@@ -122,7 +126,7 @@ WLM.map = (function($){
                 for (var key in data){
                     var val = data[key];
                     var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
-                        marker.bindPopup(val.name)
+                        marker.bindPopup(buildPopup(val))
                             .addTo(cluster);
                 }
                 clearMap();
@@ -144,8 +148,8 @@ WLM.map = (function($){
                 success: function(data){
                     for (var key in data) {
                         var val = data[key];
-                        var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: "<a href='/house/" + val.id +"'>" + val.name + '</a>' });
-                        marker.bindPopup(val.name)
+                        var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
+                        marker.bindPopup(buildPopup(val))
                             .addTo(markers[region]);
                     }
 					if (cluster){
