@@ -112,7 +112,8 @@ WLM.map = (function($){
     }
 
     var buildPopup = function(item){
-        return "<a href='/house/" + item.id + "'>" + item.name + "</a>";
+        var name = item.name ? item.name : "Не указано";
+        return "<a href='/house/" + item.id + "'>" + name + "</a>";
     }
 
     var addMarker = function(item){
