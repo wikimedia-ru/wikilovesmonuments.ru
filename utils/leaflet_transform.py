@@ -135,15 +135,15 @@ class Tile():
     @staticmethod
     def tileByPoint(point, zoom):
         return Tile(point.x, point.y, zoom)
-
-test = CRS_EPSG3857()
-latlng = LatLng(25.48295, -45.70312, True)
-point = test.latLngToPoint(latlng, 2)
-print point.x, point.y
-print int(point.x / 256), int(point.y / 256)
-tile = Tile.tileByPoint(point, 2)
-l_min, l_max =  tile.getBounds()
-point2 = Point(int(point.x / 256), int(point.y / 256))
-latlng2 = test.pointToLatLng(point2, 2)
-print latlng2.lat, latlng2.lng
+if __name__ == '__main__':
+    test = CRS_EPSG3857()
+    latlng = LatLng(25.48295, -45.70312, True)
+    point = test.latLngToPoint(latlng, 2)
+    print point.x, point.y
+    print int(point.x / 256), int(point.y / 256)
+    tile = Tile.tileByPoint(point, 2)
+    l_min, l_max =  tile.getBounds()
+    point2 = Point(int(point.x / 256), int(point.y / 256))
+    latlng2 = test.pointToLatLng(point2, 2)
+    print latlng2.lat, latlng2.lng
 

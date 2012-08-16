@@ -4,7 +4,7 @@ import json
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from utils.leaflet_transform import Point, Tile
+#from utils.leaflet_transform import Point, Tile
 
 from wlm.models import Monument, City
 

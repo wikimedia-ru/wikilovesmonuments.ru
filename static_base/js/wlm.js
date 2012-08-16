@@ -5,7 +5,29 @@ var WLM = (function(){
     //Cache for region cities
     var cities = [];
     var cur_region;
+   
+    //Regions cache
+    var regionMarkers = [];
+
+    var getRegionMarkers = function(region, callback){
+        if (typeof regionMarkers[region] !== 'undefined') {
+            callback(regionMarkers[region]);
+        } else {
+            fetchRegionMarkers(region, callback);
+        }
+    }
     
+    //Get markers from site and put it in cache
+    var fetchRegionMarkers = function(region, callback){
+        $.ajax({url: '/ajax/markersregion/' + region,
+                success: function(data){
+                    regionMarkers[region] = data;
+                    callback(regionMarkers[region]);
+                }
+        });
+    }
+
+    //Fetch cities info from site and cache it.
     var getRegionCities = function(region, callback){
         cur_region = region;
         if (typeof cities[region] !== 'undefined'){
@@ -37,6 +59,7 @@ var WLM = (function(){
 
     return {
         version: version,
+        getRegionMarkers: getRegionMarkers,
         getRegionCities: getRegionCities,
         getCity: getCity
     }
@@ -69,7 +92,7 @@ WLM.map = (function($){
 
     //Pan and zoom map to region
     var setRegionPosition = function(region){
-        var data = regions[region];
+        var data = regions[region]; //Global bootstraped regions data
         map.panTo(new L.LatLng(data['latitude'], data['longitude']))
         map.setZoom(data['scale']);
     }
@@ -92,82 +115,63 @@ WLM.map = (function($){
     }
 
     //Markers cache
-    var markers = [];
-    var cluster;
+    //var markers = [];
+    
+    //Markers Layer
+    var markersLayer;
 
     //Get markers for selected region
     regionMarkers = function(region) {
-        if (typeof markers[region] !== 'undefined') {
-            if (cluster){
-                map.removeLayer(cluster);
-            }
-            setRegionPosition(region);
-            cluster = markers[region];
-            map.addLayer(cluster);
-            return;
-        } else {
-            getMarkers(region);
-        }
-
+        setRegionPosition(region);
+        WLM.getRegionMarkers(region, buildMarkersLayer);
     }
 
+    //Build pop-up.
+    //XXX Rewrite to mustache engine
     var buildPopup = function(item){
         var name = item.name ? item.name : "Не указано";
         return "<a href='/house/" + item.id + "'>" + name + "</a>";
     }
 
+    //Put alone marker to map.
     var addMarker = function(item){
-        var marker = new L.Marker(new L.LatLng(item.coord_lat, item.coord_lon),
-            {title: item.name});
+        var marker = new L.Marker(
+            new L.LatLng(item.coord_lat, item.coord_lon),
+            {title: item.name}
+        );
         marker.addTo(map);
     }
 
-    var cityMarkers = function(city_id){
-        if (cluster) {
-            map.removeLayer(cluster);    
+    //Internal callback for building markers layer.
+    var buildMarkersLayer = function(data) {
+        if (markersLayer){
+            map.removeLayer(markersLayer);
         }
-        cluster = new L.MarkerClusterGroup();
+        markersLayer = new L.MarkerClusterGroup();
+        for (var key in data){
+            var val = data[key];
+            var marker = new L.Marker(
+                new L.LatLng(val.coord_lat, val.coord_lon),
+                { title: val.name }
+            );
+            marker.bindPopup(buildPopup(val)).addTo(markersLayer);
+        }
+        map.addLayer(markersLayer);
+    }
+
+
+    var cityMarkers = function(city_id){
+        city = WLM.getCity(city_id);
+        if (city){
+            map.panTo(new L.LatLng(city.latitude, city.longitude))
+        }
+        
         $.ajax({
             url: '/ajax/markerscity/' + city_id,
-            success: function(data){
-                for (var key in data){
-                    var val = data[key];
-                    var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
-                        marker.bindPopup(buildPopup(val))
-                            .addTo(cluster);
-                }
-                clearMap();
-                city = WLM.getCity(city_id);
-                if (city){
-                    map.panTo(new L.LatLng(city.latitude, city.longitude))
-                }
-                map.addLayer(cluster);
-            }
-
+            success: buildMarkersLayer
         });
     }
 
-
-    //Get markers from site and put it in cache
-    var getMarkers = function(region){
-        markers[region] = new L.MarkerClusterGroup();
-        $.ajax({url: '/ajax/markersregion/' + region,
-                success: function(data){
-                    for (var key in data) {
-                        var val = data[key];
-                        var marker = new L.Marker(new L.LatLng(val.coord_lat, val.coord_lon), { title: val.name });
-                        marker.bindPopup(buildPopup(val))
-                            .addTo(markers[region]);
-                    }
-					if (cluster){
-                        map.removeLayer(cluster);
-                    }
-                    cluster = markers[region];
-                    map.addLayer(cluster);
-                    setRegionPosition(region);
-                }
-        });
-    }
     return {
         init_map: init_map,
         addMarker: addMarker,
