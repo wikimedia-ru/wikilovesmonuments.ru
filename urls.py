@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^upload/?$', 'wlm.views.upload'),
     url(r'^add/?$', 'wlm.views.add'),
     url(r'^house/(?P<id>[0-9]+)/?$', 'wlm.views.house'),
+    url(r'^house/edit/(?P<m_id>\d+)$', 'wlm.views.monument_edit_form'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
