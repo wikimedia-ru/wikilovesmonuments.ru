@@ -1,12 +1,95 @@
 {%extends "base.html" %}
 
+{%block head%}
+
+{{form.media}}
+
+{%endblock%}
+
+
 {%block content%}
 
 <form action="" method="post">
 {%for field in form.hidden_fields%}
 {{field}}
 {%endfor%}
- {{form}}
+
+<div class="field">
+{{form.name.label}}: {{form.name}}
+</div>
+
+<div class="field">
+{{form.name_alt.label}}: {{form.name_alt}}
+</div>
+
+<div class="field">
+{{form.region.label}}: {{form.region}}
+</div>
+
+<div class="field">
+{{form.city.label}}: {{form.city}}
+</div>
+
+
+<div class="field">
+Нужно ли это поле?
+{{form.street.label}}: {{form.street}}
+</div>
+
+<div class="field">
+{{form.address.label}}: {{form.address}}
+</div>
+
+<div class="field">
+{{form.extra_info.label}}: {{form.extra_info}}
+</div>
+
+<div class="field">
+{{form.complex_root.label}}: {{form.complex_root}}
+</div>
+
+<div class="field">
+{{form.complex.label}}: {{form.complex}}
+</div>
+
+<div class="field">
+{{form.kult_id.label}}: {{form.kult_id}}
+</div>
+
+<div class="field">
+{{form.ruwiki.label}}: {{form.ruwiki}}
+</div>
+
+<div class="field">
+{{form.state.label}}: {{form.state}}
+</div>
+
+<div class="field">
+{{form.protection.label}}: {{form.protection}}
+</div>
+
+<div class="field">
+{{form.type.label}}: {{form.type}}
+</div>
+
+<div class="field">
+{{form.verified.label}}: {{form.verified}}
+</div>
+
+<div id='map' style="width:200;heigth:150" class="map leaflet-container leaflet-fade-anim"></div>
 
 </form>
+
+<script type='text/javascript'>
+$(function(){
+    WLM.map.init_map('map');
+    var lat = $('#id_coord_lat').val(), 
+        lon = $('#id_coord_lon').val();
+    WLM.map.setPosition(lat, lon);
+    var marker = {"coord_lat": lat, "coord_lon": lon, "name": $('#id_name').val()};
+    WLM.map.addMarker(marker);
+    WLM.map.setZoom(10);
+});
+</script>
+
 {%endblock%}

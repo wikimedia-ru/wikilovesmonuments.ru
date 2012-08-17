@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.conf import settings
 from wlm.models import Region, City, Monument, HousePhoto
-
+from wlm.forms import MonumentForm
 
 def index_page(request):
     h_list = Monument.objects.exclude(coord_lon=None).select_related()
@@ -39,6 +39,14 @@ def add(request):
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
+
+def monument_edit_form(request, m_id):
+    monument = Monument.objects.select_related().get(id=m_id)
+    form = MonumentForm(instance=monument)
+    return render_to_response( "edit_monument.html",
+        { 'form': form, },
+        context_instance = RequestContext(request)
+    )
 
 
 def house(request, id):

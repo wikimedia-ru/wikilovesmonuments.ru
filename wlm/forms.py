@@ -3,6 +3,7 @@
 from django import forms
 
 from wlm.models import Monument
+from tinymce.widgets import TinyMCE
 
 class MonumentForm(forms.ModelForm):
     class Meta:
@@ -10,6 +11,7 @@ class MonumentForm(forms.ModelForm):
         widgets = {
             'coord_lat': forms.HiddenInput(),
             'coord_lon': forms.HiddenInput(),
+            'extra_info': TinyMCE(),
         }
 
     def __init__(self, *args, **kwargs):
