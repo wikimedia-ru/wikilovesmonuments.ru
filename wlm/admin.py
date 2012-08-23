@@ -20,7 +20,7 @@ class StreetAdmin(admin.ModelAdmin):
     list_filter = ['city']
 
 class RegionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name','order']
+    list_display = ['id', 'name','iso_code', 'order']
 
 class MonumentAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -28,7 +28,10 @@ class MonumentAdmin(admin.ModelAdmin):
             'fields': ('name', 'name_alt', )
         }),
         (_("Location"), {
-            'fields': ('region', 'city', 'street', 'address','coord_lon', 'coord_lat',)# 'pasport_address',)
+            'fields': ('region', 'city', 'street', 'address',)# 'pasport_address',)
+        }),
+        ("Map",{
+            'fields':('coord_lat', 'coord_lon')
         }),
         (_("Complex"), {
             'fields': ('complex',)
