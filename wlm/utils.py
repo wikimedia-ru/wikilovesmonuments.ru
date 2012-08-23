@@ -7,7 +7,10 @@ import settings
 
 def get_region(ip):
     g = GeoIP()
-    code = g.city(ip)['region']
+    try:
+        code = g.city(ip)['region']
+    except:
+        code = "67"
     if code == "48": 
         code = "47"  #Moscow
     elif code == "66":

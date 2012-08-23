@@ -22,7 +22,7 @@
 									<label class="control-label" for="filter-region">Выберите регион</label>
 									<select id="filter-region" name="region">
 										{% for r in regions %}
-										<option value='{{r.id}}'>{{r.name}}</option>
+										<option value='{{r.id}}' {%if r.id = region.id%}selected="selected"{%endif%}>{{r.name}}</option>
 										{%endfor%}
 									</select>
 								</div>

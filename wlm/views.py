@@ -5,15 +5,21 @@ from django.template import RequestContext
 from django.conf import settings
 from wlm.models import Region, City, Monument, HousePhoto
 from wlm.forms import MonumentForm
+from wlm.utils import get_region
+
 
 def index_page(request):
     h_list = Monument.objects.exclude(coord_lon=None).select_related()
     h_list = h_list.filter(city_id=34)
     p_list = HousePhoto.objects.all()[:30]
+    ip_region = get_region(request.META['REMOTE_ADDR'])
+    if not ip_region:
+        ip_region = "47"
 
     return render_to_response('house/index.html', {
         'house_list': h_list,
         'photo_list': p_list,
+        'region': Region.objects.values('id').get(iso_code=ip_region),
         'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
         'cities': City.objects.values('id', 'name').all(),
         'CMADE_KEY': settings.CMADE_KEY,
