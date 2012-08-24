@@ -10,7 +10,7 @@ def get_region(ip):
     try:
         code = g.city(ip)['region']
     except:
-        code = "67"
+        code = "47"
     if code == "48": 
         code = "47"  #Moscow
     elif code == "66":
