@@ -20,6 +20,8 @@ DATABASES = {
     }
 }
 
+GEOIP_PATH = '/usr/share/GeoIP/'
+
 SECRET_KEY = ''
 CMADE_KEY = ''
 

@@ -292,3 +292,10 @@ footer p {
 .contacts {
 	padding-top: 17px;
 }
+
+/*
+	Leaflef popups
+*/
+.leaflet-popup-content .name:first-word {
+	text-transform: capitalize;
+}
