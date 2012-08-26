@@ -7,11 +7,13 @@
 <script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
-{% block title %}{{ house.street.name }}, {{ house.number }} — {% endblock %}
+{% block title %}{{ house.name }} ({{ house.address }}) — {% endblock %}
 
 {% block content %}
-<div class="row">
-	<div class="span6">
+<div id="find" class="row show-grid">
+	<div class="span8">
+		<h2>{{ house.name }}</h2>
+
 	{% if photo %}
 		<ul class="thumbnails">
 		{% for p in photo %}
@@ -23,10 +25,8 @@
 		{% endfor %}
 		</ul>
 	{% endif %}
-	</div>
 
-	<div class="span6">
-		{% if house.coord_lon %}
+	{% if house.coord_lon %}
 		<div id="map" class="map"></div>
 		<script type="text/javascript">
 			$(function(){
@@ -51,14 +51,14 @@
 				.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
 		    */
         </script>
-		{% endif %}
-
-		<div class="block-header">
-			<h2>{{ house.street.full_name }}, {{ house.number }}</h2>
-			{% if house.name %}<p>{{ house.name }}</p>{% endif %}
-		</div>
+	{% endif %}
 
 		<table class="table">
+			<tr>
+				<th>Адрес</th>
+				<td>{{ house.address }}</td>
+			</tr>
+
 		{% if house.kult_id %}
 			<tr>
 				<th>На сайте Культурного наследия</th>

@@ -189,6 +189,11 @@ header .btn-large:hover {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5eb80', endColorstr='#f5d83a',GradientType=0 ); /* IE6-9 */
 	background-image: linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* W3C */
 }
+#find .table {
+	width: 98%;
+	margin: 0 auto 8px;
+	background: url("../img/bg.jpg") repeat scroll 0 0 #eee;
+}
 #result {
 	margin: -21px auto 0;
 	padding-top: 8px;
