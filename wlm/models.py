@@ -73,6 +73,11 @@ class Monument(models.Model):
         ('H', _("Historical")),
     )
 
+    class Meta:
+        permissions = (
+            ('can_moderate', 'Can verify and change monument data'),
+        )
+
     #minimal required fields
     # Geospatial
     region = models.ForeignKey(Region, verbose_name = _("Region of RF"))

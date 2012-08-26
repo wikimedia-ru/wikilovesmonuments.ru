@@ -6,7 +6,7 @@ from django.conf import settings
 from wlm.models import Region, City, Monument, HousePhoto
 from wlm.forms import MonumentForm
 from wlm.utils import get_region
-
+from django.contrib.auth.decorators import permission_required
 
 def index_page(request):
     h_list = Monument.objects.exclude(coord_lon=None).select_related()
@@ -45,10 +45,11 @@ def add(request):
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
-
+@permission_required('wlm.can_moderate')
 def monument_edit_form(request, m_id):
     monument = Monument.objects.select_related().get(id=m_id)
     form = MonumentForm(instance=monument)
+    print request.user.has_perm('monuments.can_moderate')
     return render_to_response( "edit_monument.html",
         { 'form': form, },
         context_instance = RequestContext(request)

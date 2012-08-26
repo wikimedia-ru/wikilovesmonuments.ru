@@ -7,7 +7,13 @@
 <script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
-{% block title %}{{ house.street.name }}, {{ house.number }} — {% endblock %}
+{% block title %}{{house.name|default:"Неизвестно"}}{{ house.street.name }}, {{ house.number }} — {% endblock %}
+
+{%block moderator_menu%}
+{%if perms.monument.can_moderate%}
+<li><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
+{%endif%}
+{%endblock%}
 
 {% block content %}
 <div class="row">
@@ -54,8 +60,8 @@
 		{% endif %}
 
 		<div class="block-header">
-			<h2>{{ house.street.full_name }}, {{ house.number }}</h2>
-			{% if house.name %}<p>{{ house.name }}</p>{% endif %}
+			<h2>{{ house.name|default:"Без названия" }}</h2>
+			{% if house.street.full_name %}<p>{{ house.street.full_name }}</p>{% endif %}
 		</div>
 
 		<table class="table">
