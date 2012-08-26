@@ -16,161 +16,176 @@
 {%endblock%}
 
 {% block content %}
-<div id="find" class="row show-grid">
-	<div class="span8">
-		<h2>{{ house.name }}</h2>
+<div class="row">
+	<div id="main">
+		<div id="find" class="show-grid">
+			<div class="span8">
+				<h2>{{ house.name }}</h2>
 
-	{% if photo %}
-		<ul class="thumbnails">
-		{% for p in photo %}
-			<li class="span{% if forloop.first %}6{% else %}3{% endif %}">
-				<a href="{{ p.file.src }}" class="thumbnail" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
-				{% if p.title %}<h5>{{ p.title }}</h5>{% endif %}
-				<p>Автор: {{ p.author }}</p>
-			</li>
-		{% endfor %}
-		</ul>
-	{% endif %}
-
-	{% if house.coord_lon %}
-		<div id="map" class="map"></div>
-		<script type="text/javascript">
-			$(function(){
-                var item = {
-                    "id": {{house.id}},
-                    "coord_lat": {{house.coord_lat|stringformat:"f"}},
-                    "coord_lon": {{house.coord_lon|stringformat:"f"}},
-                    "name": "{{house.name|default:'Неизвестно'}}"
-                }
-                WLM.map.init_map('map');
-                WLM.map.setPosition({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
-                WLM.map.addMarker(item);
-                WLM.map.setZoom(10);
-            });
-            /*
-            var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-			var map = new L.Map('map');
-			map
-				.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 16)
-				.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
-				.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
-		    */
-        </script>
-	{% endif %}
-
-		<table class="table">
-			<tr>
-				<th>Адрес</th>
-				<td>{{ house.address }}</td>
-			</tr>
-
-		{% if house.kult_id %}
-			<tr>
-				<th>На сайте Культурного наследия</th>
-				<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}" target="_blank">{{ house.kult_id }}</a></td>
-			</tr>
-		{% endif %}
-
-		{% if house.ruwiki %}
-			<tr>
-				<th>В Википедии</th>
-				<td><a href="//ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
-			</tr>
-		{% endif %}
-
-		{% if house.safety %}
-			{% if house.state and house.safety in 'S' %}
-			<tr>
-				<th>Сохранность и состояние</th>
-				<td class="state-{{ house.state }}">{{ house.get_safety_display }} ({{ house.get_state_display|lower }})</td>
-			</tr>
-			{% else %}
-			<tr>
-				<th>Сохранность и состояние</th>
-				<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
-			</tr>
+			{% if photo %}
+				<ul class="thumbnails">
+				{% for p in photo %}
+					<li class="span{% if forloop.first %}6{% else %}3{% endif %}">
+						<a href="{{ p.file.src }}" class="thumbnail" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
+						{% if p.title %}<h5>{{ p.title }}</h5>{% endif %}
+						<p>Автор: {{ p.author }}</p>
+					</li>
+				{% endfor %}
+				</ul>
 			{% endif %}
-		{% endif %}
 
-		{% if house.pasport_safety %}
-			{% if house.pasport_state and house.pasport_safety in 'S' %}
-			<tr>
-				<th>Сохранность и состояние по паспорту</th>
-				<td class="state-{{ house.pasport_state }}">{{ house.get_pasport_safety_display }} ({{ house.get_pasport_state_display|lower }})</td>
-			</tr>
-			{% else %}
-			<tr>
-				<th>Сохранность и состояние по паспорту</th>
-				<td class="safety-{{ house.pasport_safety }}">{{ house.get_pasport_safety_display }}</td>
-			</tr>
+			{% if house.coord_lon %}
+				<div id="map" class="map"></div>
+				<script type="text/javascript">
+					$(function(){
+				        var item = {
+				            "id": {{house.id}},
+				            "coord_lat": {{house.coord_lat|stringformat:"f"}},
+				            "coord_lon": {{house.coord_lon|stringformat:"f"}},
+				            "name": "{{house.name|default:'Неизвестно'}}"
+				        }
+				        WLM.map.init_map('map');
+				        WLM.map.setPosition({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
+				        WLM.map.addMarker(item);
+				        WLM.map.setZoom(10);
+				    });
+				    /*
+				    var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+					var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
+					var map = new L.Map('map');
+					map
+						.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 16)
+						.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
+						.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
+					*/
+				</script>
 			{% endif %}
-		{% endif %}
 
-		{% if house.pasport_address %}
-			<tr>
-				<th>Адрес в паспорте</th>
-				<td>{{ house.pasport_address }}</td>
-			</tr>
-		{% endif %}
+				<table class="table">
+					<tr>
+						<th>Адрес</th>
+						<td>{{ house.address }}</td>
+					</tr>
 
-		{% if house.usage %}
-			<tr>
-				<th>Использование</th>
-				<td>{{ house.get_usage_display }}</td>
-			</tr>
-		{% endif %}
+				{% if house.kult_id %}
+					<tr>
+						<th>На сайте Культурного наследия</th>
+						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}" target="_blank">{{ house.kult_id }}</a></td>
+					</tr>
+				{% endif %}
 
-		{% if house.protection %}
-			<tr>
-				<th>Категория охраны</th>
-				<td>{{ house.get_protection_display }}</td>
-			</tr>
-		{% endif %}
+				{% if house.ruwiki %}
+					<tr>
+						<th>В Википедии</th>
+						<td><a href="//ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
+					</tr>
+				{% endif %}
 
-		{% if is_admin and house.pasport %}
-			<tr>
-				<th>Паспорт</th>
-				<td>{{ house.pasport }}</td>
-			</tr>
-		{% endif %}
+				{% if house.safety %}
+					{% if house.state and house.safety in 'S' %}
+					<tr>
+						<th>Сохранность и состояние</th>
+						<td class="state-{{ house.state }}">{{ house.get_safety_display }} ({{ house.get_state_display|lower }})</td>
+					</tr>
+					{% else %}
+					<tr>
+						<th>Сохранность и состояние</th>
+						<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
+					</tr>
+					{% endif %}
+				{% endif %}
 
-		{% if house.material %}
-			<tr>
-				<th>Тип</th>
-				<td>{{ house.get_material_display }}</td>
-			</tr>
-		{% endif %}
+				{% if house.pasport_safety %}
+					{% if house.pasport_state and house.pasport_safety in 'S' %}
+					<tr>
+						<th>Сохранность и состояние по паспорту</th>
+						<td class="state-{{ house.pasport_state }}">{{ house.get_pasport_safety_display }} ({{ house.get_pasport_state_display|lower }})</td>
+					</tr>
+					{% else %}
+					<tr>
+						<th>Сохранность и состояние по паспорту</th>
+						<td class="safety-{{ house.pasport_safety }}">{{ house.get_pasport_safety_display }}</td>
+					</tr>
+					{% endif %}
+				{% endif %}
 
-		{% if house.chronology %}
-			<tr>
-				<th>Хронология</th>
-				<td>{{ house.chronology|safe }}</td>
-			</tr>
-		{% endif %}
+				{% if house.pasport_address %}
+					<tr>
+						<th>Адрес в паспорте</th>
+						<td>{{ house.pasport_address }}</td>
+					</tr>
+				{% endif %}
 
-		{% if is_admin and house.documents %}
-			<tr>
-				<th>Документооборот</th>
-				<td>{{ house.documents|safe }}</td>
-			</tr>
-		{% endif %}
+				{% if house.usage %}
+					<tr>
+						<th>Использование</th>
+						<td>{{ house.get_usage_display }}</td>
+					</tr>
+				{% endif %}
 
-		{% if is_admin and house.monitoring %}
-			<tr>
-				<th>Мониторинг</th>
-				<td>{{ house.monitoring|safe }}</td>
-			</tr>
-		{% endif %}
+				{% if house.protection %}
+					<tr>
+						<th>Категория охраны</th>
+						<td>{{ house.get_protection_display }}</td>
+					</tr>
+				{% endif %}
 
-		{% if house.extra_info %}
-			<tr>
-				<th>Дополнительная информация</th>
-				<td>{{ house.extra_info|safe }}</td>
-			</tr>
-		{% endif %}
-		</table>
+				{% if is_admin and house.pasport %}
+					<tr>
+						<th>Паспорт</th>
+						<td>{{ house.pasport }}</td>
+					</tr>
+				{% endif %}
 
+				{% if house.material %}
+					<tr>
+						<th>Тип</th>
+						<td>{{ house.get_material_display }}</td>
+					</tr>
+				{% endif %}
+
+				{% if house.chronology %}
+					<tr>
+						<th>Хронология</th>
+						<td>{{ house.chronology|safe }}</td>
+					</tr>
+				{% endif %}
+
+				{% if is_admin and house.documents %}
+					<tr>
+						<th>Документооборот</th>
+						<td>{{ house.documents|safe }}</td>
+					</tr>
+				{% endif %}
+
+				{% if is_admin and house.monitoring %}
+					<tr>
+						<th>Мониторинг</th>
+						<td>{{ house.monitoring|safe }}</td>
+					</tr>
+				{% endif %}
+
+				{% if house.extra_info %}
+					<tr>
+						<th>Дополнительная информация</th>
+						<td>{{ house.extra_info|safe }}</td>
+					</tr>
+				{% endif %}
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="about" class="show-grid">
+		<div class="span4">
+			<div class="upload-block">
+				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ house.id }}">
+					<i class="upload-my"></i>
+					Загрузить фото
+				</a>
+				<br />
+				<small>Необходимо <a href="//commons.wikimedia.org/w/index.php?title=Special:UserLogin&uselang=ru">авторизоваться</a> на Викискладе</small>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}
