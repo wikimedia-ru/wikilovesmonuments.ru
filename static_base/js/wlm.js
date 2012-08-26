@@ -163,7 +163,8 @@ WLM.map = (function($){
     var cityMarkers = function(city_id){
         city = WLM.getCity(city_id);
         if (city){
-            map.panTo(new L.LatLng(city.latitude, city.longitude))
+            map.panTo(new L.LatLng(city.latitude, city.longitude));
+            map.setZoom(12);
         }
         
         $.ajax({
