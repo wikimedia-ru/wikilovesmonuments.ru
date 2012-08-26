@@ -9,6 +9,12 @@
 
 {% block title %}{{ house.name }} ({{ house.address }}) — {% endblock %}
 
+{%block moderator_menu%}
+{%if perms.monument.can_moderate%}
+<li><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
+{%endif%}
+{%endblock%}
+
 {% block content %}
 <div id="find" class="row show-grid">
 	<div class="span8">

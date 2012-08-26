@@ -8,7 +8,7 @@
 
 
 {%block content%}
-
+{{user}}
 <form action="" method="post">
 {%for field in form.hidden_fields%}
 {{field}}
@@ -31,10 +31,10 @@
 </div>
 
 
-<div class="field">
+<!--div class="field">
 Нужно ли это поле?
 {{form.street.label}}: {{form.street}}
-</div>
+</div-->
 
 <div class="field">
 {{form.address.label}}: {{form.address}}
