@@ -234,7 +234,7 @@ msgstr "Адрес"
 
 #: wlm/models.py:95
 msgid "Belong to complex"
-msgstr "Принадледит комплексу"
+msgstr "Принадлежит комплексу"
 
 #: wlm/models.py:98
 msgid "Additional"
