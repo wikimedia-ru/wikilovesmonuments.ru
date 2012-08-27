@@ -50,10 +50,10 @@ def monument_edit_form(request, m_id):
     monument = Monument.objects.select_related().get(id=m_id)
     form = MonumentForm(instance=monument)
     print request.user.has_perm('monuments.can_moderate')
-    return render_to_response( "edit_monument.html",
-        { 'form': form, },
-        context_instance = RequestContext(request)
-    )
+    return render_to_response( "edit_monument.html", {
+        'id': m_id,
+        'form': form,
+        }, context_instance = RequestContext(request))
 
 
 def house(request, id):

@@ -11,7 +11,8 @@
 
 {%block moderator_menu%}
 {%if perms.monument.can_moderate%}
-<li><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
+<li class="pull-right"><a href='/admin/logout/'>Выйти ({{user}})</a></li>
+<li class="pull-right"><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
 {%endif%}
 {%endblock%}
 
