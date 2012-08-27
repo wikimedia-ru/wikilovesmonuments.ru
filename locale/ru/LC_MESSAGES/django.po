@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-27 04:43+0400\n"
+"POT-Creation-Date: 2012-08-27 06:09+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sergey 'putnik' Leschina <mail@putnik.ws>\n"
 "Language-Team: RU <LL@li.org>\n"
@@ -34,29 +34,29 @@ msgstr "Порядок"
 #: templates/zinnia/_entry_detail.html:18
 #, python-format
 msgid "Show all %(author)s's entries"
-msgstr ""
+msgstr "Показать все записи авторства %(author)s"
 
 #: templates/zinnia/_entry_detail.html:44
 #, python-format
 msgid "Continue reading %(object)s"
-msgstr ""
+msgstr "Продолжить чтение  %(object)s"
 
 #: templates/zinnia/_entry_detail.html:46
 msgid "Continue reading"
-msgstr ""
+msgstr "Продолжить чтение"
 
 #: templates/zinnia/_entry_detail.html:57
 #, python-format
 msgid "Show all entries tagged by %(tag)s"
-msgstr ""
+msgstr "Показать все записи, помеченные тегом(ами) %(tag)s"
 
 #: templates/zinnia/base.html:15
 msgid "RSS Feed of latest entries"
-msgstr ""
+msgstr "RSS-лента последних записей"
 
 #: templates/zinnia/base.html:16
 msgid "RSS Feed of latest discussions"
-msgstr ""
+msgstr "RSS-лента последних обсуждений"
 
 #: templates/zinnia/base.html:35
 msgid "Tools"
@@ -64,7 +64,7 @@ msgstr "Инструменты"
 
 #: templates/zinnia/base.html:39 templates/zinnia/base.html.py:40
 msgid "Dashboard"
-msgstr ""
+msgstr "Дашборд"
 
 #: templates/zinnia/base.html:46 templates/zinnia/base.html.py:47
 msgid "Post an entry"
@@ -76,19 +76,19 @@ msgstr "Выйти"
 
 #: templates/zinnia/entry_detail.html:22
 msgid "RSS Feed of discussions on"
-msgstr ""
+msgstr "RSS-лента обсуждений для"
 
 #: templates/zinnia/entry_detail.html:24
 msgid "RSS Feed of comments on"
-msgstr ""
+msgstr "RSS-лента комментариев для"
 
 #: templates/zinnia/entry_detail.html:26
 msgid "RSS Feed of pingbacks on"
-msgstr ""
+msgstr "RSS-лента pingback'ов для"
 
 #: templates/zinnia/entry_detail.html:28
 msgid "RSS Feed of trackbacks on"
-msgstr ""
+msgstr "RSS-лента trackback'ов для"
 
 #: templates/zinnia/entry_detail.html:49
 msgid "Next entry"
@@ -214,7 +214,7 @@ msgstr "Культурный"
 
 #: wlm/models.py:72
 msgid "Architectural"
-msgstr "Архитектурыный"
+msgstr "Архитектурный"
 
 #: wlm/models.py:73
 msgid "Historical"
@@ -277,9 +277,8 @@ msgid "Author"
 msgstr "Автор"
 
 #: wlm/models.py:131
-#, fuzzy
-msgid "Wikimedia link"
-msgstr "Статья в Википедии"
+msgid "Wikimedia Commons link"
+msgstr "Ссылка на Викисклад"
 
 #: wlm/models.py:138
 msgid "Projected"

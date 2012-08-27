@@ -128,7 +128,7 @@ class HousePhoto(models.Model):
     #file = YFField(upload_to=make_upload_folder)
     title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
     author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
-    img_link = models.CharField(max_length=255, verbose_name=_('Wikimedia link'))
+    img_link = models.CharField(max_length=255, verbose_name=_('Wikimedia Commons link'))
     
     def __unicode__(self):
         return self.title
