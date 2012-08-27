@@ -22,7 +22,6 @@
 			{%for field in form.hidden_fields%}
 				{{field}}
 			{%endfor%}
-
 			<div class="control-group {% if form.name.errors %}error{% endif %}">
 				<label class="control-label" for="id_name">{{form.name.label}}</label>
 				<div class="controls">

@@ -81,7 +81,7 @@ class Monument(models.Model):
     #minimal required fields
     # Geospatial
     region = models.ForeignKey(Region, verbose_name = _("Region of RF"))
-    city = models.ForeignKey(City, verbose_name = _("City"), blank = True, null = True)
+    city = models.ForeignKey(City, verbose_name = _("City"), blank=True, null=True)
     street = models.ForeignKey(Street, verbose_name = _("Street"), blank = True, null = True)
     coord_lon = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     coord_lat = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
