@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-02-26 03:31+0400\n"
+"POT-Creation-Date: 2012-08-27 04:43+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sergey 'putnik' Leschina <mail@putnik.ws>\n"
 "Language-Team: RU <LL@li.org>\n"
@@ -19,306 +19,414 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
-#: house/admin.py:32
-msgid "Main info"
-msgstr "Основная информация"
-
-#: house/admin.py:35
-msgid "Location"
-msgstr "Местоположение"
-
-#: house/admin.py:38
-msgid "External sources"
-msgstr "Внешние источники"
-
-#: house/admin.py:41 house/models.py:90
-msgid "Safety"
-msgstr "Сохранность"
-
-#: house/admin.py:44 house/models.py:94
-msgid "Safety from pasport"
-msgstr "Сохранность (в паспорте)"
-
-#: house/admin.py:47 house/models.py:99
-msgid "Ownership"
-msgstr "Собственность"
-
-#: house/admin.py:50 house/models.py:115
-msgid "Additional"
-msgstr "Дополнительная информация"
-
-#: house/admin.py:53 house/models.py:111
-msgid "Belong to complex"
-msgstr "Принадледит комплексу"
-
-#: house/admin.py:61
-msgid "Address"
-msgstr "Адрес"
-
-#: house/admin.py:71
-msgid "Map"
-msgstr "Карта"
-
-#: house/admin.py:86 house/models.py:76 house/models.py:113
-msgid "ID Kulturnoe Nasledie"
-msgstr "ID культ. насл."
-
-#: house/models.py:10 house/models.py:84
-msgid "Street"
-msgstr "Улица"
-
-#: house/models.py:11
-msgid "Lane"
-msgstr "Переулок"
-
-#: house/models.py:12
-msgid "Highway"
-msgstr "Шоссе"
-
-#: house/models.py:13
-msgid "Square"
-msgstr "Площадь"
-
-#: house/models.py:14
-msgid "Embankment"
-msgstr "Набережная"
-
-#: house/models.py:15
-msgid "Passage"
-msgstr "Проезд"
-
-#: house/models.py:16
-msgid "Avenue"
-msgstr "Проспект"
-
-#: house/models.py:17
-msgid "Blind alley"
-msgstr "Тупик"
-
-#: house/models.py:20 house/models.py:79 house/models.py:112
+#: menu/models.py:6 wlm/models.py:90
 msgid "Name"
 msgstr "Название"
 
-#: house/models.py:21
-msgid "Full name"
-msgstr "Полное название"
+#: menu/models.py:7
+msgid "URL"
+msgstr "URL"
 
-#: house/models.py:22
-msgid "Type"
-msgstr "Тип"
+#: menu/models.py:8
+msgid "Order"
+msgstr "Порядок"
 
-#: house/models.py:33
-msgid "Saved"
-msgstr "Сохранён"
+#: templates/zinnia/_entry_detail.html:18
+#, python-format
+msgid "Show all %(author)s's entries"
+msgstr ""
 
-#: house/models.py:34
-msgid "Modern replica"
-msgstr "Новодел"
+#: templates/zinnia/_entry_detail.html:44
+#, python-format
+msgid "Continue reading %(object)s"
+msgstr ""
 
-#: house/models.py:35
-msgid "Ruins"
-msgstr "Руины"
+#: templates/zinnia/_entry_detail.html:46
+msgid "Continue reading"
+msgstr ""
 
-#: house/models.py:36
-msgid "Losed"
-msgstr "Утрачен"
+#: templates/zinnia/_entry_detail.html:57
+#, python-format
+msgid "Show all entries tagged by %(tag)s"
+msgstr ""
 
-#: house/models.py:40 house/models.py:145
-msgid "Restored"
-msgstr "Реставрирован"
+#: templates/zinnia/base.html:15
+msgid "RSS Feed of latest entries"
+msgstr ""
 
-#: house/models.py:41
-msgid "Satisfactory"
-msgstr "Удовлетворительное"
+#: templates/zinnia/base.html:16
+msgid "RSS Feed of latest discussions"
+msgstr ""
 
-#: house/models.py:42
-msgid "Unsatisfactory"
-msgstr "Неудовлетворительное"
+#: templates/zinnia/base.html:35
+msgid "Tools"
+msgstr "Инструменты"
 
-#: house/models.py:43
-msgid "Accident"
-msgstr "Аварийное"
+#: templates/zinnia/base.html:39 templates/zinnia/base.html.py:40
+msgid "Dashboard"
+msgstr ""
 
-#: house/models.py:47
-msgid "Dwelling house"
-msgstr "Жилой дом"
+#: templates/zinnia/base.html:46 templates/zinnia/base.html.py:47
+msgid "Post an entry"
+msgstr "Опубликовать запись"
 
-#: house/models.py:48
-msgid "Office building"
-msgstr "Административное здание"
+#: templates/zinnia/base.html:54 templates/zinnia/base.html.py:55
+msgid "Log out"
+msgstr "Выйти"
 
-#: house/models.py:52 house/models.py:61
-msgid "Federal"
-msgstr "Федеральный"
+#: templates/zinnia/entry_detail.html:22
+msgid "RSS Feed of discussions on"
+msgstr ""
 
-#: house/models.py:53 house/models.py:62
-msgid "Regional"
-msgstr "Региональный"
+#: templates/zinnia/entry_detail.html:24
+msgid "RSS Feed of comments on"
+msgstr ""
 
-#: house/models.py:54
-msgid "Local"
-msgstr "Местный"
+#: templates/zinnia/entry_detail.html:26
+msgid "RSS Feed of pingbacks on"
+msgstr ""
 
-#: house/models.py:55
-msgid "Determined"
-msgstr "Выявлен"
+#: templates/zinnia/entry_detail.html:28
+msgid "RSS Feed of trackbacks on"
+msgstr ""
 
-#: house/models.py:56
-msgid "OPOKN"
-msgstr "ОПОКН"
+#: templates/zinnia/entry_detail.html:49
+msgid "Next entry"
+msgstr "Следующая запись"
 
-#: house/models.py:57
-msgid "No"
-msgstr "Нет"
+#: templates/zinnia/entry_detail.html:61
+msgid "Previous entry"
+msgstr "Предыдущая запись"
 
-#: house/models.py:63
-msgid "Municipal"
-msgstr "Муниципальный"
+#: templates/zinnia/entry_detail.html:76
+msgid "Comments"
+msgstr "Комментарии"
 
-#: house/models.py:67
-msgid "Wooden"
-msgstr "Деревянный"
+#: templates/zinnia/entry_detail.html:92
+msgid "on"
+msgstr "вкл."
 
-#: house/models.py:68
-msgid "Stone"
-msgstr "Каменный"
+#: templates/zinnia/entry_detail.html:102
+#: templates/zinnia/entry_detail.html:108
+msgid "Comments are closed."
+msgstr "Коментарии закрыты."
 
-#: house/models.py:72
-msgid "Lease"
-msgstr "Найм"
+#: templates/zinnia/entry_detail.html:106
+msgid "No comments yet."
+msgstr "Пока нет комментариев."
 
-#: house/models.py:73
-msgid "Rent"
-msgstr "Аренда"
+#: templates/zinnia/entry_detail.html:127
+#: templates/zinnia/entry_detail.html:128
+msgid "Edit the entry"
+msgstr "Редактировать запист"
 
-#: house/models.py:77
-msgid "Wikipedia article"
-msgstr "Статья в Википедии"
+#: wlm/admin.py:27
+msgid "Main info"
+msgstr "Основная информация"
 
-#: house/models.py:80
-msgid "Alternative name"
-msgstr "Альтернативное название"
+#: wlm/admin.py:30
+msgid "Location"
+msgstr "Местоположение"
 
-#: house/models.py:81
-msgid "Material"
-msgstr "Материал"
-
-#: house/models.py:82
-msgid "Pasport status"
-msgstr "Паспорт"
-
-#: house/models.py:85
-msgid "Number"
-msgstr "Номер"
-
-#: house/models.py:86
-msgid "Longitude"
-msgstr "Долгота"
-
-#: house/models.py:87
-msgid "Latitude"
-msgstr "Широта"
-
-#: house/models.py:88
-msgid "Address from pasport"
-msgstr "Адрес в паспорте"
-
-#: house/models.py:91
-msgid "State"
-msgstr "Состояние"
-
-#: house/models.py:92 house/models.py:96
-msgid "Protection class"
-msgstr "Категория охраны"
-
-#: house/models.py:95
-msgid "State from pasport"
-msgstr "Состояние (в паспорте)"
-
-#: house/models.py:98
-msgid "Usage"
-msgstr "Использование"
-
-#: house/models.py:100
-msgid "Land ownership"
-msgstr "Собственность земли"
-
-#: house/models.py:101
-msgid "Owner"
-msgstr "Владелец"
-
-#: house/models.py:102
-msgid "Obligation date"
-msgstr "Дата подписания обязательства"
-
-#: house/models.py:103
-msgid "Lease/Rent"
-msgstr "Найм/аренда"
-
-#: house/models.py:104
-msgid "Tenant"
-msgstr "Арендатор"
-
-#: house/models.py:106
-msgid "Cronology"
-msgstr "Хронология"
-
-#: house/models.py:107
-msgid "Documents"
-msgstr "Документы"
-
-#: house/models.py:108
-msgid "Monitoring"
-msgstr "Мониторинг"
-
-#: house/models.py:110
+#: wlm/admin.py:36 wlm/models.py:96
 msgid "Complex"
 msgstr "Комплекс"
 
-#: house/models.py:117
-msgid "ID Kulturnoe Nasledie checked"
-msgstr "ID культ. насл. проверен"
+#: wlm/admin.py:39
+msgid "Safety"
+msgstr "Сохранность"
 
-#: house/models.py:118
-msgid "Kulturnoe Nasledie problems"
-msgstr "Проблемы с сайтом Культ. насл."
+#: wlm/admin.py:42
+msgid "Extra"
+msgstr "Дополнительно"
 
-#: house/models.py:119
-msgid "Gudea base checked"
-msgstr "Сверено с базой Gudea"
+#: wlm/models.py:13 wlm/models.py:83
+msgid "Region of RF"
+msgstr "Регион РФ"
 
-#: house/models.py:133 house/models.py:149
+#: wlm/models.py:16
+msgid "Federal district of RF"
+msgstr "Федеральный округ РФ"
+
+#: wlm/models.py:18 wlm/models.py:35 wlm/models.py:87
+msgid "Latitude"
+msgstr "Широта"
+
+#: wlm/models.py:19 wlm/models.py:36 wlm/models.py:86
+msgid "Longitude"
+msgstr "Долгота"
+
+#: wlm/models.py:20
+msgid "Scale"
+msgstr "Масштаб"
+
+#: wlm/models.py:21
+msgid "ISO region code"
+msgstr "ISO-код региона"
+
+#: wlm/models.py:31 wlm/models.py:84
+msgid "City"
+msgstr "Город"
+
+#: wlm/models.py:56 wlm/models.py:140
+msgid "Restored"
+msgstr "Реставрирован"
+
+#: wlm/models.py:57
+msgid "Satisfactory"
+msgstr "Удовлетворительное"
+
+#: wlm/models.py:58
+msgid "Unsatisfactory"
+msgstr "Неудовлетворительное"
+
+#: wlm/models.py:59
+msgid "Accident"
+msgstr "Аварийное"
+
+#: wlm/models.py:63
+msgid "Federal"
+msgstr "Федеральный"
+
+#: wlm/models.py:64
+msgid "Regional"
+msgstr "Региональный"
+
+#: wlm/models.py:65
+msgid "Local"
+msgstr "Местный"
+
+#: wlm/models.py:66
+msgid "Determined"
+msgstr "Выявлен"
+
+#: wlm/models.py:67
+msgid "OPOKN"
+msgstr "ОПОКН"
+
+#: wlm/models.py:68
+msgid "No"
+msgstr "Нет"
+
+#: wlm/models.py:71
+msgid "Cultural"
+msgstr "Культурный"
+
+#: wlm/models.py:72
+msgid "Architectural"
+msgstr "Архитектурыный"
+
+#: wlm/models.py:73
+msgid "Historical"
+msgstr "Исторический"
+
+#: wlm/models.py:85
+msgid "Street"
+msgstr "Улица"
+
+#: wlm/models.py:91
+msgid "Alternative name"
+msgstr "Альтернативное название"
+
+#: wlm/models.py:92
+msgid "Address"
+msgstr "Адрес"
+
+#: wlm/models.py:95
+msgid "Belong to complex"
+msgstr "Принадледит комплексу"
+
+#: wlm/models.py:98
+msgid "Additional"
+msgstr "Дополнительная информация"
+
+#: wlm/models.py:99
+msgid "State"
+msgstr "Состояние"
+
+#: wlm/models.py:100
+msgid "Protection class"
+msgstr "Категория охраны"
+
+#: wlm/models.py:101
+msgid "Type class"
+msgstr "Тип"
+
+#: wlm/models.py:104
+msgid "Wikipedia article"
+msgstr "Статья в Википедии"
+
+#: wlm/models.py:106
+msgid "ID Kulturnoe Nasledie"
+msgstr "ID культ. насл."
+
+#: wlm/models.py:109
+msgid "Verified"
+msgstr "Проверен"
+
+#: wlm/models.py:127 wlm/models.py:144
 msgid "House"
 msgstr "Дом"
 
-#: house/models.py:134
-msgid "File"
-msgstr "Файл"
-
-#: house/models.py:135
+#: wlm/models.py:129
 msgid "Title"
 msgstr "Заголовок"
 
-#: house/models.py:143
+#: wlm/models.py:130
+msgid "Author"
+msgstr "Автор"
+
+#: wlm/models.py:131
+#, fuzzy
+msgid "Wikimedia link"
+msgstr "Статья в Википедии"
+
+#: wlm/models.py:138
 msgid "Projected"
 msgstr "Спроектирован"
 
-#: house/models.py:144
+#: wlm/models.py:139
 msgid "Builded"
 msgstr "Построен"
 
-#: house/models.py:146
+#: wlm/models.py:141
 msgid "Demolished"
 msgstr "Разрушен"
 
-#: house/models.py:150
+#: wlm/models.py:145
 msgid "Date"
 msgstr "Дата"
 
-#: house/models.py:151
+#: wlm/models.py:146
 msgid "Event type"
 msgstr "Тип события"
 
-#: house/models.py:152
+#: wlm/models.py:147
 msgid "Comment"
 msgstr "Комментарий"
+
+#~ msgid "External sources"
+#~ msgstr "Внешние источники"
+
+#~ msgid "Safety from pasport"
+#~ msgstr "Сохранность (в паспорте)"
+
+#~ msgid "Ownership"
+#~ msgstr "Собственность"
+
+#~ msgid "Map"
+#~ msgstr "Карта"
+
+#~ msgid "Lane"
+#~ msgstr "Переулок"
+
+#~ msgid "Highway"
+#~ msgstr "Шоссе"
+
+#~ msgid "Square"
+#~ msgstr "Площадь"
+
+#~ msgid "Embankment"
+#~ msgstr "Набережная"
+
+#~ msgid "Passage"
+#~ msgstr "Проезд"
+
+#~ msgid "Avenue"
+#~ msgstr "Проспект"
+
+#~ msgid "Blind alley"
+#~ msgstr "Тупик"
+
+#~ msgid "Full name"
+#~ msgstr "Полное название"
+
+#~ msgid "Type"
+#~ msgstr "Тип"
+
+#~ msgid "Saved"
+#~ msgstr "Сохранён"
+
+#~ msgid "Modern replica"
+#~ msgstr "Новодел"
+
+#~ msgid "Ruins"
+#~ msgstr "Руины"
+
+#~ msgid "Losed"
+#~ msgstr "Утрачен"
+
+#~ msgid "Dwelling house"
+#~ msgstr "Жилой дом"
+
+#~ msgid "Office building"
+#~ msgstr "Административное здание"
+
+#~ msgid "Municipal"
+#~ msgstr "Муниципальный"
+
+#~ msgid "Wooden"
+#~ msgstr "Деревянный"
+
+#~ msgid "Stone"
+#~ msgstr "Каменный"
+
+#~ msgid "Lease"
+#~ msgstr "Найм"
+
+#~ msgid "Rent"
+#~ msgstr "Аренда"
+
+#~ msgid "Material"
+#~ msgstr "Материал"
+
+#~ msgid "Pasport status"
+#~ msgstr "Паспорт"
+
+#~ msgid "Number"
+#~ msgstr "Номер"
+
+#~ msgid "Address from pasport"
+#~ msgstr "Адрес в паспорте"
+
+#~ msgid "State from pasport"
+#~ msgstr "Состояние (в паспорте)"
+
+#~ msgid "Usage"
+#~ msgstr "Использование"
+
+#~ msgid "Land ownership"
+#~ msgstr "Собственность земли"
+
+#~ msgid "Owner"
+#~ msgstr "Владелец"
+
+#~ msgid "Obligation date"
+#~ msgstr "Дата подписания обязательства"
+
+#~ msgid "Lease/Rent"
+#~ msgstr "Найм/аренда"
+
+#~ msgid "Tenant"
+#~ msgstr "Арендатор"
+
+#~ msgid "Cronology"
+#~ msgstr "Хронология"
+
+#~ msgid "Documents"
+#~ msgstr "Документы"
+
+#~ msgid "Monitoring"
+#~ msgstr "Мониторинг"
+
+#~ msgid "ID Kulturnoe Nasledie checked"
+#~ msgstr "ID культ. насл. проверен"
+
+#~ msgid "Kulturnoe Nasledie problems"
+#~ msgstr "Проблемы с сайтом Культ. насл."
+
+#~ msgid "Gudea base checked"
+#~ msgstr "Сверено с базой Gudea"
+
+#~ msgid "File"
+#~ msgstr "Файл"
