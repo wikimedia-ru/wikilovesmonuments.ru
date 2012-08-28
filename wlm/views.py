@@ -2,6 +2,7 @@ from django.db import connection
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 from django.conf import settings
 from wlm.models import Region, City, Monument, HousePhoto
 from wlm.forms import MonumentForm
@@ -45,11 +46,14 @@ def add(request):
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
+
 @permission_required('wlm.can_moderate')
 def monument_edit_form(request, m_id):
     monument = Monument.objects.select_related().get(id=m_id)
-    form = MonumentForm(instance=monument)
-    print request.user.has_perm('monuments.can_moderate')
+    form = MonumentForm(request.POST or None, instance=monument)
+    if request.POST and form.is_valid():
+        form.save()
+        return HttpResponseRedirect('/house/%s' % m_id)
     return render_to_response( "edit_monument.html", {
         'id': m_id,
         'form': form,

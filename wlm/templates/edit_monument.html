@@ -22,7 +22,6 @@
 			{%for field in form.hidden_fields%}
 				{{field}}
 			{%endfor%}
-
 			<div class="control-group {% if form.name.errors %}error{% endif %}">
 				<label class="control-label" for="id_name">{{form.name.label}}</label>
 				<div class="controls">
@@ -152,7 +151,21 @@
 		var marker = {"coord_lat": lat, "coord_lon": lon, "name": $('#id_name').val()};
 		WLM.map.addMarker(marker);
 		WLM.map.setZoom(10);
-	});
+	
+        var setCities = function(data){
+            $('#id_city').empty();
+            $('#id_city').append("<option></option>")
+            $.each(data, function(key, value){
+                $('#id_city').append($("<option></option>")
+                    .attr("value", value.id)
+                    .text(value.name));
+            });
+        }
+        WLM.getRegionCities($('#id_region option:selected').val(), setCities);
+        $('#id_region').change(function(){
+            WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
+        });
+});
 	</script>
 		</div>
 </div>
