@@ -71,7 +71,7 @@
 				{% if house.kult_id %}
 					<tr>
 						<th>На сайте Культурного наследия</th>
-						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id }}" target="_blank">{{ house.kult_id }}</a></td>
+						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id|stringformat:"010d" }}" target="_blank">{{ house.kult_id|stringformat:"010d" }}</a></td>
 					</tr>
 				{% endif %}
 
@@ -179,7 +179,7 @@
 	<div id="about" class="show-grid">
 		<div class="span4">
 			<div class="upload-block">
-				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ house.id }}">
+				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ house.kult_id|stringformat:"010d" }}">
 					<i class="upload-my"></i>
 					Загрузить фото
 				</a>
