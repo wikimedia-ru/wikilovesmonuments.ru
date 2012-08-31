@@ -57,8 +57,8 @@
 			<!-- .subnav -->
 			<div class="subnav">
 				<ul class="nav nav-pills">
-					<li{% if request.get_full_path == '/' %} class="active"{% endif %}><a href="/">Карта памятников</a></li>
-					<li{% if request.get_full_path == '/rules/' %} class="active"{% endif %}><a href="/rules/">Правила, жюри, призы</a></li>
+					<li{% if request.path == '/' %} class="active"{% endif %}><a href="/">Карта памятников</a></li>
+					<li{% if request.path == '/rules/' %} class="active"{% endif %}><a href="/rules/">Правила, жюри, призы</a></li>
 					<!--<li><a href="/results/">Итоги</a></li>-->
 					<!--<li><a href="//2011.wikilovesmonuments.ru/">В 2011-м</a></li>-->
 					<li><a href="//wikimedia.ru/blog/tags/wlm/">Блог</a></li>
