@@ -16,12 +16,18 @@ header .logo {
 }
 header .logo a {
 	display: inline-block;
-	width: 670px;
+	width: 535px;
 	height: 62px;
 	background: url("../img/logo.png") no-repeat 0 0;
 	overflow: hidden;
-	text-indent: 100%;
+	text-indent: 200%;
 	white-space: nowrap;
+}
+@media (max-width: 768px) {
+	header .logo a {
+		width: 241px;
+		background: url("../img/logo-medium.png") no-repeat 0 0;
+	}
 }
 header a {
 	color: #828282;

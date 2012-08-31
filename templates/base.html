@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 	<meta charset="utf-8" />
-	<title>{% block title %}{% endblock %} Wiki Loves Monuments</title>
+	<title>{% block title %}{% endblock %} Вики любит памятники / Wiki Loves Monuments</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Language" content="ru" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,18 +37,18 @@
 		<header class="jumbotron subhead" id="overview">
 			<div class="row">
 				<div class="span7">
-					<h1 class="logo"><a href="/">Wiki Loves Monuments</a></h1>
+					<h1 class="logo"><a href="/">Вики любит памятники</a></h1>
 				</div>
+				{% comment %}
 				<div class="span3">
 					&nbsp;
-					{% comment %}
 					<a class="btn btn-large" href="#">
 						<i class="upload-my"></i>
 						Загрузить фото
 					</a>
-					{% endcomment %}
 				</div>
-				<div class="span2 contacts">
+				{% endcomment %}
+				<div class="span2 offset3 contacts">
 					<a href="mailto:info@wikimedia.ru">info@wikimedia.ru</a>
 					<br>
 					<a href="https://twitter.com/WLMRussia">@WLMRussia</a>
