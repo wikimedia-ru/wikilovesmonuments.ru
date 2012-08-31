@@ -17,6 +17,7 @@ def get_region_cities(request, region):
 def get_region_markers(request, region):
     monuments = Monument.objects.select_related().filter(
         region_id=region,
+        kult_id__isnull=False,
         coord_lat__isnull=False,
         coord_lon__isnull=False,
         ).values("id", "coord_lon", "coord_lat", "name")
@@ -26,6 +27,7 @@ def get_region_markers(request, region):
 def get_city_markers(request, city):
     monuments = Monument.objects.select_related().filter(
         city_id=city,
+        kult_id__isnull=False,
         coord_lat__isnull=False,
         coord_lon__isnull=False,
         ).values("id", "coord_lon", "coord_lat", "name")
@@ -36,6 +38,7 @@ def get_tile_markers(request, x_tile, y_tile, zoom, first, last):
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     monuments = Monument.objects.filter(
+        kult_id__isnull=False,\
         coord_lon__gte=latlng_min.lng,\
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
@@ -48,6 +51,7 @@ def get_tile_markers_count(request, x_tile, y_tile, zoom):
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     mon_count = Monument.objects.filter(
+        kult_id__isnull=False,\
         coord_lon__gte=latlng_min.lng,\
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
@@ -59,6 +63,7 @@ def test_tile_markers(request, x_tile, y_tile, zoom, first, last):
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     monuments = Monument.objects.filter(
+        kult_id__isnull=False,\
         coord_lon__gte=latlng_min.lng,\
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
