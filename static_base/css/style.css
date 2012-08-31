@@ -176,6 +176,7 @@ header .btn-large:hover,
 }
 
 #map .leaflet-control-search {
+	display: none;
 	padding: 5px 7px 0;
 }
 
