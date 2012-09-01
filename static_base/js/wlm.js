@@ -87,7 +87,8 @@ WLM.map = (function($){
             zoomControl: false,
             layers: [cloudmade]
         });
-        map.zoomControl = new L.Control.Zoom({ position: 'bottomleft' });
+        map.zoomControl = new L.Control.Zoom({ position: 'topright' });
+        map.addControl(map.zoomControl);
     }
 
     //Pan and zoom map to region
