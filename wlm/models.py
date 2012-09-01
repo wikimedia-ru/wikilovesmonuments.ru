@@ -103,7 +103,7 @@ class Monument(models.Model):
     #External link to Wiki
     ruwiki = models.CharField(max_length=250, blank=True, verbose_name=_("Wikipedia article"))
     #External link to kulturnoe-nasledie.ru
-    kult_id = models.PositiveIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
+    kult_id = models.BigIntegerField(blank=True, null=True, verbose_name=_("ID Kulturnoe Nasledie"))
 
     #Mark this true mean "We check all data"
     verified = models.BooleanField(default = False, verbose_name = _("Verified"))
