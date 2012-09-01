@@ -13,7 +13,12 @@ L.Control.Search = L.Control.extend({
 		L.DomEvent.disableClickPropagation(container);
 
 		var input = L.DomUtil.create('input', className + '-input', form);
-		input.type = 'search';
+		try {
+			input.type = 'search';
+		}
+		catch(e) {
+			input.type = 'text'; // IE
+		}
 		input.placeholder = 'Воспользуйтесь поиском';
 
 		var submit = L.DomUtil.create('button', className + '-submit btn', form);
