@@ -315,7 +315,8 @@ footer p {
 
 
 .contacts {
-	padding-top: 17px;
+	float: right;
+	padding-top: 20px;
 }
 
 /*
