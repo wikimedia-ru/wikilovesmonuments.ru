@@ -10,7 +10,7 @@
 {% block title %}{{ house.name }} ({{ house.address }}) — {% endblock %}
 
 {%block moderator_menu%}
-{%if perms.monument.can_moderate%}
+{%if perms.monument.can_edit%}
 <li class="pull-right"><a href='/admin/logout/'>Выйти ({{user}})</a></li>
 <li class="pull-right"><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
 {%endif%}
