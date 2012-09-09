@@ -64,6 +64,16 @@
 
 				<table class="table">
 					<tr>
+						<th>Регион</th>
+						<td><a href="/list/region/{{ house.region.id }}/">{{ house.region.name }}</a></td>
+					</tr>
+
+					<tr>
+						<th>Город</th>
+						<td><a href="/list/city/{{ house.city.id }}/">{{ house.city.name }}</a></td>
+					</tr>
+
+					<tr>
 						<th>Адрес</th>
 						<td>{{ house.address }}</td>
 					</tr>
@@ -96,34 +106,6 @@
 					{% endif %}
 				{% endif %}
 
-				{% if house.pasport_safety %}
-					{% if house.pasport_state and house.pasport_safety in 'S' %}
-					<tr>
-						<th>Сохранность и состояние по паспорту</th>
-						<td class="state-{{ house.pasport_state }}">{{ house.get_pasport_safety_display }} ({{ house.get_pasport_state_display|lower }})</td>
-					</tr>
-					{% else %}
-					<tr>
-						<th>Сохранность и состояние по паспорту</th>
-						<td class="safety-{{ house.pasport_safety }}">{{ house.get_pasport_safety_display }}</td>
-					</tr>
-					{% endif %}
-				{% endif %}
-
-				{% if house.pasport_address %}
-					<tr>
-						<th>Адрес в паспорте</th>
-						<td>{{ house.pasport_address }}</td>
-					</tr>
-				{% endif %}
-
-				{% if house.usage %}
-					<tr>
-						<th>Использование</th>
-						<td>{{ house.get_usage_display }}</td>
-					</tr>
-				{% endif %}
-
 				{% if house.protection %}
 					<tr>
 						<th>Категория охраны</th>
@@ -131,38 +113,10 @@
 					</tr>
 				{% endif %}
 
-				{% if is_admin and house.pasport %}
-					<tr>
-						<th>Паспорт</th>
-						<td>{{ house.pasport }}</td>
-					</tr>
-				{% endif %}
-
 				{% if house.material %}
 					<tr>
 						<th>Тип</th>
 						<td>{{ house.get_material_display }}</td>
-					</tr>
-				{% endif %}
-
-				{% if house.chronology %}
-					<tr>
-						<th>Хронология</th>
-						<td>{{ house.chronology|safe }}</td>
-					</tr>
-				{% endif %}
-
-				{% if is_admin and house.documents %}
-					<tr>
-						<th>Документооборот</th>
-						<td>{{ house.documents|safe }}</td>
-					</tr>
-				{% endif %}
-
-				{% if is_admin and house.monitoring %}
-					<tr>
-						<th>Мониторинг</th>
-						<td>{{ house.monitoring|safe }}</td>
 					</tr>
 				{% endif %}
 

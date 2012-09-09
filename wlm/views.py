@@ -10,6 +10,19 @@ from wlm.utils import get_region
 from django.contrib.auth.decorators import permission_required
 
 def index_page(request):
+    ip_region = get_region(request.META['REMOTE_ADDR'])
+    if not ip_region:
+        ip_region = "47"
+
+    return render_to_response('house/index.html', {
+        'region': Region.objects.values('id').get(iso_code=ip_region),
+        'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
+        'cities': City.objects.values('id', 'name').all(),
+        'CMADE_KEY': settings.CMADE_KEY,
+        }, context_instance=RequestContext(request))
+
+
+def list_page(request):
     h_list = Monument.objects.exclude(coord_lon=None).select_related()
     h_list = h_list.filter(city_id=34)
     p_list = HousePhoto.objects.all()[:30]
@@ -17,12 +30,25 @@ def index_page(request):
     if not ip_region:
         ip_region = "47"
 
-    return render_to_response('house/index.html', {
-        'house_list': h_list,
-        'photo_list': p_list,
+    return render_to_response('house/list_index.html', {
         'region': Region.objects.values('id').get(iso_code=ip_region),
         'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
-        'cities': City.objects.values('id', 'name').all(),
+        'CMADE_KEY': settings.CMADE_KEY,
+        }, context_instance=RequestContext(request))
+
+
+def list_region(request, id):
+    return render_to_response('house/list_region.html', {
+        'region': Region.objects.get(id=id),
+        'cities': City.objects.values('id', 'name').filter(region_id=id),
+        'CMADE_KEY': settings.CMADE_KEY,
+        }, context_instance=RequestContext(request))
+
+
+def list_city(request, id):
+    return render_to_response('house/list_city.html', {
+        'monuments': Monument.objects.filter(city_id=id).exclude(coord_lon=None).exclude(kult_id=None).select_related(),
+        'city': City.objects.get(id=id),
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 

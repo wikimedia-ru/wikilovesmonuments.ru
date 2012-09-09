@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type='text/javascript' src='{{STATIC_URL}}/js/wlm.js'></script>
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div id="main" class="span9">
+		<div id="find" class="row show-grid">
+			<div class="span9">
+				<div class="content">
+					<h2>{{ region.name }}. Выберите город</h2>
+
+					<div class="row">
+						<div id="boxMap" class="span9">
+							<table class="table">
+								{% for c in cities %}
+								<tr>
+									<td><a href="/list/city/{{c.id}}/">{{c.name}}</a></td>
+								</tr>
+								{%endfor%}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="about" class="row show-grid">
+		<div class="span3">
+			<h2>О&nbsp;проекте</h2>
+			<div class="content">
+				<p>«Вики любит памятники» — часть организуемого региональными отделениями Викимедиа международного фотосоревнования Wiki Loves Monuments`2012, проходящего в&nbsp;сентябре 2012 года.</p>
+				<p>В&nbsp;конкурсе участвуют самостоятельно сделанные и в&nbsp;сентябре 2012 года самостоятельно загруженные под свободной лицензией на&nbsp;Викисклад фотографии, на&nbsp;которых запечатлён памятник архитектуры из&nbsp;специального списка.</p>
+				<hr />
+				<p><i class="icon-warning-sign icon-white"></i> В данный момент часть памятников не&nbsp;показывается на&nbsp;карте. Поэтому, если вы не&nbsp;нашли какого-то памятника, вернитесь через пару дней. Всё будет.</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
