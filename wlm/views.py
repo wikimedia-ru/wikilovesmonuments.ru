@@ -73,7 +73,7 @@ def add(request):
         }, context_instance=RequestContext(request))
 
 
-@permission_required('wlm.can_moderate')
+@permission_required('wlm.can_change')
 def monument_edit_form(request, m_id):
     monument = Monument.objects.select_related().get(id=m_id)
     form = MonumentForm(request.POST or None, instance=monument)
