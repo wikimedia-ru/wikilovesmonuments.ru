@@ -17,11 +17,15 @@
 					<div class="row">
 						<div id="boxMap" class="span9">
 							<table class="table">
-								{% for c in cities %}
 								<tr>
+								{% for c in cities %}
 									<td><a href="/list/city/{{c.id}}/">{{c.name}}</a></td>
+								{% if forloop.counter|divisibleby:3 %}
 								</tr>
+								<tr>
+								{% endif %}
 								{%endfor%}
+								</tr>
 							</table>
 						</div>
 					</div>
