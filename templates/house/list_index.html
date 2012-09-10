@@ -17,11 +17,19 @@
 					<div class="row">
 						<div id="boxMap" class="span9">
 							<table class="table">
-								{% for r in regions %}
 								<tr>
-									<td><a href="/list/region/{{r.id}}/">{{r.name}}</a></td>
+								{% for r in regions %}
+								{% if forloop.counter > 2 %}
+									<td><a href="/list/region/{{r.id}}/">{{r.id}}. {{r.name}}</a></td>
+								{% else %}
+									<td><a href="/list/region/{{r.id}}/"><strong>{{r.name}}</strong></a></td>
+								{% endif %}
+								{% if forloop.counter|divisibleby:2 %}
 								</tr>
-								{%endfor%}
+								<tr>
+								{% endif %}
+								{% endfor %}
+								</tr>
 							</table>
 						</div>
 					</div>
