@@ -138,9 +138,10 @@ WLM.map = (function($){
     var addMarker = function(item){
         var marker = new L.Marker(
             new L.LatLng(item.coord_lat, item.coord_lon),
-            {title: item.name}
+            {title: item.name, draggable: (item.draggable ? item.draggable: false )}
         );
         marker.addTo(map);
+        return marker;
     }
 
     //Internal callback for building markers layer.
