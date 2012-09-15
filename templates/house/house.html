@@ -23,18 +23,6 @@
 			<div class="span8">
 				<h2>{{ house.name }}</h2>
 
-			{% if photo %}
-				<ul class="thumbnails">
-				{% for p in photo %}
-					<li class="span{% if forloop.first %}6{% else %}3{% endif %}">
-						<a href="{{ p.file.src }}" class="thumbnail" target="_blank"><img src="{{ p.file.src_300 }}" alt="{% if p.title %}{{ p.title }}. {% endif %}Автор: {{ p.author }}" /></a>
-						{% if p.title %}<h5>{{ p.title }}</h5>{% endif %}
-						<p>Автор: {{ p.author }}</p>
-					</li>
-				{% endfor %}
-				</ul>
-			{% endif %}
-
 			{% if house.coord_lon %}
 				<div id="map" class="map"></div>
 				<script type="text/javascript">
