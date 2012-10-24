@@ -127,7 +127,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'tinymce',
     'wlm',
-    'menu',
 )
 
 # A sample logging configuration. The only tangible logging
