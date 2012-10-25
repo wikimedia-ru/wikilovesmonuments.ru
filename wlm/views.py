@@ -120,7 +120,7 @@ def monuments_double_coordinates(request):
 
 def voting(request):
     if request.user is None or not request.user.is_active:
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/admin/')
 
     cnt = {}
 
