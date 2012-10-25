@@ -1,0 +1,29 @@
+{% extends "voting_base.html" %}
+
+{% block content %}
+<div style="position:absolute; right:10px; top:5px; font-size:smaller">
+	{{ user.username }} (<a href="/logout">выйти</a>)<br />
+	{{ cnt.done }} / {{ cnt.all }}
+</div>
+
+<center>
+	<small><a href="//commons.wikimedia.org/wiki/User:{{ photo.author }}">{{ photo.author }}</a> — <a href="//commons.wikimedia.org/wiki/File:{{ photo.url_name }}">{{ photo.name }}</a> ({{ photo.width }} &times; {{ photo.height }})</small>
+	<br /><br />
+{% if p.width > 800 %}
+	<a href="//upload.wikimedia.org/wikipedia/commons/{{ photo.folder }}/{{ photo.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ photo.folder }}/{{ photo.url_name }}/800px-{{ photo.url_name }}" style="max-height:600px" /></a>
+{% else %}
+	<img src="//upload.wikimedia.org/wikipedia/commons/{{ photo.folder }}/{{ photo.url_name }}" style="max-height:600px" />
+{% endif %}
+</center>
+{% endblock %}
+
+
+{% block footer %}
+<p style="font-weight:bold; text-align:center; font-size:1.5em">
+	<a href="/vote/{{ photo.id }}/1" style="color:#c33; margin-right:5em">Плохо</a>
+	<a href="/vote/{{ photo.id }}/2" style="color:#955; margin-right:5em">Не очень</a>
+	<a href="/vote/{{ photo.id }}/3" style="color:#666; margin-right:5em">Средне</a>
+	<a href="/vote/{{ photo.id }}/4" style="color:#595; margin-right:5em">Хорошо</a>
+	<a href="/vote/{{ photo.id }}/5" style="color:#3a3">Супер</a>
+</p>
+{% endblock %}

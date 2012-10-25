@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from wlm.models import Region, City, Monument, MonumentPhoto
+from wlm.models import Region, City, Monument, MonumentPhoto, MonumentPhotoRating
 from wlm.forms import MonumentForm
 from wlm.utils import get_region
 from django.contrib.auth.decorators import permission_required
@@ -117,3 +117,44 @@ def monuments_double_coordinates(request):
         lon = None
     monuments = Monument.objects.filter(coord_lat=lat, coord_lon=lon)
     return render_to_response('monuments_double.html', {'monuments': monuments,})
+
+def voting(request):
+    if request.user is None or not request.user.is_active:
+        return HttpResponseRedirect('/login')
+
+    cnt = {}
+
+    pr = MonumentPhotoRating.objects.filter(user_id=request.user.id)
+    pr2 = []
+    for i in pr:
+        pr2.append(i.photo_id)
+    cnt = {
+        'all': len(MonumentPhoto.objects.all()),
+        'done': len(pr2),
+    }
+
+    p = MonumentPhoto.objects.exclude(id__in=pr2)
+    if (len(p)):
+        p = p.order_by('?')[0]
+    else:
+        return render_to_response('voting_over.html', {
+            'cnt': cnt,
+            'user': request.user,
+            }, context_instance=RequestContext(request))
+    
+    p.url_name = p.name.replace(' ', '_')
+    return render_to_response('voting.html', {
+        'photo': p,
+        'cnt': cnt,
+        'user': request.user,
+        }, context_instance=RequestContext(request))
+
+def vote_for_photo(request, photo_id, vote):
+    vote = int(vote)
+    if vote >= 1 and vote <= 5:
+        r, created = MonumentPhotoRating.objects.get_or_create(user=request.user, 
+            photo=MonumentPhoto.objects.get(id=photo_id))
+        r.vote = vote
+        r.save()
+    return HttpResponseRedirect('/voting')
+

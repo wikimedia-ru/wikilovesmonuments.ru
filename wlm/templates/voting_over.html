@@ -1,0 +1,17 @@
+{% extends "voting_base.html" %}
+
+{% block content %}
+<div style="position:absolute; right:10px; top:5px; font-size:smaller">
+	{{ user.username }} (<a href="/logout">выйти</a>)<br />
+        {{ cnt.done }} / {{ cnt.all }}
+</div>
+
+<center>
+	<p style="font-size:3em; margin:150px 0">Спасибо!<br />Вы проголосовали за все работы.</p>
+	<p><a href="/">На главную</a></p>
+</center>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

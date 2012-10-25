@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     url(r'^add/?$', 'wlm.views.add'),
     url(r'^house/(?P<id>[0-9]+)/?$', 'wlm.views.house'),
     url(r'^house/edit/(?P<m_id>\d+)$', 'wlm.views.monument_edit_form'),
+    url(r'^voting/?$', 'wlm.views.voting'),
+    url(r'^vote/(?P<photo_id>\d+)/(?P<vote>\d+)/?$', 'wlm.views.vote_for_photo'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
