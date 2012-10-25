@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from wlm.models import Region, City, Monument, HousePhoto
+from wlm.models import Region, City, Monument, MonumentPhoto
 from wlm.forms import MonumentForm
 from wlm.utils import get_region
 from django.contrib.auth.decorators import permission_required
@@ -25,7 +25,7 @@ def index_page(request):
 def list_page(request):
     h_list = Monument.objects.exclude(coord_lon=None).select_related()
     h_list = h_list.filter(city_id=34)
-    p_list = HousePhoto.objects.all()[:30]
+    p_list = MonumentPhoto.objects.all()[:30]
     ip_region = get_region(request.META['REMOTE_ADDR'])
     if not ip_region:
         ip_region = "47"
@@ -64,7 +64,7 @@ def upload(request):
 
 def add(request):
     h_list = Monument.objects.all()
-    p_list = HousePhoto.objects.all()[:30]
+    p_list = MonumentPhoto.objects.all()[:30]
 
     return render_to_response('house/add.html', {
         'house_list': h_list,
@@ -88,7 +88,7 @@ def monument_edit_form(request, m_id):
 
 def house(request, id):
     h = Monument.objects.get(pk=id)
-    photo = HousePhoto.objects.filter(house=h)[:30]
+    photo = MonumentPhoto.objects.filter(house=h)[:30]
 
     return render_to_response('house/house.html', {
         'house': h,

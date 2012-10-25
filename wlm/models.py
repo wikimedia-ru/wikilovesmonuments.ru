@@ -118,34 +118,22 @@ class Monument(models.Model):
     def show_wiki(self):
         return self.ruwiki
 
-class HousePhoto(models.Model):
+class MonumentPhoto(models.Model):
     def make_upload_folder(instance, filename):
         dir_name, image_name = os.path.split(filename)
         path = u"%d/%s" % (instance.house.pk, image_name)
         return path
 
-    house = models.ForeignKey('Monument', verbose_name=_("House"))
-    #file = YFField(upload_to=make_upload_folder)
-    title = models.CharField(max_length=250, blank=True, verbose_name=_("Title"))
+    monument = models.ForeignKey('Monument', verbose_name=_("Monument"))
+    name = models.CharField(max_length=250, blank=True, verbose_name=_("Name"))
+    commons_id = models.BigIntegerField(verbose_name=_("Image page ID"))
     author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
-    img_link = models.CharField(max_length=255, verbose_name=_('Wikimedia Commons link'))
+    datetime = models.DateTimeField(auto_now=False, auto_now_add=False, verbose_name=_("Date & time"))
+    contest_year = models.IntegerField(verbose_name=_("Federal district of RF"))
+    folder = models.CharField(max_length=255, verbose_name=_('Commons folder'))
+    width = models.IntegerField(verbose_name=_("File width"))
+    height = models.IntegerField(verbose_name=_("File height"))
+    size = models.IntegerField(verbose_name=_("File size"))
     
     def __unicode__(self):
-        return self.title
-
-class HouseEvent(models.Model):
-    TYPE_CHOICES = (
-        ('P', _("Projected")),
-        ('B', _("Builded")),
-        ('R', _("Restored")),
-        ('D', _("Demolished")),
-    )
-
-    house = models.ForeignKey('Monument', verbose_name=_("House"))
-    date = models.CharField(max_length=250, blank=True, verbose_name=_("Date"))
-    type = models.CharField(max_length=1, blank=True, choices=TYPE_CHOICES, verbose_name=_("Event type"))
-    comment = models.CharField(max_length=250, blank=True, verbose_name=_("Comment"))
-
-    def __unicode__(self):
-        return self.date + ' - ' + self.text
-
+        return self.name
