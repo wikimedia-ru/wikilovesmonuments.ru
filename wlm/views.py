@@ -124,7 +124,8 @@ def voting(request):
 
     cnt = {}
 
-    pr = MonumentPhotoRating.objects.filter(user_id=request.user.id)
+    pr = MonumentPhotoRating.objects.all()
+    #pr = MonumentPhotoRating.objects.filter(user_id=request.user.id)
     pr2 = []
     for i in pr:
         pr2.append(i.photo_id)
