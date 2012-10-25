@@ -9,7 +9,7 @@
 <center>
 	<small><a href="//commons.wikimedia.org/wiki/User:{{ photo.author }}">{{ photo.author }}</a> — <a href="//commons.wikimedia.org/wiki/File:{{ photo.url_name }}">{{ photo.name }}</a> ({{ photo.width }} &times; {{ photo.height }})</small>
 	<br /><br />
-{% if p.width > 800 %}
+{% if photo.width > 800 %}
 	<a href="//upload.wikimedia.org/wikipedia/commons/{{ photo.folder }}/{{ photo.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ photo.folder }}/{{ photo.url_name }}/800px-{{ photo.url_name }}" style="max-height:600px" /></a>
 {% else %}
 	<img src="//upload.wikimedia.org/wikipedia/commons/{{ photo.folder }}/{{ photo.url_name }}" style="max-height:600px" />
