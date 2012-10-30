@@ -97,6 +97,13 @@ def monument(request, id):
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
+
+def redirect_by_kult_id(request, kult_id):
+    m = get_object_or_404(Monument, kult_id=kult_id)
+
+    return HttpResponseRedirect('/monument/%d' % m.id)
+
+
 def coordinates_doubled(request):
     query = '''select count(id), coord_lat, coord_lon from wlm_monument
         group by coord_lat, coord_lon
