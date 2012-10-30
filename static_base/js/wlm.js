@@ -130,8 +130,8 @@ WLM.map = (function($){
     //Build pop-up.
     //XXX Rewrite to mustache engine
     var buildPopup = function(item){
-        var name = item.name ? item.name : "Не указано";
-        return "<a class='name' href='/house/" + item.id + "'>" + name + "</a>";
+        var name = item.name ? item.name : "Без названия";
+        return "<a class='name' href='/monument/" + item.id + "'>" + name + "</a>";
     }
 
     //Put alone marker to map.

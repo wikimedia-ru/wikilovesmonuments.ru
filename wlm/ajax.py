@@ -43,7 +43,7 @@ def get_tile_markers(request, x_tile, y_tile, zoom, first, last):
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
         coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
-    return render_to_response('markers.js', {'monuments':monuments,}, mimetype='application/json')
+    return render_to_response('wlm/markers.js', {'monuments':monuments,}, mimetype='application/json')
 
 
 def get_tile_markers_count(request, x_tile, y_tile, zoom):
@@ -56,7 +56,7 @@ def get_tile_markers_count(request, x_tile, y_tile, zoom):
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
         coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").count()
-    return render_to_response('markers_count.js', {'count':mon_count, }, mimetype='application/json')
+    return render_to_response('wlm/markers_count.js', {'count':mon_count, }, mimetype='application/json')
 
 def test_tile_markers(request, x_tile, y_tile, zoom, first, last):
     point = Point(int(x_tile), int(y_tile))
@@ -68,5 +68,5 @@ def test_tile_markers(request, x_tile, y_tile, zoom, first, last):
         coord_lon__lt=latlng_max.lng,\
         coord_lat__gte=latlng_min.lat,\
         coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
-    return render_to_response('markers.html', {'monuments':monuments,})
+    return render_to_response('wlm/markers.html', {'monuments':monuments,})
 

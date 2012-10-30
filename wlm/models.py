@@ -122,7 +122,7 @@ class Monument(models.Model):
 class MonumentPhoto(models.Model):
     def make_upload_folder(instance, filename):
         dir_name, image_name = os.path.split(filename)
-        path = u"%d/%s" % (instance.house.pk, image_name)
+        path = u"%d/%s" % (instance.monument.pk, image_name)
         return path
 
     monument = models.ForeignKey('Monument', verbose_name=_("Monument"))

@@ -7,12 +7,12 @@
 <script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
 {% endblock %}
 
-{% block title %}{{ house.name }} ({{ house.address }}) — {% endblock %}
+{% block title %}{{ monument.name }} ({{ monument.address }}) — {% endblock %}
 
 {%block moderator_menu%}
 {%if perms.monument.can_change%}
-<li class="pull-right"><a href='/admin/logout/'>Выйти ({{user}})</a></li>
-<li class="pull-right"><a href='/house/edit/{{house.id}}'>Редактировать</a></li>
+<li class="pull-right"><a href='/admin/logout/'>Выйти ({{ user }})</a></li>
+<li class="pull-right"><a href='/monument/edit/{{ monument.id }}'>Редактировать</a></li>
 {%endif%}
 {%endblock%}
 
@@ -21,20 +21,20 @@
 	<div id="main">
 		<div id="find" class="show-grid">
 			<div class="span8">
-				<h2>{{ house.name }}</h2>
+				<h2>{{ monument.name }}</h2>
 
-			{% if house.coord_lon %}
+			{% if monument.coord_lon %}
 				<div id="map" class="map"></div>
 				<script type="text/javascript">
 					$(function(){
 				        var item = {
-				            "id": {{house.id}},
-				            "coord_lat": {{house.coord_lat|stringformat:"f"}},
-				            "coord_lon": {{house.coord_lon|stringformat:"f"}},
-				            "name": "{{house.name|default:'Неизвестно'}}"
+				            "id": {{ monument.id }},
+				            "coord_lat": {{ monument.coord_lat|stringformat:"f" }},
+				            "coord_lon": {{ monument.coord_lon|stringformat:"f" }},
+				            "name": "{{ monument.name|default:'Без названия' }}"
 				        }
 				        WLM.map.init_map('map');
-				        WLM.map.setPosition({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }});
+				        WLM.map.setPosition({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }});
 				        WLM.map.addMarker(item);
 				        WLM.map.setZoom(10);
 				    });
@@ -43,9 +43,9 @@
 					var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
 					var map = new L.Map('map');
 					map
-						.setView(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }}), 16)
+						.setView(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }}), 16)
 						.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
-						.addLayer(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})));
+						.addLayer(new L.Marker(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }})));
 					*/
 				</script>
 			{% endif %}
@@ -53,65 +53,65 @@
 				<table class="table">
 					<tr>
 						<th>Регион</th>
-						<td><a href="/list/region/{{ house.region.id }}/">{{ house.region.name }}</a></td>
+						<td><a href="/list/region/{{ monument.region.id }}/">{{ monument.region.name }}</a></td>
 					</tr>
 
 					<tr>
 						<th>Город</th>
-						<td><a href="/list/city/{{ house.city.id }}/">{{ house.city.name }}</a></td>
+						<td><a href="/list/city/{{ monument.city.id }}/">{{ monument.city.name }}</a></td>
 					</tr>
 
 					<tr>
 						<th>Адрес</th>
-						<td>{{ house.address }}</td>
+						<td>{{ monument.address }}</td>
 					</tr>
 
-				{% if house.kult_id %}
+				{% if monument.kult_id %}
 					<tr>
 						<th>На сайте Культурного наследия</th>
-						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ house.kult_id|stringformat:"010d" }}" target="_blank">{{ house.kult_id|stringformat:"010d" }}</a></td>
+						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ monument.kult_id|stringformat:"010d" }}" target="_blank">{{ monument.kult_id|stringformat:"010d" }}</a></td>
 					</tr>
 				{% endif %}
 
-				{% if house.ruwiki %}
+				{% if monument.ruwiki %}
 					<tr>
 						<th>В Википедии</th>
-						<td><a href="//ru.wikipedia.org/wiki/{{ house.ruwiki|urlencode }}" target="_blank">{{ house.ruwiki }}</a></td>
+						<td><a href="//ru.wikipedia.org/wiki/{{ monument.ruwiki|urlencode }}" target="_blank">{{ monument.ruwiki }}</a></td>
 					</tr>
 				{% endif %}
 
-				{% if house.safety %}
-					{% if house.state and house.safety in 'S' %}
+				{% if monument.safety %}
+					{% if monument.state and monument.safety in 'S' %}
 					<tr>
 						<th>Сохранность и состояние</th>
-						<td class="state-{{ house.state }}">{{ house.get_safety_display }} ({{ house.get_state_display|lower }})</td>
+						<td class="state-{{ monument.state }}">{{ monument.get_safety_display }} ({{ monument.get_state_display|lower }})</td>
 					</tr>
 					{% else %}
 					<tr>
 						<th>Сохранность и состояние</th>
-						<td class="safety-{{ house.safety }}">{{ house.get_safety_display }}</td>
+						<td class="safety-{{ monument.safety }}">{{ monument.get_safety_display }}</td>
 					</tr>
 					{% endif %}
 				{% endif %}
 
-				{% if house.protection %}
+				{% if monument.protection %}
 					<tr>
 						<th>Категория охраны</th>
-						<td>{{ house.get_protection_display }}</td>
+						<td>{{ monument.get_protection_display }}</td>
 					</tr>
 				{% endif %}
 
-				{% if house.material %}
+				{% if monument.material %}
 					<tr>
 						<th>Тип</th>
-						<td>{{ house.get_material_display }}</td>
+						<td>{{ monument.get_material_display }}</td>
 					</tr>
 				{% endif %}
 
-				{% if house.extra_info %}
+				{% if monument.extra_info %}
 					<tr>
 						<th>Дополнительная информация</th>
-						<td>{{ house.extra_info|safe }}</td>
+						<td>{{ monument.extra_info|safe }}</td>
 					</tr>
 				{% endif %}
 				</table>
@@ -122,7 +122,7 @@
 	<div id="about" class="show-grid">
 		<div class="span4">
 			<div class="upload-block">
-				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ house.kult_id|stringformat:"010d" }}">
+				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ monument.kult_id|stringformat:'010d' }}">
 					<i class="upload-my"></i>
 					Загрузить фото
 				</a>

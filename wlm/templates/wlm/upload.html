@@ -85,20 +85,20 @@
 				.addLayer(new L.TileLayer(cmUrl, { maxZoom: 18, attribution: cmAttr }));
 			var clusterer = new LeafClusterer(map);
 
-		{% for house in house_list %}
-			{% if house.coord_lat %}
-				clusterer.addMarker(new L.Marker(new L.LatLng({{ house.coord_lat|stringformat:"f" }}, {{ house.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/house/{{ house.id }}">{{ house.street.name }}, {{ house.number }}</p>'));
+		{% for m in monuments_list %}
+			{% if m.coord_lat %}
+				clusterer.addMarker(new L.Marker(new L.LatLng({{ m.coord_lat|stringformat:"f" }}, {{ m.coord_lon|stringformat:"f" }})).bindPopup('<p><a href="/monument/{{ m.id }}">{{ m.street.name }}, {{ m.number }}</p>'));
 			{% endif %}
 		{% endfor %}
 		</script>
 
-                <ul class="thumbnails">
+		<ul class="thumbnails">
 		{% for photo in photo_list %}
-                        <li class="span2">
-                                <a href="/house/{{ photo.house.id }}" class="thumbnail"><img src="{{ photo.file.src_100 }}" alt="" /></a>
-                        </li>
-                {% endfor %}
-                </ul>
+			<li class="span2">
+				<a href="/monument/{{ photo.monument.id }}" class="thumbnail"><img src="{{ photo.file.src_100 }}" alt="" /></a>
+			</li>
+		{% endfor %}
+		</ul>
 	</div>
 	<div style="clear:both"></div>
 </div>

@@ -14,7 +14,7 @@ def index_page(request):
     if not ip_region:
         ip_region = "47"
 
-    return render_to_response('house/index.html', {
+    return render_to_response('wlm/index.html', {
         'region': Region.objects.values('id').get(iso_code=ip_region),
         'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
         'cities': City.objects.values('id', 'name').all(),
@@ -23,14 +23,14 @@ def index_page(request):
 
 
 def list_page(request):
-    h_list = Monument.objects.exclude(coord_lon=None).select_related()
-    h_list = h_list.filter(city_id=34)
+    m_list = Monument.objects.exclude(coord_lon=None).select_related()
+    m_list = m_list.filter(city_id=34)
     p_list = MonumentPhoto.objects.all()[:30]
     ip_region = get_region(request.META['REMOTE_ADDR'])
     if not ip_region:
         ip_region = "47"
 
-    return render_to_response('house/list_index.html', {
+    return render_to_response('wlm/list_index.html', {
         'region': Region.objects.values('id').get(iso_code=ip_region),
         'regions': Region.objects.values('id', 'name', "latitude", "longitude", "scale").exclude(id=77),
         'CMADE_KEY': settings.CMADE_KEY,
@@ -38,7 +38,7 @@ def list_page(request):
 
 
 def list_region(request, id):
-    return render_to_response('house/list_region.html', {
+    return render_to_response('wlm/list_region.html', {
         'region': Region.objects.get(id=id),
         'cities': City.objects.values('id', 'name').filter(region_id=id),
         'CMADE_KEY': settings.CMADE_KEY,
@@ -46,7 +46,7 @@ def list_region(request, id):
 
 
 def list_city(request, id):
-    return render_to_response('house/list_city.html', {
+    return render_to_response('wlm/list_city.html', {
         'monuments': Monument.objects.filter(city_id=id).exclude(coord_lon=None).exclude(kult_id=None).select_related(),
         'city': City.objects.get(id=id),
         'CMADE_KEY': settings.CMADE_KEY,
@@ -54,20 +54,20 @@ def list_city(request, id):
 
 
 def upload(request):
-    h_list = Monument.objects.all()
+    m_list = Monument.objects.all()
 
-    return render_to_response('house/upload.html', {
-        'house_list': h_list,
+    return render_to_response('wlm/upload.html', {
+        'monuments_list': m_list,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 
 
 def add(request):
-    h_list = Monument.objects.all()
+    m_list = Monument.objects.all()
     p_list = MonumentPhoto.objects.all()[:30]
 
-    return render_to_response('house/add.html', {
-        'house_list': h_list,
+    return render_to_response('wlm/add_monument.html', {
+        'monuments_list': m_list,
         'photo_list': p_list,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
@@ -79,19 +79,19 @@ def monument_edit_form(request, m_id):
     form = MonumentForm(request.POST or None, instance=monument)
     if request.POST and form.is_valid():
         form.save()
-        return HttpResponseRedirect('/house/%s' % m_id)
-    return render_to_response( "edit_monument.html", {
+        return HttpResponseRedirect('/monument/%s' % m_id)
+    return render_to_response( "wlm/edit_monument.html", {
         'id': m_id,
         'form': form,
         }, context_instance = RequestContext(request))
 
 
-def house(request, id):
+def monument(request, id):
     m = Monument.objects.get(pk=id)
     photo = MonumentPhoto.objects.filter(monument=m)[:30]
 
-    return render_to_response('house/house.html', {
-        'house': m,
+    return render_to_response('wlm/monument.html', {
+        'monument': m,
         'photo': photo,
         'is_admin': True,
         'CMADE_KEY': settings.CMADE_KEY,
@@ -116,7 +116,7 @@ def monuments_double_coordinates(request):
     else:
         lon = None
     monuments = Monument.objects.filter(coord_lat=lat, coord_lon=lon)
-    return render_to_response('monuments_double.html', {'monuments': monuments,})
+    return render_to_response('wlm/monuments_double.html', {'monuments': monuments,})
 
 def voting(request):
     if request.user is None or not request.user.is_active:
@@ -138,13 +138,13 @@ def voting(request):
     if (len(p)):
         p = p.order_by('?')[0]
     else:
-        return render_to_response('voting_over.html', {
+        return render_to_response('wlm/voting_over.html', {
             'cnt': cnt,
             'user': request.user,
             }, context_instance=RequestContext(request))
     
     p.url_name = p.name.replace(' ', '_')
-    return render_to_response('voting.html', {
+    return render_to_response('wlm/voting.html', {
         'photo': p,
         'cnt': cnt,
         'user': request.user,

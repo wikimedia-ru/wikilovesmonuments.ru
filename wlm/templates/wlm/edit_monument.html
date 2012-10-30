@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{{ form.media }}
+
+{% endblock %}
+
+
+{% block moderator_menu %}
+<li class="pull-right"><a href="/admin/logout/">Выйти ({{ user }})</a></li>
+<li class="pull-right"><a href="/monument/{{ id }}">Смотреть</a></li>
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+	<div id="main">
+		<form class="form-horizontal" action="" method="post">
+		<div class="span6">
+			{% csrf_token %}
+			{% for field in form.hidden_fields %}
+				{{ field }}
+			{% endfor %}
+			<div class="control-group {% if form.name.errors %}error{% endif %}">
+				<label class="control-label" for="id_name">{{ form.name.label }}</label>
+				<div class="controls">
+					{{ form.name }}
+					{{ form.name.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.name_alt.errors %}error{% endif %}">
+				<label class="control-label" for="id_name_alt">{{ form.name_alt.label }}</label>
+				<div class="controls">
+					{{ form.name_alt }}
+					{{ form.name_alt.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.region.errors %}error{% endif %}">
+				<label class="control-label" for="id_region">{{ form.region.label }}</label>
+				<div class="controls">
+					{{ form.region }}
+					{{ form.region.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.city.errors %}error{% endif %}">
+				<label class="control-label" for="id_city">{{ form.city.label }}</label>
+				<div class="controls">
+					{{ form.city }}
+					{{ form.city.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.address.errors %}error{% endif %}">
+				<label class="control-label" for="id_address">{{ form.address.label }}</label>
+				<div class="controls">
+					{{ form.address }}
+					{{ form.address.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.extra_info.errors %}error{% endif %}">
+				<label class="control-label" for="id_extra_info">{{ form.extra_info.label }}</label>
+				<div class="controls">
+					{{ form.extra_info }}
+					{{ form.extra_info.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.complex_root.errors %}error{% endif %}">
+				<label class="control-label" for="id_complex_root">{{ form.complex_root.label }}</label>
+				<div class="controls">
+					{{ form.complex_root }}
+					{{ form.complex_root.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.complex.errors %}error{% endif %}">
+				<label class="control-label" for="id_complex">{{ form.complex.label }}</label>
+				<div class="controls">
+					{{ form.complex }}
+					{{ form.complex.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.kult_id.errors %}error{% endif %}">
+				<label class="control-label" for="id_kult_id">{{ form.kult_id.label }}</label>
+				<div class="controls">
+					{{ form.kult_id }}
+					{% if form.kult_id.value %}(<a target="_blank" href="http://kulturnoe-nasledie.ru/monuments.php?id={{ form.kult_id.value }}">открыть</a>){% endif %}
+					{{ form.kult_id.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.ruwiki.errors %}error{% endif %}">
+				<label class="control-label" for="id_ruwiki">{{ form.ruwiki.label }}</label>
+				<div class="controls">
+					{{ form.ruwiki }}
+					{% if form.ruwiki.value %}(<a target="_blank" href="//ru.wikipedia.org/wiki/{{ form.ruwiki.value }}">открыть</a>){% endif %}
+					{{ form.ruwiki.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.state.errors %}error{% endif %}">
+				<label class="control-label" for="id_state">{{ form.state.label }}</label>
+				<div class="controls">
+					{{ form.state }}
+					{{ form.state.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.protection.errors %}error{% endif %}">
+				<label class="control-label" for="id_protection">{{ form.protection.label }}</label>
+				<div class="controls">
+					{{ form.protection }}
+					{{ form.protection.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.type.errors %}error{% endif %}">
+				<label class="control-label" for="id_type">{{ form.type.label }}</label>
+				<div class="controls">
+					{{ form.type }}
+					{{ form.type.errors }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.verified.errors %}error{% endif %}">
+				<label class="control-label label label-info" for="id_verified">{{ form.verified.label }}</label>
+				<div class="controls">
+					{{ form.verified }}
+					{{ form.verified.errors }}
+				</div>
+			</div>
+			<input type="submit" class="btn btn-success btn-large pull-right" value="Сохранить" />
+		</div>
+		</form>
+	</div>
+
+	<div class="span6">
+		<div id='map' style="width:200; heigth:150" class="map leaflet-container leaflet-fade-anim"></div>
+		<script type='text/javascript'>
+$(function(){
+	WLM.map.init_map('map');
+	var lat = $('#id_coord_lat').val(), 
+		lon = $('#id_coord_lon').val();
+	WLM.map.setPosition(lat, lon);
+	var marker = {"coord_lat": lat, "coord_lon": lon, "name": $('#id_name').val(), "draggable": true};
+	var m = WLM.map.addMarker(marker);
+	m.on('dragend', function(e){
+		var llm = m.getLatLng();
+		$('#id_coord_lat').val(llm.lat);
+		$('#id_coord_lon').val(llm.lon);
+
+	});
+	WLM.map.setZoom(10);
+
+	var setCities = function(data){
+		$('#id_city').empty();
+		$('#id_city').append("<option></option>")
+		$.each(data, function(key, value){
+			$('#id_city').append($("<option></option>")
+				.attr("value", value.id)
+				.text(value.name));
+		});
+	}
+	WLM.getRegionCities($('#id_region option:selected').val(), setCities);
+	$('#id_region').change(function(){
+		WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
+	});
+});
+		</script>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>Наименование</th>
+					<th>Город</th>
+					<th>Широта</th>
+					<th>Долгота</th>
+					<th>Культ.наследие</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for m in monuments %}
+				<tr>
+					<td>{{ m.name|default:"Неизвестно" }}<br>{{ m.address }}</td>
+					<td>{{ m.city|default:"Не указан" }}</td>
+					<td>{{ m.coord_lat }}</td>
+					<td>{{ m.coord_lon }}</td>
+					<td>{% if m.kult_id %}<a target="_blank" href="http://kulturnoe-nasledie.ru/monuments.php?id={{ m.kult_id }}">ссылка</a>{%endif%}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</body>
+</html>

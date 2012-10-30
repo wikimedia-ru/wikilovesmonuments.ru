@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Количество</th>
+				<th>Широта</th>
+				<th>Долгота</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for d in doubles %}
+			<tr>
+				<td><a href="/doubles/find?lat={{ d.1|stringformat:'f' }}&lon={{ d.2|stringformat:'f' }}">{{ d.0 }}</a></td>
+				<td>{{ d.1 }}</td>
+				<td>{{ d.2 }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>

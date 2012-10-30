@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script type='text/javascript' src='{{STATIC_URL}}/js/wlm.js'></script>
+{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div id="main" class="span9">
+		<div id="find" class="row show-grid">
+			<div class="span9">
+				<div class="content">
+					<h2><a href="/list/region/{{ city.region.id }}/">{{ city.region.name }}</a> → {{ city.name }}</h2>
+					<div class="row">
+						<div id="boxMap" class="span9">
+							<table class="table">
+								<tr>
+									<th>Название</th>
+									<th>Адрес</th>
+								</tr>
+								{% for m in monuments %}
+								<tr>
+									<td><a href="/monument/{{m.id}}/">{{ m.name|default:'<Без названия>' }}</a></td>
+									<td>{{ m.address }}</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% include "wlm/sidebar_about.html" %}
+</div>
+{% endblock %}
