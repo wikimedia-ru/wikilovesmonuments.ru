@@ -87,11 +87,11 @@ def monument_edit_form(request, m_id):
 
 
 def house(request, id):
-    h = Monument.objects.get(pk=id)
-    photo = MonumentPhoto.objects.filter(house=h)[:30]
+    m = Monument.objects.get(pk=id)
+    photo = MonumentPhoto.objects.filter(monument=m)[:30]
 
     return render_to_response('house/house.html', {
-        'house': h,
+        'house': m,
         'photo': photo,
         'is_admin': True,
         'CMADE_KEY': settings.CMADE_KEY,
