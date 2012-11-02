@@ -2,7 +2,7 @@
 
 (The MIT License)
 
-Copyright (c) 2012 [Sergey Leschina] (http://putnik.ws)
+Copyright (c) 2012 [Sergey Leschina] (http://putnik.ws)  
 Copyright (c) 2012 [Valery Ilychev] (http://sarutobi.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
