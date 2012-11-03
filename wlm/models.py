@@ -130,7 +130,7 @@ class MonumentPhoto(models.Model):
     commons_id = models.BigIntegerField(verbose_name=_("Image page ID"))
     author = models.CharField(max_length=250, blank=True, verbose_name=_("Author"))
     datetime = models.DateTimeField(auto_now=False, auto_now_add=False, verbose_name=_("Date & time"))
-    contest_year = models.IntegerField(verbose_name=_("Federal district of RF"))
+    contest_year = models.IntegerField(blank=True, null=True, verbose_name=_("Year of WLM contest"))
     folder = models.CharField(max_length=255, verbose_name=_('Commons folder'))
     width = models.IntegerField(verbose_name=_("File width"))
     height = models.IntegerField(verbose_name=_("File height"))

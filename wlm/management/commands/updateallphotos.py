@@ -8,38 +8,29 @@ from wlm.models import Monument, MonumentPhoto
 
 
 class Command(BaseCommand):
-    args = '<contest_year>'
-    help = 'Update contest images'
+    help = 'Update cultural heritage images'
     
     def handle(self, *args, **options):
-        contest_year = 0
-        for a in args:
-            contest_year = a
-            break
-        if not contest_year:
-            today = datetime.today()
-            contest_year = today.year
-        
         query_server = 'http://commons.wikimedia.org'
         continue_token = ''
 
         re_kult = re.compile(r'\{\{Cultural Heritage Russia\|id\s*=\s*([0-9]+)\}\}')
         
         while True:
-            query_params = urllib.urlencode({
+            query_params = {
                 'format':       'json',
                 'action':       'query',
-                'list':         'categorymembers',
-                'cmtitle':      'Category:Images from Wiki Loves Monuments %s in Russia' % contest_year,
-                'cmtype':       'file',
-                'cmprop':       'ids|title',
-                'cmlimit':      50,
-                'cmcontinue':   continue_token,
-            })
-            f = urllib.urlopen('%s/w/api.php?%s' % (query_server, query_params))
+                'list':         'embeddedin',
+                'eititle':      'Template:Cultural Heritage Russia',
+                'einamespace':  6, # file
+                'eilimit':      50,
+            }
+            if continue_token:
+                query_params['eicontinue'] = continue_token
+            f = urllib.urlopen('%s/w/api.php?%s' % (query_server, urllib.urlencode(query_params)))
             answer = json.load(f)
 
-            for photo in answer['query']['categorymembers']:
+            for photo in answer['query']['embeddedin']:
                 try:
                     photo_record = MonumentPhoto.objects.get(commons_id = photo['pageid'])
                 except ObjectDoesNotExist:
@@ -65,7 +56,6 @@ class Command(BaseCommand):
                     except:
                         continue
                     MonumentPhoto.objects.create(
-                        contest_year = contest_year,
                         monument = monument,
                         commons_id = photo['pageid'],
                         name = photo['title'][5:], # without 'File:'
@@ -78,7 +68,7 @@ class Command(BaseCommand):
                     )
             if not 'query-continue' in answer:
                 break
-            continue_token = answer['query-continue']['categorymembers']['cmcontinue']
+            continue_token = answer['query-continue']['embeddedin']['eicontinue']
 
-        self.stdout.write('Successfully updated photos of WLM %s\n' % contest_year)
+        self.stdout.write('Successfully updated photos of cultural heritage\n')
 
