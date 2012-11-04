@@ -135,7 +135,10 @@ class MonumentPhoto(models.Model):
     width = models.IntegerField(verbose_name=_("File width"))
     height = models.IntegerField(verbose_name=_("File height"))
     size = models.IntegerField(verbose_name=_("File size"))
-    
+
+    def url_name(instance):
+        return instance.name.replace(' ', '_')
+
     def __unicode__(self):
         return self.name
 

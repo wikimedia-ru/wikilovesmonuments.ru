@@ -20,117 +20,127 @@
 <div class="row">
 	<div id="main">
 		<div id="find" class="show-grid">
-			<div class="span8">
+			<div class="span-bg span8">
 				<h2>{{ monument.name }}</h2>
 
-			{% if monument.coord_lon %}
-				<div id="map" class="map"></div>
-				<script type="text/javascript">
-					$(function(){
-				        var item = {
-				            "id": {{ monument.id }},
-				            "coord_lat": {{ monument.coord_lat|stringformat:"f" }},
-				            "coord_lon": {{ monument.coord_lon|stringformat:"f" }},
-				            "name": "{{ monument.name|default:'Без названия' }}"
-				        }
-				        WLM.map.init_map('map');
-				        WLM.map.setPosition({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }});
-				        WLM.map.addMarker(item);
-				        WLM.map.setZoom(10);
-				    });
-				    /*
-				    var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-					var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-					var map = new L.Map('map');
-					map
-						.setView(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }}), 16)
-						.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
-						.addLayer(new L.Marker(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }})));
-					*/
-				</script>
-			{% endif %}
+				<div class="row">
+					<div class="span-nobg span8">
+						<table class="table">
+							<tr>
+								<th>Регион</th>
+								<td><a href="/list/region/{{ monument.region.id }}/">{{ monument.region.name }}</a></td>
+							</tr>
 
-				<table class="table">
-					<tr>
-						<th>Регион</th>
-						<td><a href="/list/region/{{ monument.region.id }}/">{{ monument.region.name }}</a></td>
-					</tr>
+							<tr>
+								<th>Город</th>
+								<td><a href="/list/city/{{ monument.city.id }}/">{{ monument.city.name }}</a></td>
+							</tr>
 
-					<tr>
-						<th>Город</th>
-						<td><a href="/list/city/{{ monument.city.id }}/">{{ monument.city.name }}</a></td>
-					</tr>
+							<tr>
+								<th>Адрес</th>
+								<td>{{ monument.address }}</td>
+							</tr>
 
-					<tr>
-						<th>Адрес</th>
-						<td>{{ monument.address }}</td>
-					</tr>
+						{% if monument.kult_id %}
+							<tr>
+								<th>На сайте Культурного наследия</th>
+								<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ monument.kult_id|stringformat:"010d" }}" target="_blank">{{ monument.kult_id|stringformat:"010d" }}</a></td>
+							</tr>
+						{% endif %}
 
-				{% if monument.kult_id %}
-					<tr>
-						<th>На сайте Культурного наследия</th>
-						<td><a href="http://kulturnoe-nasledie.ru/monuments.php?id={{ monument.kult_id|stringformat:"010d" }}" target="_blank">{{ monument.kult_id|stringformat:"010d" }}</a></td>
-					</tr>
-				{% endif %}
+						{% if monument.ruwiki %}
+							<tr>
+								<th>В Википедии</th>
+								<td><a href="//ru.wikipedia.org/wiki/{{ monument.ruwiki|urlencode }}" target="_blank">{{ monument.ruwiki }}</a></td>
+							</tr>
+						{% endif %}
 
-				{% if monument.ruwiki %}
-					<tr>
-						<th>В Википедии</th>
-						<td><a href="//ru.wikipedia.org/wiki/{{ monument.ruwiki|urlencode }}" target="_blank">{{ monument.ruwiki }}</a></td>
-					</tr>
-				{% endif %}
+						{% if monument.safety %}
+							{% if monument.state and monument.safety in 'S' %}
+							<tr>
+								<th>Сохранность и состояние</th>
+								<td class="state-{{ monument.state }}">{{ monument.get_safety_display }} ({{ monument.get_state_display|lower }})</td>
+							</tr>
+							{% else %}
+							<tr>
+								<th>Сохранность и состояние</th>
+								<td class="safety-{{ monument.safety }}">{{ monument.get_safety_display }}</td>
+							</tr>
+							{% endif %}
+						{% endif %}
 
-				{% if monument.safety %}
-					{% if monument.state and monument.safety in 'S' %}
-					<tr>
-						<th>Сохранность и состояние</th>
-						<td class="state-{{ monument.state }}">{{ monument.get_safety_display }} ({{ monument.get_state_display|lower }})</td>
-					</tr>
-					{% else %}
-					<tr>
-						<th>Сохранность и состояние</th>
-						<td class="safety-{{ monument.safety }}">{{ monument.get_safety_display }}</td>
-					</tr>
-					{% endif %}
-				{% endif %}
+						{% if monument.protection %}
+							<tr>
+								<th>Категория охраны</th>
+								<td>{{ monument.get_protection_display }}</td>
+							</tr>
+						{% endif %}
 
-				{% if monument.protection %}
-					<tr>
-						<th>Категория охраны</th>
-						<td>{{ monument.get_protection_display }}</td>
-					</tr>
-				{% endif %}
+						{% if monument.material %}
+							<tr>
+								<th>Тип</th>
+								<td>{{ monument.get_material_display }}</td>
+							</tr>
+						{% endif %}
 
-				{% if monument.material %}
-					<tr>
-						<th>Тип</th>
-						<td>{{ monument.get_material_display }}</td>
-					</tr>
-				{% endif %}
-
-				{% if monument.extra_info %}
-					<tr>
-						<th>Дополнительная информация</th>
-						<td>{{ monument.extra_info|safe }}</td>
-					</tr>
-				{% endif %}
-				</table>
+						{% if monument.extra_info %}
+							<tr>
+								<th>Дополнительная информация</th>
+								<td>{{ monument.extra_info|safe }}</td>
+							</tr>
+						{% endif %}
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	{% comment %}
-	<div id="about" class="show-grid">
-		<div class="span4">
-			<div class="upload-block">
-				<a class="btn btn-large btn-upload" href="//commons.wikimedia.org/w/index.php?title=Special:UploadWizard&campaign=wlm-ru&uselang=ru&id={{ monument.kult_id|stringformat:'010d' }}">
-					<i class="upload-my"></i>
-					Загрузить фото
-				</a>
-				<br />
-				<small>Необходимо <a href="//commons.wikimedia.org/w/index.php?title=Special:UserLogin&uselang=ru">авторизоваться</a> на Викискладе</small>
-			</div>
-		</div>
+
+{% if monument.coord_lon %}
+<div id="about" class="show-grid">
+	<div class="span-nobg span4">
+		<div id="map" class="map map-single"></div>
+		<script type="text/javascript">
+			$(function(){
+				var item = {
+					"id": {{ monument.id }},
+					"coord_lat": {{ monument.coord_lat|stringformat:"f" }},
+					"coord_lon": {{ monument.coord_lon|stringformat:"f" }},
+					"name": "{{ monument.name|default:'Без названия' }}"
+				}
+				WLM.map.init_map('map');
+				WLM.map.setPosition({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }});
+				WLM.map.addMarker(item);
+				WLM.map.setZoom(10);
+			});
+			/*
+			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
+			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
+			var map = new L.Map('map');
+			map
+				.setView(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }}), 16)
+				.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
+				.addLayer(new L.Marker(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }})));
+			*/
+		</script>
 	</div>
-	{% endcomment %}
+	</div>
+{% endif %}
 </div>
+
+{% if photo %}
+<hr />
+<div class="row m-photo">
+	<div class="span12">
+		<ul class="thumbnails">
+		{% for p in photo %}
+			<li class="span2">
+	<a class="thumbnail" target="_blank" href="//commons.wikimedia.org/wiki/File:{{ p.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}" alt="{{ p.name }}, автор: {{ p.author }}" /></a>
+				<p>Автор: <a href="//commons.wikimedia.org/wiki/User:{{ p.author }}">{{ p.author }}</a></p>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
 {% endblock %}

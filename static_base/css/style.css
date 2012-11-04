@@ -155,7 +155,7 @@ header .btn-large:hover,
 	margin-bottom: 16px;
 	padding: 0 6%;
 }
-#map {
+.map {
 	border: 1px solid #AAAAAA;
 	border-radius: 4px 4px 4px 4px;
 	box-shadow: 0 0 3px #000000 inset;
@@ -163,8 +163,12 @@ header .btn-large:hover,
 	height: 400px;
 	margin: 0 auto 8px;
 }
+.map-single {
+	height: 250px;
+	margin-top: 10px;
+}
 #location,
-#map .leaflet-control-search {
+.map .leaflet-control-search {
 	padding: 10px;
 	background-color: #f5d83a; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
@@ -181,7 +185,7 @@ header .btn-large:hover,
 	border-radius: 5px;
 }
 
-#map .leaflet-control-search {
+.map .leaflet-control-search {
 	display: none;
 	padding: 5px 7px 0;
 }
@@ -201,7 +205,7 @@ header .btn-large:hover,
 #about a {
 	color: #fff;
 }
-#find.show-grid [class*="span"] {
+#find.show-grid .span-bg[class*="span"] {
 	background-color: #f5d83a; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
 	background-image: -moz-linear-gradient(top, #f5eb80 0%, #f5d83a 100%); /* FF3.6+ */
@@ -211,6 +215,12 @@ header .btn-large:hover,
 	background-image: -o-linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* Opera 11.10+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5eb80', endColorstr='#f5d83a',GradientType=0 ); /* IE6-9 */
 	background-image: linear-gradient(top, #f5eb80 0%,#f5d83a 100%); /* W3C */
+}
+.span-nobg[class*="span"] {
+	background: transparent;
+}
+.show-grid:hover .span-nobg[class*="span"] {
+	background: transparent;
 }
 #find .table {
 	width: 98%;
@@ -322,9 +332,14 @@ footer p {
 	padding-top: 20px;
 }
 
+.m-photo .thumbnails li {
+	height: 270px;
+}
+
 /*
 	Leaflef popups
 */
 .leaflet-popup-content .name:first-word {
 	text-transform: capitalize;
 }
+

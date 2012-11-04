@@ -88,7 +88,7 @@ def monument_edit_form(request, m_id):
 
 def monument(request, id):
     m = Monument.objects.get(pk=id)
-    photo = MonumentPhoto.objects.filter(monument=m)[:30]
+    photo = MonumentPhoto.objects.filter(monument=m).order_by('-size')[:18]
 
     return render_to_response('wlm/monument.html', {
         'monument': m,
@@ -150,7 +150,6 @@ def voting(request):
             'user': request.user,
             }, context_instance=RequestContext(request))
     
-    p.url_name = p.name.replace(' ', '_')
     return render_to_response('wlm/voting.html', {
         'photo': p,
         'cnt': cnt,
