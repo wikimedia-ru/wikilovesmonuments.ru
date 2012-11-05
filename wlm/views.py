@@ -88,12 +88,25 @@ def monument_edit_form(request, m_id):
 
 def monument(request, id):
     m = Monument.objects.get(pk=id)
-    photo = MonumentPhoto.objects.filter(monument=m).order_by('-size')[:18]
+    photo = MonumentPhoto.objects.filter(monument=m).order_by('-size')
+    photo_count = photo.count()
+    photo = photo[:18]
 
     return render_to_response('wlm/monument.html', {
         'monument': m,
         'photo': photo,
-        'is_admin': True,
+        'photo_count': photo_count,
+        'CMADE_KEY': settings.CMADE_KEY,
+        }, context_instance=RequestContext(request))
+
+
+def monument_photo(request, id):
+    m = Monument.objects.get(pk=id)
+    photo = MonumentPhoto.objects.filter(monument=m).order_by('-size')
+
+    return render_to_response('wlm/monument_photo.html', {
+        'monument': m,
+        'photo': photo,
         'CMADE_KEY': settings.CMADE_KEY,
         }, context_instance=RequestContext(request))
 

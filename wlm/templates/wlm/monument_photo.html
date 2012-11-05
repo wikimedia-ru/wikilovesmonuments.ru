@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/content.css" />
+<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
+<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
+<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
+{% endblock %}
+
+{% block title %}{{ monument.name }} ({{ monument.address }}) — {% endblock %}
+
+{%block moderator_menu%}
+{%if perms.monument.can_change%}
+<li class="pull-right"><a href="/admin/logout/">Выйти ({{ user }})</a></li>
+<li class="pull-right"><a href="/monument/edit/{{ monument.id }}">Редактировать</a></li>
+{%endif%}
+{%endblock%}
+
+{% block content %}
+<div class="row">
+	<div id="main">
+		<div id="find" class="show-grid">
+			<div class="span-bg span12">
+				<h2><a href="/monument/{{ monument.id }}">←</a> {{ monument.name }}</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if photo %}
+<hr />
+<div class="row m-photo-big">
+	<div class="span12">
+		<ul class="thumbnails">
+		{% for p in photo %}
+			<li class="span3">
+	<a class="thumbnail" target="_blank" href="//commons.wikimedia.org/wiki/File:{{ p.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}" alt="{{ p.name }}, автор: {{ p.author }}" /></a>
+				<p>Автор: <a href="//commons.wikimedia.org/wiki/User:{{ p.author }}">{{ p.author }}</a></p>
+			</li>
+		{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

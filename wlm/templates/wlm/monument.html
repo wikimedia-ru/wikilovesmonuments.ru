@@ -11,8 +11,8 @@
 
 {%block moderator_menu%}
 {%if perms.monument.can_change%}
-<li class="pull-right"><a href='/admin/logout/'>Выйти ({{ user }})</a></li>
-<li class="pull-right"><a href='/monument/edit/{{ monument.id }}'>Редактировать</a></li>
+<li class="pull-right"><a href="/admin/logout/">Выйти ({{ user }})</a></li>
+<li class="pull-right"><a href="/monument/edit/{{ monument.id }}">Редактировать</a></li>
 {%endif%}
 {%endblock%}
 
@@ -130,6 +130,9 @@
 
 {% if photo %}
 <hr />
+{% if photo_count > 18 %}
+<a class="m-photo-all" href="/monument/{{ monument.id }}/photo">Все фотографии ({{ photo_count }}) →</a>
+{% endif %}
 <div class="row m-photo">
 	<div class="span12">
 		<ul class="thumbnails">

@@ -332,8 +332,10 @@ footer p {
 	padding-top: 20px;
 }
 
-.m-photo .thumbnails li {
-	height: 270px;
+.m-photo-all {
+	float: right;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 /*
