@@ -1,124 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2012 Sergey 'putnik' Leschina
-# This file is distributed under the same license as the PACKAGE package.
-# Sergey 'putnik' Leschina <mail@putnik.ws>, 2012.
+# Copyright (C) 2012 Sergey Leschina <mail@putnik.ws>
+# This file is distributed under the same license as the WLM package.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-27 06:09+0400\n"
+"POT-Creation-Date: 2012-11-08 01:15+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Sergey 'putnik' Leschina <mail@putnik.ws>\n"
-"Language-Team: RU <LL@li.org>\n"
+"Last-Translator: Sergey Leschina <mail@putnik.ws>\n"
 "Language: RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
-
-#: menu/models.py:6 wlm/models.py:90
-msgid "Name"
-msgstr "Название"
-
-#: menu/models.py:7
-msgid "URL"
-msgstr "URL"
-
-#: menu/models.py:8
-msgid "Order"
-msgstr "Порядок"
-
-#: templates/zinnia/_entry_detail.html:18
-#, python-format
-msgid "Show all %(author)s's entries"
-msgstr "Показать все записи авторства %(author)s"
-
-#: templates/zinnia/_entry_detail.html:44
-#, python-format
-msgid "Continue reading %(object)s"
-msgstr "Продолжить чтение  %(object)s"
-
-#: templates/zinnia/_entry_detail.html:46
-msgid "Continue reading"
-msgstr "Продолжить чтение"
-
-#: templates/zinnia/_entry_detail.html:57
-#, python-format
-msgid "Show all entries tagged by %(tag)s"
-msgstr "Показать все записи, помеченные тегом(ами) %(tag)s"
-
-#: templates/zinnia/base.html:15
-msgid "RSS Feed of latest entries"
-msgstr "RSS-лента последних записей"
-
-#: templates/zinnia/base.html:16
-msgid "RSS Feed of latest discussions"
-msgstr "RSS-лента последних обсуждений"
-
-#: templates/zinnia/base.html:35
-msgid "Tools"
-msgstr "Инструменты"
-
-#: templates/zinnia/base.html:39 templates/zinnia/base.html.py:40
-msgid "Dashboard"
-msgstr "Дашборд"
-
-#: templates/zinnia/base.html:46 templates/zinnia/base.html.py:47
-msgid "Post an entry"
-msgstr "Опубликовать запись"
-
-#: templates/zinnia/base.html:54 templates/zinnia/base.html.py:55
-msgid "Log out"
-msgstr "Выйти"
-
-#: templates/zinnia/entry_detail.html:22
-msgid "RSS Feed of discussions on"
-msgstr "RSS-лента обсуждений для"
-
-#: templates/zinnia/entry_detail.html:24
-msgid "RSS Feed of comments on"
-msgstr "RSS-лента комментариев для"
-
-#: templates/zinnia/entry_detail.html:26
-msgid "RSS Feed of pingbacks on"
-msgstr "RSS-лента pingback'ов для"
-
-#: templates/zinnia/entry_detail.html:28
-msgid "RSS Feed of trackbacks on"
-msgstr "RSS-лента trackback'ов для"
-
-#: templates/zinnia/entry_detail.html:49
-msgid "Next entry"
-msgstr "Следующая запись"
-
-#: templates/zinnia/entry_detail.html:61
-msgid "Previous entry"
-msgstr "Предыдущая запись"
-
-#: templates/zinnia/entry_detail.html:76
-msgid "Comments"
-msgstr "Комментарии"
-
-#: templates/zinnia/entry_detail.html:92
-msgid "on"
-msgstr "вкл."
-
-#: templates/zinnia/entry_detail.html:102
-#: templates/zinnia/entry_detail.html:108
-msgid "Comments are closed."
-msgstr "Коментарии закрыты."
-
-#: templates/zinnia/entry_detail.html:106
-msgid "No comments yet."
-msgstr "Пока нет комментариев."
-
-#: templates/zinnia/entry_detail.html:127
-#: templates/zinnia/entry_detail.html:128
-msgid "Edit the entry"
-msgstr "Редактировать запист"
 
 #: wlm/admin.py:27
 msgid "Main info"
@@ -128,7 +24,7 @@ msgstr "Основная информация"
 msgid "Location"
 msgstr "Местоположение"
 
-#: wlm/admin.py:36 wlm/models.py:96
+#: wlm/admin.py:36 wlm/models.py:100
 msgid "Complex"
 msgstr "Комплекс"
 
@@ -140,292 +36,182 @@ msgstr "Сохранность"
 msgid "Extra"
 msgstr "Дополнительно"
 
-#: wlm/models.py:13 wlm/models.py:83
+#: wlm/models.py:14 wlm/models.py:87
 msgid "Region of RF"
 msgstr "Регион РФ"
 
-#: wlm/models.py:16
+#: wlm/models.py:17
 msgid "Federal district of RF"
 msgstr "Федеральный округ РФ"
 
-#: wlm/models.py:18 wlm/models.py:35 wlm/models.py:87
+#: wlm/models.py:19 wlm/models.py:37 wlm/models.py:91
 msgid "Latitude"
 msgstr "Широта"
 
-#: wlm/models.py:19 wlm/models.py:36 wlm/models.py:86
+#: wlm/models.py:20 wlm/models.py:38 wlm/models.py:90
 msgid "Longitude"
 msgstr "Долгота"
 
-#: wlm/models.py:20
+#: wlm/models.py:21
 msgid "Scale"
 msgstr "Масштаб"
 
-#: wlm/models.py:21
+#: wlm/models.py:22
 msgid "ISO region code"
 msgstr "ISO-код региона"
 
-#: wlm/models.py:31 wlm/models.py:84
+#: wlm/models.py:33 wlm/models.py:88
 msgid "City"
 msgstr "Город"
 
-#: wlm/models.py:56 wlm/models.py:140
+#: wlm/models.py:60
 msgid "Restored"
 msgstr "Реставрирован"
 
-#: wlm/models.py:57
+#: wlm/models.py:61
 msgid "Satisfactory"
 msgstr "Удовлетворительное"
 
-#: wlm/models.py:58
+#: wlm/models.py:62
 msgid "Unsatisfactory"
 msgstr "Неудовлетворительное"
 
-#: wlm/models.py:59
+#: wlm/models.py:63
 msgid "Accident"
 msgstr "Аварийное"
 
-#: wlm/models.py:63
+#: wlm/models.py:67
 msgid "Federal"
 msgstr "Федеральный"
 
-#: wlm/models.py:64
+#: wlm/models.py:68
 msgid "Regional"
 msgstr "Региональный"
 
-#: wlm/models.py:65
+#: wlm/models.py:69
 msgid "Local"
 msgstr "Местный"
 
-#: wlm/models.py:66
+#: wlm/models.py:70
 msgid "Determined"
 msgstr "Выявлен"
 
-#: wlm/models.py:67
+#: wlm/models.py:71
 msgid "OPOKN"
 msgstr "ОПОКН"
 
-#: wlm/models.py:68
+#: wlm/models.py:72
 msgid "No"
 msgstr "Нет"
 
-#: wlm/models.py:71
+#: wlm/models.py:75
 msgid "Cultural"
 msgstr "Культурный"
 
-#: wlm/models.py:72
+#: wlm/models.py:76
 msgid "Architectural"
 msgstr "Архитектурный"
 
-#: wlm/models.py:73
+#: wlm/models.py:77
 msgid "Historical"
 msgstr "Исторический"
 
-#: wlm/models.py:85
+#: wlm/models.py:89
 msgid "Street"
 msgstr "Улица"
 
-#: wlm/models.py:91
+#: wlm/models.py:94 wlm/models.py:133
+msgid "Name"
+msgstr "Название"
+
+#: wlm/models.py:95
 msgid "Alternative name"
 msgstr "Альтернативное название"
 
-#: wlm/models.py:92
+#: wlm/models.py:96
 msgid "Address"
 msgstr "Адрес"
 
-#: wlm/models.py:95
+#: wlm/models.py:99
 msgid "Belong to complex"
 msgstr "Принадлежит комплексу"
 
-#: wlm/models.py:98
+#: wlm/models.py:102
 msgid "Additional"
 msgstr "Дополнительная информация"
 
-#: wlm/models.py:99
+#: wlm/models.py:103
 msgid "State"
 msgstr "Состояние"
 
-#: wlm/models.py:100
+#: wlm/models.py:104
 msgid "Protection class"
 msgstr "Категория охраны"
 
-#: wlm/models.py:101
-msgid "Type class"
+#: wlm/models.py:105
+msgid "Type"
 msgstr "Тип"
 
-#: wlm/models.py:104
+#: wlm/models.py:108
 msgid "Wikipedia article"
 msgstr "Статья в Википедии"
 
-#: wlm/models.py:106
+#: wlm/models.py:110
 msgid "ID Kulturnoe Nasledie"
 msgstr "ID культ. насл."
 
-#: wlm/models.py:109
+#: wlm/models.py:113
 msgid "Verified"
 msgstr "Проверен"
 
-#: wlm/models.py:127 wlm/models.py:144
-msgid "House"
-msgstr "Дом"
+#: wlm/models.py:120
+msgid "[Without name]"
+msgstr "[Без названия]"
 
-#: wlm/models.py:129
-msgid "Title"
-msgstr "Заголовок"
+#: wlm/models.py:132
+msgid "Monument"
+msgstr "Памятник"
 
-#: wlm/models.py:130
+#: wlm/models.py:134
+msgid "Image page ID"
+msgstr "ID страницы изображения"
+
+#: wlm/models.py:135
 msgid "Author"
 msgstr "Автор"
 
-#: wlm/models.py:131
-msgid "Wikimedia Commons link"
-msgstr "Ссылка на Викисклад"
+#: wlm/models.py:136
+msgid "Date & time"
+msgstr "Дата и время"
+
+#: wlm/models.py:137
+msgid "Year of WLM contest"
+msgstr "Год проведения WLM"
 
 #: wlm/models.py:138
-msgid "Projected"
-msgstr "Спроектирован"
+msgid "Commons folder"
+msgstr "Папка на Викискладе"
 
 #: wlm/models.py:139
-msgid "Builded"
-msgstr "Построен"
+msgid "File width"
+msgstr "Ширина файла"
+
+#: wlm/models.py:140
+msgid "File height"
+msgstr "Высота файла"
 
 #: wlm/models.py:141
-msgid "Demolished"
-msgstr "Разрушен"
+msgid "File size"
+msgstr "Размер файла"
 
-#: wlm/models.py:145
-msgid "Date"
-msgstr "Дата"
+#: wlm/models.py:151
+msgid "User ID"
+msgstr "ID участника"
 
-#: wlm/models.py:146
-msgid "Event type"
-msgstr "Тип события"
+#: wlm/models.py:152
+msgid "Photo"
+msgstr "Фото"
 
-#: wlm/models.py:147
-msgid "Comment"
-msgstr "Комментарий"
-
-#~ msgid "External sources"
-#~ msgstr "Внешние источники"
-
-#~ msgid "Safety from pasport"
-#~ msgstr "Сохранность (в паспорте)"
-
-#~ msgid "Ownership"
-#~ msgstr "Собственность"
-
-#~ msgid "Map"
-#~ msgstr "Карта"
-
-#~ msgid "Lane"
-#~ msgstr "Переулок"
-
-#~ msgid "Highway"
-#~ msgstr "Шоссе"
-
-#~ msgid "Square"
-#~ msgstr "Площадь"
-
-#~ msgid "Embankment"
-#~ msgstr "Набережная"
-
-#~ msgid "Passage"
-#~ msgstr "Проезд"
-
-#~ msgid "Avenue"
-#~ msgstr "Проспект"
-
-#~ msgid "Blind alley"
-#~ msgstr "Тупик"
-
-#~ msgid "Full name"
-#~ msgstr "Полное название"
-
-#~ msgid "Type"
-#~ msgstr "Тип"
-
-#~ msgid "Saved"
-#~ msgstr "Сохранён"
-
-#~ msgid "Modern replica"
-#~ msgstr "Новодел"
-
-#~ msgid "Ruins"
-#~ msgstr "Руины"
-
-#~ msgid "Losed"
-#~ msgstr "Утрачен"
-
-#~ msgid "Dwelling house"
-#~ msgstr "Жилой дом"
-
-#~ msgid "Office building"
-#~ msgstr "Административное здание"
-
-#~ msgid "Municipal"
-#~ msgstr "Муниципальный"
-
-#~ msgid "Wooden"
-#~ msgstr "Деревянный"
-
-#~ msgid "Stone"
-#~ msgstr "Каменный"
-
-#~ msgid "Lease"
-#~ msgstr "Найм"
-
-#~ msgid "Rent"
-#~ msgstr "Аренда"
-
-#~ msgid "Material"
-#~ msgstr "Материал"
-
-#~ msgid "Pasport status"
-#~ msgstr "Паспорт"
-
-#~ msgid "Number"
-#~ msgstr "Номер"
-
-#~ msgid "Address from pasport"
-#~ msgstr "Адрес в паспорте"
-
-#~ msgid "State from pasport"
-#~ msgstr "Состояние (в паспорте)"
-
-#~ msgid "Usage"
-#~ msgstr "Использование"
-
-#~ msgid "Land ownership"
-#~ msgstr "Собственность земли"
-
-#~ msgid "Owner"
-#~ msgstr "Владелец"
-
-#~ msgid "Obligation date"
-#~ msgstr "Дата подписания обязательства"
-
-#~ msgid "Lease/Rent"
-#~ msgstr "Найм/аренда"
-
-#~ msgid "Tenant"
-#~ msgstr "Арендатор"
-
-#~ msgid "Cronology"
-#~ msgstr "Хронология"
-
-#~ msgid "Documents"
-#~ msgstr "Документы"
-
-#~ msgid "Monitoring"
-#~ msgstr "Мониторинг"
-
-#~ msgid "ID Kulturnoe Nasledie checked"
-#~ msgstr "ID культ. насл. проверен"
-
-#~ msgid "Kulturnoe Nasledie problems"
-#~ msgstr "Проблемы с сайтом Культ. насл."
-
-#~ msgid "Gudea base checked"
-#~ msgstr "Сверено с базой Gudea"
-
-#~ msgid "File"
-#~ msgstr "Файл"
+#: wlm/models.py:153
+msgid "Vote"
+msgstr "Голос"
