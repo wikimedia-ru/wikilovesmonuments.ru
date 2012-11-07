@@ -9,12 +9,12 @@
 
 {% block title %}{{ monument.name }} ({{ monument.address }}) — {% endblock %}
 
-{%block moderator_menu%}
-{%if perms.monument.can_change%}
+{% block moderator_menu %}
+{% if perms.monument.can_change %}
 <li class="pull-right"><a href="/admin/logout/">Выйти ({{ user }})</a></li>
 <li class="pull-right"><a href="/monument/edit/{{ monument.id }}">Редактировать</a></li>
-{%endif%}
-{%endblock%}
+{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -27,12 +27,12 @@
 	</div>
 </div>
 
-{% if photo %}
+{% if monument.monumentphoto_set.count %}
 <hr />
 <div class="row m-photo-big">
 	<div class="span12">
 		<ul class="thumbnails">
-		{% for p in photo %}
+		{% for p in monument.monumentphoto_set.all %}
 			<li class="span3">
 	<a class="thumbnail" target="_blank" href="//commons.wikimedia.org/wiki/File:{{ p.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}" alt="{{ p.name }}, автор: {{ p.author }}" /></a>
 				<p>Автор: <a href="//commons.wikimedia.org/wiki/User:{{ p.author }}">{{ p.author }}</a></p>
