@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 import json
 
 from django.shortcuts import render_to_response
@@ -10,7 +8,8 @@ from wlm.models import Monument, City
 
 
 def get_region_cities(request, region):
-    cities = City.objects.filter(region=region).values('id', 'name', 'latitude', 'longitude')
+    cities = City.objects.filter(region=region)
+    cities = cities.values('id', 'name', 'latitude', 'longitude')
     return HttpResponse(json.dumps(list(cities)), mimetype="application/json")
 
 
@@ -20,8 +19,9 @@ def get_region_markers(request, region):
         kult_id__isnull=False,
         coord_lat__isnull=False,
         coord_lon__isnull=False,
-        ).values("id", "coord_lon", "coord_lat", "name")
-    return HttpResponse(json.dumps(list(monuments)), mimetype="application/json")
+    ).values("id", "coord_lon", "coord_lat", "name")
+    monuments_json = json.dumps(list(monuments))
+    return HttpResponse(monuments_json, mimetype="application/json")
 
 
 def get_city_markers(request, city):
@@ -30,20 +30,25 @@ def get_city_markers(request, city):
         kult_id__isnull=False,
         coord_lat__isnull=False,
         coord_lon__isnull=False,
-        ).values("id", "coord_lon", "coord_lat", "name")
-    return HttpResponse(json.dumps(list(monuments)), mimetype="application/json")
+    ).values("id", "coord_lon", "coord_lat", "name")
+    monuments_json = json.dumps(list(monuments))
+    return HttpResponse(monuments_json, mimetype="application/json")
+
 
 def get_tile_markers(request, x_tile, y_tile, zoom, first, last):
     point = Point(int(x_tile), int(y_tile))
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     monuments = Monument.objects.filter(
-        kult_id__isnull=False,\
-        coord_lon__gte=latlng_min.lng,\
-        coord_lon__lt=latlng_max.lng,\
-        coord_lat__gte=latlng_min.lat,\
-        coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
-    return render_to_response('wlm/markers.js', {'monuments':monuments,}, mimetype='application/json')
+        kult_id__isnull=False,
+        coord_lon__gte=latlng_min.lng,
+        coord_lon__lt=latlng_max.lng,
+        coord_lat__gte=latlng_min.lat,
+        coord_lat__lt=latlng_max.lat,
+    ).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
+    return render_to_response('wlm/markers.js', {
+        'monuments': monuments
+    }, mimetype='application/json')
 
 
 def get_tile_markers_count(request, x_tile, y_tile, zoom):
@@ -51,22 +56,26 @@ def get_tile_markers_count(request, x_tile, y_tile, zoom):
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     mon_count = Monument.objects.filter(
-        kult_id__isnull=False,\
-        coord_lon__gte=latlng_min.lng,\
-        coord_lon__lt=latlng_max.lng,\
-        coord_lat__gte=latlng_min.lat,\
-        coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").count()
-    return render_to_response('wlm/markers_count.js', {'count':mon_count, }, mimetype='application/json')
+        kult_id__isnull=False,
+        coord_lon__gte=latlng_min.lng,
+        coord_lon__lt=latlng_max.lng,
+        coord_lat__gte=latlng_min.lat,
+        coord_lat__lt=latlng_max.lat,
+    ).values("id", "coord_lon", "coord_lat", "name").count()
+    return render_to_response('wlm/markers_count.js', {
+        'count': mon_count
+    }, mimetype='application/json')
+
 
 def test_tile_markers(request, x_tile, y_tile, zoom, first, last):
     point = Point(int(x_tile), int(y_tile))
     tile = Tile.tileByPoint(point, int(zoom))
     latlng_min, latlng_max = tile.getBounds()
     monuments = Monument.objects.filter(
-        kult_id__isnull=False,\
-        coord_lon__gte=latlng_min.lng,\
-        coord_lon__lt=latlng_max.lng,\
-        coord_lat__gte=latlng_min.lat,\
-        coord_lat__lt=latlng_max.lat).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
-    return render_to_response('wlm/markers.html', {'monuments':monuments,})
-
+        kult_id__isnull=False,
+        coord_lon__gte=latlng_min.lng,
+        coord_lon__lt=latlng_max.lng,
+        coord_lat__gte=latlng_min.lat,
+        coord_lat__lt=latlng_max.lat,
+    ).values("id", "coord_lon", "coord_lat", "name").order_by('id')[first:last]
+    return render_to_response('wlm/markers.html', {'monuments': monuments})

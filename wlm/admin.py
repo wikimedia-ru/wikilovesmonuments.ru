@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
-import urllib, json
+import urllib
+import json
 
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
@@ -16,11 +15,13 @@ class StreetAdmin(admin.ModelAdmin):
         }),
     )
 
-    list_display = ['name','city', 'region' ]
-    list_filter = ['city']
+    list_display = ['name', 'city', 'region', ]
+    list_filter = ['city', ]
+
 
 class RegionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name','iso_code', 'order']
+    list_display = ['id', 'name', 'iso_code', 'order', ]
+
 
 class MonumentAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -28,24 +29,24 @@ class MonumentAdmin(admin.ModelAdmin):
             'fields': ('name', 'name_alt', )
         }),
         (_("Location"), {
-            'fields': ('region', 'city', 'street', 'address',)# 'pasport_address',)
+            'fields': ('region', 'city', 'street', 'address', )
         }),
-        ("Map",{
-            'fields':('coord_lat', 'coord_lon')
+        ("Map", {
+            'fields': ('coord_lat', 'coord_lon', )
         }),
         (_("Complex"), {
-            'fields': ('complex',)
+            'fields': ('complex', )
         }),
         (_("Safety"), {
-            'fields': ('state', 'protection', 'type',)
+            'fields': ('state', 'protection', 'type', )
         }),
         (_("Extra"), {
-            'fields': ('extra_info', 'verified', 'kult_id', 'ruwiki',)
-        })
-
+            'fields': ('extra_info', 'verified', 'kult_id', 'ruwiki', )
+        }),
     )
-    list_filter = ['complex', 'region']
-    list_display = ['show_name', 'region', 'city', 'show_wiki', 'verified',]
+    list_filter = ['complex', 'region', ]
+    list_display = ['show_name', 'region', 'city', 'show_wiki', 'verified', ]
+
 
 admin.site.register(Street, StreetAdmin)
 admin.site.register(Monument, MonumentAdmin)
