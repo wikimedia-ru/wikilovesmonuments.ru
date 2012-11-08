@@ -1,3 +1,9 @@
+## Daily dumps
+
+* [Monument] (http://wikilovesmonuments.ru/dumps/monument.sql)
+* [MonumentPhoto] (http://wikilovesmonuments.ru/dumps/monumentphoto.sql)
+
+
 ## License
 
 (The MIT License)
