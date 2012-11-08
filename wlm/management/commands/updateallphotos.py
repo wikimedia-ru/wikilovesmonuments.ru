@@ -38,7 +38,7 @@ class Command(BaseCommand):
                 try:
                     MonumentPhoto.objects.get(commons_id=photo['pageid'])
                 except ObjectDoesNotExist:
-                    api_params = urllib.urlencode({
+                    api_params = {
                         'format': 'json',
                         'action': 'query',
                         'prop': 'imageinfo|revisions',
@@ -47,7 +47,8 @@ class Command(BaseCommand):
                         'rvprop': 'content',
                         'rvlimit': 1,
                         'titles': photo['title'].encode('utf8'),
-                    })
+                    }
+                    api_get_str = urllib.urlencode(api_params)
                     f = urllib.urlopen('%s/w/api.php?%s' % (api_server, api_get_str))
                     p_answer = json.load(f)
                     p_info = p_answer['query']['pages'][str(photo['pageid'])]
