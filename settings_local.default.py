@@ -1,12 +1,11 @@
-# Local settings for vologda project.
-LOCAL_SETTINGS = True
+# Local settings for WLM project.
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     #('Name', 'mail@example.com'),
 )
-
 MANAGERS = ADMINS
 
 DATABASES = {

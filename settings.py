@@ -30,13 +30,13 @@ TIME_ZONE = 'Europe/Moscow'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru-RU'
 
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
@@ -171,11 +171,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 
+GEOIP_PATH = '/usr/share/GeoIP/'
+
+CMADE_KEY = ''
+
 # Local settings
-try: 
-    LOCAL_SETTINGS
-except NameError:
-    try:
-        from settings_local import *
-    except:
-        pass
+try:
+    from settings_local import *
+except ImportError:
+    pass
