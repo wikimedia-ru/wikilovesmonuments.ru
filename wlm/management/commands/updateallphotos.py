@@ -26,6 +26,7 @@ class Command(BaseCommand):
                 'action': 'query',
                 'list': 'embeddedin',
                 'eititle': 'Template:Cultural Heritage Russia',
+                'einamespace':  6, # file
                 'eilimit': 50,
             }
             if api_token:
