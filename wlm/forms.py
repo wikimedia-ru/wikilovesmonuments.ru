@@ -19,11 +19,5 @@ class MonumentForm(forms.ModelForm):
         self.fields['complex_root'].queryset = qs
         self.fields['city'].required = True
 
-    def clean_city(self):
-        city = self.cleaned_data['city']
-        if city:
-            return City.objects.get(id=city)
-        return None
-
     def clean_street(self):
         return None
