@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^monument/(?P<id>[0-9]+)/?$', 'wlm.views.monument'),
     url(r'^monument/(?P<id>[0-9]+)/photo/?$', 'wlm.views.monument_photo'),
     url(r'^monument/kult/(?P<kult_id>[0-9]+)/?$', 'wlm.views.redirect_by_kult_id'),
-    url(r'^monument/edit/(?P<m_id>\d+)$', 'wlm.views.monument_edit_form'),
+    url(r'^monument/edit/(?P<id>\d+)$', 'wlm.views.monument_edit_form'),
     url(r'^voting/?$', 'wlm.views.voting'),
     url(r'^vote/(?P<photo_id>\d+)/(?P<vote>\d+)/?$', 'wlm.views.vote_for_photo'),
 

@@ -159,12 +159,14 @@ $(function(){
 	WLM.map.setZoom(10);
 
 	var setCities = function(data){
+		var city_id = $('#id_city').val();
 		$('#id_city').empty();
 		$('#id_city').append("<option></option>")
 		$.each(data, function(key, value){
 			$('#id_city').append($("<option></option>")
 				.attr("value", value.id)
-				.text(value.name));
+				.text(value.name)
+				.prop('selected', value.id == city_id));
 		});
 	}
 	WLM.getRegionCities($('#id_region option:selected').val(), setCities);
