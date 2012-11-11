@@ -108,20 +108,13 @@
 					"coord_lon": {{ monument.coord_lon|stringformat:"f" }},
 					"name": "{{ monument.name|default:'Без названия' }}"
 				}
-				WLM.map.init_map('map');
-				WLM.map.setPosition({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }});
+				WLM.map.init_map('map', {
+					'coord_lat': {{ monument.coord_lat|stringformat:"f" }},
+					'coord_lon': {{ monument.coord_lon|stringformat:"f" }},
+					'zoom': 15
+					});
 				WLM.map.addMarker(item);
-				WLM.map.setZoom(10);
 			});
-			/*
-			var cmUrl = 'http://{s}.tile.cloudmade.com/{{ CMADE_KEY }}/997/256/{z}/{x}/{y}.png';
-			var cmAttr = 'карта &copy; OpenStreetMap, рендер &copy; CloudMade';
-			var map = new L.Map('map');
-			map
-				.setView(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }}), 16)
-				.addLayer(new L.TileLayer(cmUrl, {maxZoom: 18, attribution: cmAttr}))
-				.addLayer(new L.Marker(new L.LatLng({{ monument.coord_lat|stringformat:"f" }}, {{ monument.coord_lon|stringformat:"f" }})));
-			*/
 		</script>
 	</div>
 	</div>
