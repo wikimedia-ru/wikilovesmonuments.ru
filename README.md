@@ -1,7 +1,17 @@
 ## Daily dumps
 
+* [Region] (http://wikilovesmonuments.ru/dumps/region.sql)
+* [City] (http://wikilovesmonuments.ru/dumps/city.sql)
 * [Monument] (http://wikilovesmonuments.ru/dumps/monument.sql)
 * [MonumentPhoto] (http://wikilovesmonuments.ru/dumps/monumentphoto.sql)
+
+All in one archive:
+[wlm.sql.bz2] (http://wikilovesmonuments.ru/dumps/wlm.sql.bz2)
+
+If something wron with latest dump, you can download more old (since
+2012-11-10) using direct link with date:
+
+    http://wikilovesmonuments.ru/dumps/wlm_<yyyy-mm-dd>.sql.bz2
 
 
 ## License
