@@ -36,6 +36,7 @@ class City(models.Model):
     name = models.CharField(max_length=200)
     latitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
     longitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
+    capital = models.BooleanField(default=False, verbose_name=_("Capital"))
 
     def __unicode__(self):
         return "%s, %s" % (self.region.name, self.name)

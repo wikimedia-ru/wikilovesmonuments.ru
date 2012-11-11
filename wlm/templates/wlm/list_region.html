@@ -18,7 +18,11 @@
 							<table class="table">
 								<tr>
 								{% for c in cities %}
-									<td><a href="/list/city/{{ c.id }}/">{{ c.name }}</a></td>
+									<td>
+										{% if c.capital %}<strong>{% endif %}
+										<a href="/list/city/{{ c.id }}/">{{ c.name }}</a>
+										{% if c.capital %}</strong>{% endif %}
+									</td>
 								{% if forloop.counter|divisibleby:3 %}
 								</tr>
 								<tr>

@@ -45,7 +45,10 @@ def list_page(request):
 def list_region(request, id):
     return render_to_response('wlm/list_region.html', {
         'region': Region.objects.get(pk=id),
-        'cities': City.objects.values('id', 'name').filter(region_id=id),
+        'cities': City.objects
+                    .values('id', 'name', 'capital')
+                    .filter(region_id=id)
+                    .order_by('-capital', 'name'),
     }, context_instance=RequestContext(request))
 
 
