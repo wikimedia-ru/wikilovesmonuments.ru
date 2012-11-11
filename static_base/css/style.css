@@ -326,6 +326,13 @@ footer p {
 	text-align: left !important;
 }
 
+a {
+	color: #8f0000;
+}
+
+a:hover {
+	color: #bf0000;
+}
 
 .contacts {
 	float: right;
