@@ -1,6 +1,6 @@
 //Base module
 var WLM = (function() {
-	var version = "1.1";
+	var version = "1.2";
 
 	//Cache for region cities
 	var cities = [];
@@ -73,15 +73,15 @@ var WLM = (function() {
 
 
 WLM.map = (function($) {
-	var minZoom = 3;
-	var maxZoom = 18;
-	var center = new L.LatLng(66, 94);
+	var minZoom = 5,
+		maxZoom = 18,
+		center = new L.LatLng(66, 94);
 
-	//Cloudmade layer
-	var cloudmade = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-		maxZoom: 18,
-		minZoom: 3,
-		attribution: 'карта &copy; OpenStreetMap, рендер &copy; CloudMade'
+	//Default layer
+	var mapsurfer = new L.TileLayer('http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}', {
+		maxZoom: maxZoom,
+		minZoom: minZoom,
+		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href=\"http://giscience.uni-hd.de/\" target=\"_blank\">GIScience Research Group @ University of Heidelberg</a>'
 	});
 
 	//Map object
@@ -95,9 +95,9 @@ WLM.map = (function($) {
 		}
 		map = new L.Map(item_name, {
 			center:      center,
-			zoom:        config['zoom'] || 3,
+			zoom:        config['zoom'] || minZoom,
 			zoomControl: config['zoomControl'] || false,
-			layers:      [cloudmade]
+			layers:      [mapsurfer]
 		});
 		map.zoomControl = new L.Control.Zoom({ position: 'topright' });
 		map.addControl(map.zoomControl);
@@ -161,7 +161,10 @@ WLM.map = (function($) {
 		if (markersLayer) {
 			map.removeLayer(markersLayer);
 		}
-		markersLayer = new L.MarkerClusterGroup();
+		markersLayer = new L.MarkerClusterGroup({
+			showCoverageOnHover: false,
+			disableClusteringAtZoom: 16
+		});
 		for (var key in data) {
 			var val = data[key];
 			var marker = new L.Marker(

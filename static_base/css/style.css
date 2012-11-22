@@ -202,7 +202,8 @@ header .btn-large:hover,
 	background-image: linear-gradient(top, #1abeee 0%,#3883b2 100%); /* W3C */
 	/*border: 1px solid #307cab;*/
 }
-#about a {
+.about a,
+.about a:hover {
 	color: #fff;
 }
 #find.show-grid .span-bg[class*="span"] {
