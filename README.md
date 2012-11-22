@@ -9,6 +9,7 @@ Create database for project. Than put settings to your settings\_local.py file.
 Install django-tynymce application.
 
     python2 manage.py syncdb
+    python2 manage.py collectstatic
     wget http://wikilovesmonuments.ru/dumps/wlm.sql.bz2
     bzip2 -d wlm.sql.bz2
     mysql -u<db_user> -p <db_name> < wlm.sql
