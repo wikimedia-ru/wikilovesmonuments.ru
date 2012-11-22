@@ -1,3 +1,24 @@
+## Install
+
+    git clone git@github.com:putnik/WLM.git
+    cd WLM
+    cp settings\_local.default.py settings\_local.py
+
+Create database for project. Than put settings to your settings\_local.py file.
+
+Install django-tynymce application.
+
+    python2 manage.py syncdb
+    wget http://wikilovesmonuments.ru/dumps/wlm.sql.bz2
+    bzip2 -d wlm.sql.bz2
+    mysql -u_db\_user_ -p _db\_name_ <\ wlm.sql
+
+Now you can remove dump file and start django server
+
+    rm wlm.sql
+    python2 manage.py runserver
+
+
 ## Daily dumps
 
 * [Region] (http://wikilovesmonuments.ru/dumps/region.sql)
@@ -11,7 +32,7 @@ All in one archive:
 If something wron with latest dump, you can download more old (since
 2012-11-10) using direct link with date:
 
-    http://wikilovesmonuments.ru/dumps/wlm_<yyyy-mm-dd>.sql.bz2
+    http://wikilovesmonuments.ru/dumps/wlm_<\yyyy-mm-dd>.sql.bz2
 
 
 ## License
