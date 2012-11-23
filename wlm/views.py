@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 
 from wlm.models import Region, City
@@ -26,7 +25,6 @@ def index_page(request):
         'regions': Region.objects.values('id', 'name', 'latitude',
                     'longitude', 'scale').exclude(pk=MOSCOW_ID),
         'cities': City.objects.values('id', 'name').all(),
-        'CMADE_KEY': settings.CMADE_KEY,
     }, context_instance=RequestContext(request))
 
 
@@ -66,7 +64,6 @@ def upload(request):
 
     return render_to_response('wlm/upload.html', {
         'monuments_list': m_list,
-        'CMADE_KEY': settings.CMADE_KEY,
     }, context_instance=RequestContext(request))
 
 
@@ -75,7 +72,6 @@ def add(request):
 
     return render_to_response('wlm/add_monument.html', {
         'monuments_list': m_list,
-        'CMADE_KEY': settings.CMADE_KEY,
     }, context_instance=RequestContext(request))
 
 
@@ -95,7 +91,6 @@ def monument_edit_form(request, id):
 def monument(request, id):
     return render_to_response('wlm/monument.html', {
         'monument': get_object_or_404(Monument, pk=id),
-        'CMADE_KEY': settings.CMADE_KEY,
     }, context_instance=RequestContext(request))
 
 

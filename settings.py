@@ -173,8 +173,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 GEOIP_PATH = '/usr/share/GeoIP/'
 
-CMADE_KEY = ''
-
 # Local settings
 try:
     from settings_local import *
