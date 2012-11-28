@@ -144,24 +144,30 @@
 		<div id='map' style="width:200; heigth:150" class="map leaflet-container leaflet-fade-anim"></div>
 		<script type='text/javascript'>
 $(function(){
-	WLM.map.init_map('map');
-	var lat = $('#id_coord_lat').val(), 
-		lon = $('#id_coord_lon').val();
-	WLM.map.setPosition(lat, lon);
-	var marker = {"coord_lat": lat, "coord_lon": lon, "name": $('#id_name').val(), "draggable": true};
+	var lat = $('#id_coord_lat').val() || 66,
+		lon = $('#id_coord_lon').val() || 94;
+	WLM.map.init_map('map', {
+		'coord_lat': lat,
+		'coord_lon': lon,
+		'zoom': 17
+		});
+	var marker = {
+		"coord_lat": lat,
+		"coord_lon": lon,
+		"name": $('#id_name').val(),
+		"draggable": true
+	};
 	var m = WLM.map.addMarker(marker);
 	m.on('dragend', function(e){
 		var llm = m.getLatLng();
 		$('#id_coord_lat').val(llm.lat);
-		$('#id_coord_lon').val(llm.lon);
-
+		$('#id_coord_lon').val(llm.lng);
 	});
-	WLM.map.setZoom(10);
 
 	var setCities = function(data){
 		var city_id = $('#id_city').val();
 		$('#id_city').empty();
-		$('#id_city').append("<option></option>")
+		$('#id_city').append("<option></option>");
 		$.each(data, function(key, value){
 			$('#id_city').append($("<option></option>")
 				.attr("value", value.id)
