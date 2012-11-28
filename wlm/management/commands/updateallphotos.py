@@ -18,7 +18,7 @@ class Command(BaseCommand):
         api_server = 'http://commons.wikimedia.org'
         api_token = ''
 
-        re_kult = re.compile(r'\{\{Cultural Heritage Russia\|id\s*=\s*([0-9]+)\}\}')
+        re_kult = re.compile(r'\{\{Cultural Heritage Russia\s*\|\s*id\s*=\s*([0-9]+)\D')
 
         while True:
             api_params = {
@@ -39,6 +39,7 @@ class Command(BaseCommand):
                 try:
                     MonumentPhoto.objects.get(commons_id=photo['pageid'])
                 except ObjectDoesNotExist:
+                    print "%s ..." % photo['title'],
                     api_params = {
                         'format': 'json',
                         'action': 'query',
@@ -59,6 +60,7 @@ class Command(BaseCommand):
                         kult_id = int(m.group(1))
                         monument = Monument.objects.get(kult_id=kult_id)
                     except:
+                        print "ERROR"
                         continue
                     MonumentPhoto.objects.create(
                         monument=monument,
@@ -71,6 +73,7 @@ class Command(BaseCommand):
                         author=p_info['imageinfo'][0]['user'],
                         datetime=parse(p_info['imageinfo'][0]['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
                     )
+                    print "OK"
             if not 'query-continue' in answer:
                 break
             api_token = answer['query-continue']['embeddedin']['eicontinue']
