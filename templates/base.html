@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/docs.css" />
 	<link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.min.css">
 	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/content.css" />
 
 	<!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,7 +25,7 @@
 
 	<link rel="stylesheet" href="//danzel.github.com/Leaflet.markercluster/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="//danzel.github.com/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
-	<script src="//danzel.github.com/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+	<script src="//danzel.github.com/Leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
 	<script src="{{ STATIC_URL }}js/leaflet-controls.js"></script>
 
@@ -53,7 +54,7 @@
 					<!--<li><a href="/results/">Итоги</a></li>-->
 					<!--<li><a href="//2011.wikilovesmonuments.ru/">В 2011-м</a></li>-->
 					<li><a href="//wikimedia.ru/blog/tags/wlm/">Блог</a></li>
-                    {%block moderator_menu%}{%endblock%}
+					{%block moderator_menu%}{%endblock%}
 				</ul>
 			</div>
 			<!-- /.subnav -->
@@ -92,7 +93,7 @@
 	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-carousel.js"></script>
 	<script src="{{ STATIC_URL }}bootstrap/js/bootstrap-typeahead.js"></script>
 	<script src="{{ STATIC_URL }}bootstrap/js/application.js"></script>
-	<script type='text/javascript' src='{{STATIC_URL}}/js/wlm.js'></script>
+	<script type='text/javascript' src='{{STATIC_URL}}js/wlm.js'></script>
 
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript">

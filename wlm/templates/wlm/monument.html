@@ -1,12 +1,5 @@
 {% extends "base.html" %}
 
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/content.css" />
-<link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.css" />
-<!--[if lte IE 8]><link rel="stylesheet" href="//api.oldvologda.ru/leaflet/leaflet.ie.css" /><![endif]-->
-<script src="//api.oldvologda.ru/leaflet/leaflet.js"></script>
-{% endblock %}
-
 {% block title %}{{ monument.name }} ({{ monument.address }}) — {% endblock %}
 
 {% block moderator_menu %}
