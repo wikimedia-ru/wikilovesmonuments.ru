@@ -50,8 +50,7 @@
 					<li{% if request.path == '/list/' or request.path|truncatechars:9 == '/list/...' %} class="active"{% endif %}><a href="/list/">Списки памятников</a></li>
 					<li{% if request.path == '/rules/' %} class="active"{% endif %}><a href="/rules/">Правила, жюри, призы</a></li>
 					<li{% if request.path == '/partners/' %} class="active"{% endif %}><a href="/partners/">Партнёры</a></li>
-					<!--<li><a href="/results/">Итоги</a></li>-->
-					<!--<li><a href="//2011.wikilovesmonuments.ru/">В 2011-м</a></li>-->
+					<li{% if request.path == '/feedback/' %} class="active"{% endif %}><a href="/feedback/">Обратная связь</a></li>
 					<li><a href="//wikimedia.ru/blog/tags/wlm/">Блог</a></li>
 					{%block moderator_menu%}{%endblock%}
 				</ul>
