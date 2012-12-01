@@ -19,6 +19,13 @@
 				<div class="row">
 					<div class="span-nobg span8">
 						<table class="table">
+						{% if monument.name_alt %}
+							<tr>
+								<th>Другие названия</th>
+								<td>{{ monument.name_alt }}</td>
+							</tr>
+						{% endif %}
+
 							<tr>
 								<th>Регион</th>
 								<td><a href="/list/region/{{ monument.region.id }}/">{{ monument.region.name }}</a></td>
@@ -33,6 +40,13 @@
 								<th>Адрес</th>
 								<td>{{ monument.address }}</td>
 							</tr>
+
+						{% if monument.complex_root %}
+							<tr>
+								<th>Принадлежит комплексу</th>
+								<td><a href="/monument/{{ monument.complex_root.id }}" target="_blank">{{ monument.complex_root.name }}</a></td>
+							</tr>
+						{% endif %}
 
 						{% if monument.kult_id %}
 							<tr>
