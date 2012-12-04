@@ -76,6 +76,7 @@ class Monument(models.Model):
         ('C', _("Cultural")),
         ('A', _("Architectural")),
         ('H', _("Historical")),
+        ('M', _("Monumental art")),
     )
 
     class Meta:
