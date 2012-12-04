@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-09 02:33+0400\n"
+"POT-Creation-Date: 2012-12-04 06:40+0400\n"
 "Last-Translator: Sergey Leschina <mail@putnik.ws>\n"
 "Language: ru-RU\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr "Основная информация"
 msgid "Location"
 msgstr "Местоположение"
 
-#: wlm/admin.py:37 wlm/models.py:100
+#: wlm/admin.py:37 wlm/models.py:102
 msgid "Complex"
 msgstr "Комплекс"
 
@@ -33,7 +33,7 @@ msgstr "Сохранность"
 msgid "Extra"
 msgstr "Дополнительно"
 
-#: wlm/models.py:14 wlm/models.py:87
+#: wlm/models.py:14 wlm/models.py:89
 msgid "Region of RF"
 msgstr "Регион РФ"
 
@@ -41,11 +41,11 @@ msgstr "Регион РФ"
 msgid "Federal district of RF"
 msgstr "Федеральный округ РФ"
 
-#: wlm/models.py:19 wlm/models.py:37 wlm/models.py:91
+#: wlm/models.py:19 wlm/models.py:37 wlm/models.py:93
 msgid "Latitude"
 msgstr "Широта"
 
-#: wlm/models.py:20 wlm/models.py:38 wlm/models.py:90
+#: wlm/models.py:20 wlm/models.py:38 wlm/models.py:92
 msgid "Longitude"
 msgstr "Долгота"
 
@@ -57,158 +57,166 @@ msgstr "Масштаб"
 msgid "ISO region code"
 msgstr "ISO-код региона"
 
-#: wlm/models.py:33 wlm/models.py:88
+#: wlm/models.py:33 wlm/models.py:90
 msgid "City"
 msgstr "Город"
 
-#: wlm/models.py:60
+#: wlm/models.py:39
+msgid "Capital"
+msgstr "Столица"
+
+#: wlm/models.py:61
 msgid "Restored"
 msgstr "Реставрирован"
 
-#: wlm/models.py:61
+#: wlm/models.py:62
 msgid "Satisfactory"
 msgstr "Удовлетворительное"
 
-#: wlm/models.py:62
+#: wlm/models.py:63
 msgid "Unsatisfactory"
 msgstr "Неудовлетворительное"
 
-#: wlm/models.py:63
+#: wlm/models.py:64
 msgid "Accident"
 msgstr "Аварийное"
 
-#: wlm/models.py:67
+#: wlm/models.py:68
 msgid "Federal"
 msgstr "Федеральный"
 
-#: wlm/models.py:68
+#: wlm/models.py:69
 msgid "Regional"
 msgstr "Региональный"
 
-#: wlm/models.py:69
+#: wlm/models.py:70
 msgid "Local"
 msgstr "Местный"
 
-#: wlm/models.py:70
+#: wlm/models.py:71
 msgid "Determined"
 msgstr "Выявлен"
 
-#: wlm/models.py:71
+#: wlm/models.py:72
 msgid "OPOKN"
 msgstr "ОПОКН"
 
-#: wlm/models.py:72
+#: wlm/models.py:73
 msgid "No"
 msgstr "Нет"
 
-#: wlm/models.py:75
+#: wlm/models.py:76
 msgid "Cultural"
 msgstr "Культурный"
 
-#: wlm/models.py:76
+#: wlm/models.py:77
 msgid "Architectural"
 msgstr "Архитектурный"
 
-#: wlm/models.py:77
+#: wlm/models.py:78
 msgid "Historical"
 msgstr "Исторический"
 
-#: wlm/models.py:89
+#: wlm/models.py:79
+msgid "Monumental art"
+msgstr "Монументальное искуство"
+
+#: wlm/models.py:91
 msgid "Street"
 msgstr "Улица"
 
-#: wlm/models.py:94 wlm/models.py:133
+#: wlm/models.py:96 wlm/models.py:135
 msgid "Name"
 msgstr "Название"
 
-#: wlm/models.py:95
+#: wlm/models.py:97
 msgid "Alternative name"
 msgstr "Альтернативное название"
 
-#: wlm/models.py:96
+#: wlm/models.py:98
 msgid "Address"
 msgstr "Адрес"
 
-#: wlm/models.py:99
+#: wlm/models.py:101
 msgid "Belong to complex"
 msgstr "Принадлежит комплексу"
 
-#: wlm/models.py:102
+#: wlm/models.py:104
 msgid "Additional"
 msgstr "Дополнительная информация"
 
-#: wlm/models.py:103
+#: wlm/models.py:105
 msgid "State"
 msgstr "Состояние"
 
-#: wlm/models.py:104
+#: wlm/models.py:106
 msgid "Protection class"
 msgstr "Категория охраны"
 
-#: wlm/models.py:105
+#: wlm/models.py:107
 msgid "Type"
 msgstr "Тип"
 
-#: wlm/models.py:108
+#: wlm/models.py:110
 msgid "Wikipedia article"
 msgstr "Статья в Википедии"
 
-#: wlm/models.py:110
+#: wlm/models.py:112
 msgid "ID Kulturnoe Nasledie"
 msgstr "ID культ. насл."
 
-#: wlm/models.py:113
+#: wlm/models.py:115
 msgid "Verified"
 msgstr "Проверен"
 
-#: wlm/models.py:120
+#: wlm/models.py:122
 msgid "[Without name]"
 msgstr "[Без названия]"
 
-#: wlm/models.py:132
+#: wlm/models.py:134
 msgid "Monument"
 msgstr "Памятник"
 
-#: wlm/models.py:134
+#: wlm/models.py:136
 msgid "Image page ID"
 msgstr "ID страницы изображения"
 
-#: wlm/models.py:135
+#: wlm/models.py:137
 msgid "Author"
 msgstr "Автор"
 
-#: wlm/models.py:136
+#: wlm/models.py:138
 msgid "Date & time"
 msgstr "Дата и время"
 
-#: wlm/models.py:137
+#: wlm/models.py:139
 msgid "Year of WLM contest"
 msgstr "Год проведения WLM"
 
-#: wlm/models.py:138
+#: wlm/models.py:140
 msgid "Commons folder"
 msgstr "Папка на Викискладе"
 
-#: wlm/models.py:139
+#: wlm/models.py:141
 msgid "File width"
 msgstr "Ширина файла"
 
-#: wlm/models.py:140
+#: wlm/models.py:142
 msgid "File height"
 msgstr "Высота файла"
 
-#: wlm/models.py:141
+#: wlm/models.py:143
 msgid "File size"
 msgstr "Размер файла"
 
-#: wlm/models.py:151
+#: wlm/models.py:153
 msgid "User ID"
 msgstr "ID участника"
 
-#: wlm/models.py:152
+#: wlm/models.py:154
 msgid "Photo"
 msgstr "Фото"
 
-#: wlm/models.py:153
+#: wlm/models.py:155
 msgid "Vote"
 msgstr "Голос"
