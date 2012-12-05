@@ -138,7 +138,13 @@
 		<ul class="thumbnails">
 		{% for p in monument.monumentphoto_set.all|slice:"18" %}
 			<li class="span2">
-	<a class="thumbnail" target="_blank" href="//commons.wikimedia.org/wiki/File:{{ p.url_name }}"><img src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}" alt="{{ p.name }}, автор: {{ p.author }}" /></a>
+				<a class="thumbnail" target="_blank" href="//commons.wikimedia.org/wiki/File:{{ p.url_name }}"><img
+				{% if p.width <= 300 %}
+					src="//upload.wikimedia.org/wikipedia/commons/{{ p.folder }}/{{ p.url_name }}"
+				{% else %}
+					src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}"
+				{% endif %}
+					alt="{{ p.name }}, автор: {{ p.author }}" /></a>
 				<p>Автор: <a href="//commons.wikimedia.org/wiki/User:{{ p.author }}">{{ p.author }}</a></p>
 			</li>
 		{% endfor %}
