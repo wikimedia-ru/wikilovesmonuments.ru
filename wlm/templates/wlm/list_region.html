@@ -7,16 +7,16 @@
 	<div id="main" class="span9">
 		<div id="find" class="row show-grid">
 			<div class="span-bg span9">
-				<div itemscope itemtype="http://schema.org/Place" class="content" class="content">
-					<h2><spam itemprop="name">{{ region.name }}</span>. Выберите город</h2>
+				<div itemscope itemtype="http://schema.org/State" class="content" class="content">
+					<h2><span itemprop="name">{{ region.name }}</span>. Выберите город</h2>
 					<div class="row">
 						<div class="span-bg span9">
 							<table class="table">
 								<tr>
 								{% for c in cities %}
-									<td itemscope itemtype="http://schema.org/Place">
+									<td itemscope itemtype="http://schema.org/City">
 										{% if c.capital %}<strong>{% endif %}
-										<a itemprop="url" href="/list/city/{{ c.id }}/">{{ c.name }}</a>
+										<a itemprop="url" href="/list/city/{{ c.id }}/"><span itemprop="name">{{ c.name }}</span></a>
 										{% if c.capital %}</strong>{% endif %}
 									</td>
 								{% if forloop.counter|divisibleby:3 %}

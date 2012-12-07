@@ -97,6 +97,16 @@
 									<td itemprop="description">{{ monument.extra_info|safe }}</td>
 								</tr>
 							{% endif %}
+
+							{% if monument.coord_lon %}
+								<tr hidden="hidden" itemscope itemtype="http://schema.org/GeoCoordinates">
+									<th>Координаты</th>
+									<td>
+										<span itemprop="latitude">{{ monument.coord_lat }}</span>,
+										<span itemprop="longitude">{{ monument.coord_lon }}</span>
+									</td>
+								</tr>
+							{% endif %}
 							</table>
 						</div>
 					</div>
