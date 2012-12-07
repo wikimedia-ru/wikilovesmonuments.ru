@@ -7,8 +7,8 @@
 	<div id="main" class="span9">
 		<div id="find" class="row show-grid">
 			<div class="span-bg span9">
-				<div class="content">
-					<h2><a href="/list/region/{{ city.region.id }}/">{{ city.region.name }}</a> → {{ city.name }}</h2>
+				<div itemscope itemtype="http://schema.org/Place" class="content">
+					<h2><a itemprop="containedIn" href="/list/region/{{ city.region.id }}/">{{ city.region.name }}</a> → <span itemprop="name">{{ city.name }}</span></h2>
 					<div class="row">
 						<div id="boxMap" class="span-bg span9">
 							<table class="table">
@@ -17,8 +17,8 @@
 									<th>Адрес</th>
 								</tr>
 								{% for m in monuments %}
-								<tr>
-									<td><a href="/monument/{{m.id}}/">{{ m.name|default:'<Без названия>' }}</a></td>
+								<tr itemscope itemtype="http://schema.org/LandmarksOrHistoricalBuildings">
+									<td><a itemprop="url" href="/monument/{{m.id}}/">{{ m.name|default:'<Без названия>' }}</a></td>
 									<td>{{ m.address }}</td>
 								</tr>
 								{% endfor %}
