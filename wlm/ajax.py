@@ -10,7 +10,8 @@ from wlm.models import Monument, City
 def get_region_cities(request, region):
     cities = City.objects.filter(region=region)
     cities = cities.values('id', 'name', 'latitude', 'longitude')
-    return HttpResponse(json.dumps(list(cities)), mimetype="application/json")
+    cities_json = json.dumps(list(cities), ensure_ascii=False, separators=(',', ':'))
+    return HttpResponse(cities_json, mimetype="application/json")
 
 
 def get_region_markers(request, region):
@@ -20,7 +21,7 @@ def get_region_markers(request, region):
         coord_lat__isnull=False,
         coord_lon__isnull=False,
     ).values("id", "coord_lon", "coord_lat", "name")
-    monuments_json = json.dumps(list(monuments))
+    monuments_json = json.dumps(list(monuments), ensure_ascii=False, separators=(',', ':'))
     return HttpResponse(monuments_json, mimetype="application/json")
 
 
@@ -31,7 +32,7 @@ def get_city_markers(request, city):
         coord_lat__isnull=False,
         coord_lon__isnull=False,
     ).values("id", "coord_lon", "coord_lat", "name")
-    monuments_json = json.dumps(list(monuments))
+    monuments_json = json.dumps(list(monuments), ensure_ascii=False, separators=(',', ':'))
     return HttpResponse(monuments_json, mimetype="application/json")
 
 
