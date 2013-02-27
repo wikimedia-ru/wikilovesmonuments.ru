@@ -1,4 +1,5 @@
 from django.contrib.gis.geoip import GeoIP
+import re
 import settings
 
 
@@ -6,6 +7,7 @@ def get_region(ip):
     default_code = '47' # Moscow
     g = GeoIP()
     try:
+        ip = re.sub(r'^::ffff:', '', ip)
         city = g.city(ip)
         if city['country_code'] == 'RU':
             code = city['region']
