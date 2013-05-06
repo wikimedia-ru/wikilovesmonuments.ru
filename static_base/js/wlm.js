@@ -74,7 +74,7 @@ var WLM = (function() {
 
 WLM.map = (function($) {
 	var minZoom = 5,
-		maxZoom = 18,
+		maxZoom = 17,
 		center = new L.LatLng(66, 94);
 
 	//Default layer
@@ -82,6 +82,11 @@ WLM.map = (function($) {
 		maxZoom: maxZoom,
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href=\"http://giscience.uni-hd.de/\" target=\"_blank\">GIScience Research Group @ University of Heidelberg</a>'
+	});
+	var mapbox = new L.TileLayer('https://tiles.mapbox.com/v3/putnik.map-86mogcj7/{z}/{x}/{y}.png', {
+		maxZoom: maxZoom,
+		minZoom: minZoom,
+		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href="http://mapbox.com/">MapBox</a>'
 	});
 
 	//Map object
@@ -97,7 +102,7 @@ WLM.map = (function($) {
 			center:      center,
 			zoom:        config['zoom'] || minZoom,
 			zoomControl: config['zoomControl'] || false,
-			layers:      [mapsurfer]
+			layers:      [mapbox]
 		});
 		map.zoomControl = new L.Control.Zoom({ position: 'topright' });
 		map.addControl(map.zoomControl);
