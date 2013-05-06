@@ -83,7 +83,7 @@ WLM.map = (function($) {
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href=\"http://giscience.uni-hd.de/\" target=\"_blank\">GIScience Research Group @ University of Heidelberg</a>'
 	});
-	var mapbox = new L.TileLayer('https://tiles.mapbox.com/v3/putnik.map-86mogcj7/{z}/{x}/{y}.png', {
+	var mapbox = new L.TileLayer('http://{s}.tiles.mapbox.com/v3/putnik.map-86mogcj7/{z}/{x}/{y}.png', {
 		maxZoom: maxZoom,
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href="http://mapbox.com/">MapBox</a>'
