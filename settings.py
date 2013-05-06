@@ -1,4 +1,4 @@
-# Django settings for vologda project.
+# Django settings for WLM project.
 
 import os
 
