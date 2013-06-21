@@ -102,7 +102,7 @@ WLM.map = (function($) {
 			center:      center,
 			zoom:        config['zoom'] || minZoom,
 			zoomControl: config['zoomControl'] || false,
-			layers:      [mapbox]
+			layers:      [mapsurfer]
 		});
 		map.zoomControl = new L.Control.Zoom({ position: 'topright' });
 		map.addControl(map.zoomControl);
