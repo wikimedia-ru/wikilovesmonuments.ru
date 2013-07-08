@@ -15,25 +15,21 @@ class Command(BaseCommand):
     help = 'Update cultural heritage images'
 
     def handle(self, *args, **options):
-        api_server = 'http://commons.wikimedia.org'
         api_token = ''
-
+        file_errors = []
         re_kult = re.compile(r'\{\{Cultural Heritage Russia\s*\|\s*id\s*=\s*([0-9]+)\D')
 
         while True:
             api_params = {
-                'format': 'json',
                 'action': 'query',
                 'list': 'embeddedin',
                 'eititle': 'Template:Cultural Heritage Russia',
-                'einamespace':  6, # file
+                'einamespace': 6, # file
                 'eilimit': 50,
             }
             if api_token:
                 api_params['eicontinue'] = api_token
-            api_get_str = urllib.urlencode(api_params)
-            f = urllib.urlopen('%s/w/api.php?%s' % (api_server, api_get_str))
-            answer = json.load(f)
+            answer = self.api_request(api_params)
 
             for photo in answer['query']['embeddedin']:
                 try:
@@ -41,7 +37,6 @@ class Command(BaseCommand):
                 except ObjectDoesNotExist:
                     print "%s ..." % photo['title'],
                     api_params = {
-                        'format': 'json',
                         'action': 'query',
                         'prop': 'imageinfo|revisions',
                         'iiprop': 'timestamp|user|url|size',
@@ -50,9 +45,7 @@ class Command(BaseCommand):
                         'rvlimit': 1,
                         'titles': photo['title'].encode('utf8'),
                     }
-                    api_get_str = urllib.urlencode(api_params)
-                    f = urllib.urlopen('%s/w/api.php?%s' % (api_server, api_get_str))
-                    p_answer = json.load(f)
+                    p_answer = self.api_request(api_params)
                     p_info = p_answer['query']['pages'][str(photo['pageid'])]
                     p_url_parts = p_info['imageinfo'][0]['url'].split('/', 7)
                     m = re.search(re_kult, p_info['revisions'][0]['*'])
@@ -60,6 +53,7 @@ class Command(BaseCommand):
                         kult_id = int(m.group(1))
                         monument = Monument.objects.get(kult_id=kult_id)
                     except:
+                        file_errors.append(photo['title'][5:])
                         print "ERROR"
                         continue
                     MonumentPhoto.objects.create(
@@ -78,4 +72,52 @@ class Command(BaseCommand):
                 break
             api_token = answer['query-continue']['embeddedin']['eicontinue']
 
+        self.update_errors_page(file_errors)
+
         self.stdout.write('Successfully updated photos of cultural heritage\n')
+
+
+    def update_errors_page(self, files):
+        text = u''
+        for filename in files:
+            text += u'* [[:File:%s]]\n' % filename
+
+        error_page = u'Commons:Wiki Loves Monuments 2012 in Russia/Errors'
+        api_params = {
+            'action': 'query',
+            'prop': 'info',
+            'intoken': 'edit',
+            'titles': error_page,
+        }
+        answer = self.api_request(api_params)
+        pages = answer['query']['pages']
+        for page_id in pages:
+            token = pages[page_id]['edittoken']
+            break
+
+        api_params = {
+            'action': 'edit',
+            'summary': u'Bot: Updating list',
+            'bot': 1,
+            'title': error_page,
+            'text': text.encode('utf-8'),
+            'token': token,
+        }
+        answer = self.api_request(api_params, True)
+
+
+    def api_request(self, ext_params, post=False):
+        params = {
+            'format': 'json',
+        }
+        params.update(ext_params)
+        get_string = urllib.urlencode(params)
+
+        server = 'http://commons.wikimedia.org'
+        if post:
+            f = urllib.urlopen('%s/w/api.php' % server, get_string)
+        else:
+            f = urllib.urlopen('%s/w/api.php?%s' % (server, get_string))
+
+        return json.load(f)
+
