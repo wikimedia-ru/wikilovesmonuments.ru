@@ -81,7 +81,8 @@ class Command(BaseCommand):
 
 
     def update_errors_page(self, errors):
-        text = u'{| class="standard sortable"\n'
+        text = u'{| class="wikitable sortable"\n'
+        text += u'! File !! ID\n'
         for error in errors:
             text += u'|-\n'
             text += u'| [[:File:%s]] ' % error['filename']
