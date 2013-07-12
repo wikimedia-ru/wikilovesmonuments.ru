@@ -53,7 +53,10 @@ class Command(BaseCommand):
                         kult_id = int(m.group(1))
                         monument = Monument.objects.get(kult_id=kult_id)
                     except:
-                        file_errors.append(photo['title'][5:])
+                        file_errors.append({
+                            'filename': photo['title'][5:],
+                            'kult_id': kult_id,
+                        })
                         print "ERROR"
                         continue
                     MonumentPhoto.objects.create(
@@ -77,10 +80,13 @@ class Command(BaseCommand):
         self.stdout.write('Successfully updated photos of cultural heritage\n')
 
 
-    def update_errors_page(self, files):
-        text = u''
-        for filename in files:
-            text += u'* [[:File:%s]]\n' % filename
+    def update_errors_page(self, errors):
+        text = u'{| class="standard sortable"\n'
+        for error in errors:
+            text += u'|-\n'
+            text += u'| [[:File:%s]] ' % error['filename']
+            text += u'|| %s\n' % error['kult_id']
+        text += u'|}'
 
         error_page = u'Commons:Wiki Loves Monuments 2012 in Russia/Errors'
         api_params = {
