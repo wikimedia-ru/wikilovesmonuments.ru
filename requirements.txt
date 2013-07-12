@@ -4,3 +4,4 @@ argparse
 distribute
 django-tinymce
 wsgiref
+python-dateutil
