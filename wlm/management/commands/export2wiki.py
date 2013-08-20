@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
 
     def update_page(self, title, monuments):
-        if not len(monuments) or len(monuments) > 500:
+        if not len(monuments):
             return False
         text = u'{{WLM/заголовок}}\n'
         for m in monuments:
@@ -56,7 +56,6 @@ class Command(BaseCommand):
         for page_id in pages:
             token = pages[page_id]['edittoken']
             break
-        print 'token: %s\n' % token
 
         api_params = {
             'action': 'edit',
