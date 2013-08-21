@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-import urllib, urllib2
+import cookielib, urllib, urllib2
 import json
 import re
 
@@ -14,11 +14,14 @@ from settings import WIKI_NAME, WIKI_PASSWORD
 
 class Command(BaseCommand):
     help = u'Export cultural heritage into Wikipedia'
-    cookie = ''
 
 
     def handle(self, *args, **options):
         regions = Region.objects.all()
+
+        cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
+
         self.login()
         for region in regions:
             print '%s (%s): ' % (region.name, region.id)
@@ -44,7 +47,7 @@ class Command(BaseCommand):
 
 
     def update_page(self, title, monuments):
-        if not len(monuments) or len(monuments) > 500:
+        if not len(monuments):
             return False
         text = u'{{WLM/заголовок}}\n'
         for m in monuments:
@@ -95,18 +98,8 @@ class Command(BaseCommand):
         }
         answer = self.api_request(api_params, True)
 
-        token = answer['login']['token']
-        api_params['lgtoken'] = token
-
-        sessionid = answer['login']['sessionid']
-        self.cookie = 'ruwikiSession=%s' % sessionid
-
+        api_params['lgtoken'] = answer['login']['token']
         answer = self.api_request(api_params, True)
-        prefix = answer['login']['cookieprefix']
-        cookie = '%sUserID=%s' % (prefix, answer['login']['lguserid'])
-        cookie += '; %sUserName=%s' % (prefix, answer['login']['lgusername'])
-        cookie += '; %sSession=%s' % (prefix, answer['login']['sessionid'])
-        self.cookie = cookie
         
         return True
 
@@ -125,10 +118,7 @@ class Command(BaseCommand):
         else:
             req = urllib2.Request(url='%s/w/api.php?%s' % (server, get_string))
 
-        if self.cookie:
-            req.add_header('Cookie', self.cookie)
-
-        f = urllib2.urlopen(req)
+        f = self.opener.open(req)
 
         return json.load(f)
 
