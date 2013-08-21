@@ -24,37 +24,38 @@ class Command(BaseCommand):
 
         self.login()
         for region in regions:
-            print '%s (%s): ' % (region.name, region.id)
             monuments = Monument.objects.filter(region_id=region.id)
             cities = City.objects.filter(region_id=region.id)
             for city in cities:
                 monuments_city = Monument.objects.filter(region_id=region.id, city_id=city.id)
                 if len(monuments_city) > 10:
                     city_page = '%s/%s' % (region.name, city.name);
-                    print '%s (%s): ' % (city_page, city.id)
                     if self.update_page(city_page, monuments_city):
                         monuments = monuments.exclude(city_id=city.id)
-                        print 'OK\n'
-                    else:
-                        print 'fail!\n'
 
-            if self.update_page(region.name, monuments):
-                print 'OK\n'
-            else:
-                print 'fail!\n'
+            self.update_page(region.name, monuments)
 
         self.stdout.write(u'Successfully exported all cultural heritage objects\n')
 
 
     def update_page(self, title, monuments):
+        print('%s - %d' % (title, len(monuments)))
         if not len(monuments):
             return False
+        if len(monuments) > 330:
+            for i in range(0, len(monuments) / 300):
+                self.update_page('%s/%d' % (title, i + 1), monuments[i:i+300])
+            self.update_page('%s/%d' % (title, i + 2), monuments[i+300:len(monuments)])
+            return True
         text = u'{{WLM/заголовок}}\n'
         for m in monuments:
+            city_name = u''
+            if m.city and m.city.name:
+                city_name = m.city.name
             text += u'{{WLM/строка\n'
             text += u'| id = %s\n' % m.kult_id
             text += u'| название = %s\n' % m.name
-            text += u'| нп = %s\n' % m.city.name
+            text += u'| нп = %s\n' % city_name
             text += u'| адрес = %s\n' % m.address
             text += u'| регион = %s\n' % m.region
             text += u'| lat = %s\n' % m.coord_lat
@@ -85,7 +86,6 @@ class Command(BaseCommand):
             'token': token,
         }
         answer = self.api_request(api_params, True)
-        print answer
         
         return True
 
@@ -114,9 +114,9 @@ class Command(BaseCommand):
         server = 'http://ru.wikipedia.org'
 
         if post:
-            f = self.opener.open('%s/w/api.php' % server, get_string, 30)
+            f = self.opener.open('%s/w/api.php' % server, get_string)
         else:
-            f = self.opener.open('%s/w/api.php?%s' % (server, get_string), '', 30)
+            f = self.opener.open('%s/w/api.php?%s' % (server, get_string))
 
         return json.load(f)
 
