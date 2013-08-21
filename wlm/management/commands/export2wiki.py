@@ -8,7 +8,7 @@ from dateutil.parser import parse
 from django.core.management.base import BaseCommand, CommandError
 from django.core.exceptions import ObjectDoesNotExist
 
-from wlm.models import Region, Monument, MonumentPhoto
+from wlm.models import Region, City, Monument, MonumentPhoto
 from settings import WIKI_NAME, WIKI_PASSWORD
 
 
@@ -23,6 +23,18 @@ class Command(BaseCommand):
         for region in regions:
             print '%s (%s): ' % (region.name, region.id)
             monuments = Monument.objects.filter(region_id=region.id)
+            cities = City.objects.filter(region_id=region.id)
+            for city in cities:
+                monuments_city = Monument.objects.filter(region_id=region.id, city_id=city.id)
+                if len(monuments_city) > 10:
+                    city_page = '%s/%s' % (region.name, city.name);
+                    print '%s (%s): ' % (city_page, city.id)
+                    if self.update_page(city_page, monuments_city):
+                        monuments = monuments.exclude(city_id=city.id)
+                        print 'OK\n'
+                    else:
+                        print 'fail!\n'
+
             if self.update_page(region.name, monuments):
                 print 'OK\n'
             else:
