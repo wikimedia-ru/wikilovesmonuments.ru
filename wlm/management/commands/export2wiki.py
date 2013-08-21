@@ -114,11 +114,9 @@ class Command(BaseCommand):
         server = 'http://ru.wikipedia.org'
 
         if post:
-            req = urllib2.Request(url='%s/w/api.php' % server, data=get_string)
+            f = self.opener.open('%s/w/api.php' % server, get_string, 30)
         else:
-            req = urllib2.Request(url='%s/w/api.php?%s' % (server, get_string))
-
-        f = self.opener.open(req)
+            f = self.opener.open('%s/w/api.php?%s' % (server, get_string), '', 30)
 
         return json.load(f)
 
