@@ -21,7 +21,7 @@ def index_page(request):
         ip_region = MOSCOW_REGION_ID
 
     return render_to_response('wlm/index.html', {
-        'region': Region.objects.values('id').get(iso_code=ip_region),
+        'region': Region.objects.values('id').get(gibdd_code=ip_region),
         'regions': Region.objects.values('id', 'name', 'latitude',
                     'longitude', 'scale').exclude(pk=MOSCOW_ID),
         'cities': City.objects.values('id', 'name').all(),
@@ -34,7 +34,7 @@ def list_page(request):
         ip_region = MOSCOW_REGION_ID
 
     return render_to_response('wlm/list_index.html', {
-        'region': Region.objects.values('id').get(iso_code=ip_region),
+        'region': Region.objects.values('id').get(gibdd_code=ip_region),
         'regions': Region.objects.values('id', 'name', 'latitude',
                     'longitude', 'scale').exclude(pk=MOSCOW_ID),
     }, context_instance=RequestContext(request))
