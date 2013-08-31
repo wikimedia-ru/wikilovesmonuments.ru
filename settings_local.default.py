@@ -2,6 +2,9 @@
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+DEBUG_PROPAGATE_EXCEPTIONS = DEBUG
+
+ALLOWED_HOSTS = '*'
 
 ADMINS = (
     #('Name', 'mail@example.com'),
