@@ -1,5 +1,6 @@
 Django
 MySQL-python
+south
 argparse
 distribute
 django-tinymce
