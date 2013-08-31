@@ -19,7 +19,8 @@ class Region(models.Model):
     latitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Latitude"))
     longitude = models.FloatField(max_length=20, blank=True, null=True, verbose_name=_("Longitude"))
     scale = models.IntegerField(verbose_name=_("Scale"))
-    iso_code = models.IntegerField(verbose_name=_('ISO region code'))
+    gibdd_code = models.IntegerField(blank=True, default=0, verbose_name=_('GIBDD region code'))
+    iso_code = models.CharField(max_length=6, blank=True, default='', verbose_name=_('ISO 3166-2 region code'))
 
     def __unicode__(self):
         return self.name
