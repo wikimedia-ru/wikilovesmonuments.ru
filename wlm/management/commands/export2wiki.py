@@ -28,11 +28,13 @@ class Command(BaseCommand):
             cities = City.objects.filter(region_id=region.id)
             for city in cities:
                 monuments_city = Monument.objects.filter(region_id=region.id, city_id=city.id)
+                monuments_city = monuments_city.select_related()
                 if len(monuments_city) > 10:
                     city_page = '%s/%s' % (region.name, city.name);
                     if self.update_page(city_page, monuments_city):
                         monuments = monuments.exclude(city_id=city.id)
 
+            monuments = monuments.select_related()
             self.update_page(region.name, monuments)
 
         self.stdout.write(u'Successfully exported all cultural heritage objects\n')
@@ -42,10 +44,15 @@ class Command(BaseCommand):
         print('%s - %d' % (title, len(monuments)))
         if not len(monuments):
             return False
-        if len(monuments) > 330:
-            for i in range(0, len(monuments) / 300):
-                self.update_page('%s/%d' % (title, i + 1), monuments[i:i+300])
-            self.update_page('%s/%d' % (title, i + 2), monuments[i+300:len(monuments)])
+        page_limit = 150
+        if len(monuments) > page_limit:
+            self.update_page(title, monuments[:page_limit])
+            pos = 0
+            i = 0
+            for i in range(1, len(monuments) / page_limit):
+                pos = i * page_limit
+                self.update_page('%s/%d' % (title, i + 1), monuments[pos:pos+page_limit])
+            self.update_page('%s/%d' % (title, i + 2), monuments[pos+page_limit:len(monuments)])
             return True
         text = u'{{WLM/заголовок}}\n'
         for m in monuments:
@@ -57,7 +64,8 @@ class Command(BaseCommand):
             text += u'| название = %s\n' % m.name
             text += u'| нп = %s\n' % city_name
             text += u'| адрес = %s\n' % m.address
-            text += u'| регион = %s\n' % m.region
+            text += u'| регион = %s\n' % m.region.name
+            text += u'| регион_iso = %s\n' % m.region.iso_code
             text += u'| lat = %s\n' % m.coord_lat
             text += u'| lon = %s\n' % m.coord_lon
             text += u'| фото = \n'
