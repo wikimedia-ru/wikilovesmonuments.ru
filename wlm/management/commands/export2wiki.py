@@ -67,8 +67,8 @@ class Command(BaseCommand):
             text += u'| регион = %s\n' % m.region.name
             text += u'| регион_iso = %s\n' % m.region.iso_code
             if m.coord_lat and m.coord_lat is not None:
-                text += u'| lat = %f\n' % m.coord_lat
-                text += u'| lon = %f\n' % m.coord_lon
+                text += u'| lat = %.5f\n' % m.coord_lat
+                text += u'| lon = %.5f\n' % m.coord_lon
             else:
                 text += u'| lat = \n'
                 text += u'| lon = \n'
