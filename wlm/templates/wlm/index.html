@@ -13,21 +13,22 @@
 					<div class="row">
 						<div id="boxMap" class="span-bg span9">
 							<div id="location">
-								<p class="title"><i class="icon-screenshot"></i>Введите регион и город вручную</p>
+								<p class="title"><i class="icon-screenshot"></i>Выберите регион и город вручную</p>
 								<div class="controls">
-									<label class="control-label" for="filter-region">Выберите регион</label>
+									<label class="control-label" for="filter-region">Регион</label>
 									<select id="filter-region" name="region">
 										{% for r in regions %}
-										<option value="{{ r.id }}" {% if r.id = region.id %}selected="selected"{% endif %}>{{ r.name }}</option>
+										<option value="{{ r.id }}" {% if r.id == region.id %}selected="selected"{% endif %}>{{ r.name }}</option>
 										{% endfor %}
 									</select>
 								</div>
 								<div class="controls">
-									<label class="control-label" for="filter-city">Выберите город</label>
+									<label class="control-label" for="filter-city">Ближайший город</label>
 									<select id="filter-city" name="city">
 										<option></option>
 									</select>
 								</div>
+								<a id="boxMap-list" style="color:#bf0000" href="/list/region/{{ region.id }}/">Показать списком</a>
 							</div>
 
 							<div id="map" class="map map-big"></div>
@@ -50,16 +51,21 @@ $(function(){
 	WLM.map.regionMarkers($('#filter-region option:selected').val());
 	WLM.getRegionCities($('option:selected').val(), setCities);
 	$('#filter-region').change(function(){
-		WLM.map.regionMarkers($('option:selected', $(this)).val());
-		WLM.getRegionCities($('option:selected', $(this)).val(), setCities);
+		var region = $('option:selected', $(this)).val();
+		WLM.map.regionMarkers(region);
+		WLM.getRegionCities(region, setCities);
+		$('#boxMap-list').attr('href', '/list/region/' + region + '/');
 	});
 	$('#filter-city').change(function(){
 		var city = $('option:selected', $(this)).val();
 		if (city) {
 			WLM.map.cityMarkers(city);
+			$('#boxMap-list').attr('href', '/list/city/' + city + '/');
 		}
 		else {
-			WLM.map.regionMarkers($('#filter-region option:selected').val());
+			var region = $('#filter-region option:selected').val();
+			WLM.map.regionMarkers(region);
+			$('#boxMap-list').attr('href', '/list/region/' + region + '/');
 		}
 	});
 });
