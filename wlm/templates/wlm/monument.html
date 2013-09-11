@@ -154,7 +154,7 @@
 					{% if p.width <= 300 %}
 						src="//upload.wikimedia.org/wikipedia/commons/{{ p.folder }}/{{ p.url_name }}"
 					{% else %}
-						src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/300px-{{ p.url_name }}"
+						src="//upload.wikimedia.org/wikipedia/commons/thumb/{{ p.folder }}/{{ p.url_name }}/{% if p.url_name|lower|slice:'-4:' == '.tif' %}lossy-page1-300px-{{ p.url_name }}.jpg{% else %}300px-{{ p.url_name }}{% endif %}"
 					{% endif %}
 						alt="{{ p.name }}, автор: {{ p.author }}" /></a>
 					<p>Автор: <a itemprop="author" href="//commons.wikimedia.org/wiki/User:{{ p.author }}">{{ p.author }}</a></p>
