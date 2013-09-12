@@ -12,6 +12,13 @@ L.Control.Search = L.Control.extend({
 			form = L.DomUtil.create('form', 'input-append', container);
 		L.DomEvent.disableClickPropagation(container);
 
+		form.action = 'http://yandex.ru/sitesearch';
+
+		var searchid = L.DomUtil.create('input', '', form);
+		searchid.type = 'hidden';
+		searchid.name = 'searchid';
+		searchid.value = '2075319';
+
 		var input = L.DomUtil.create('input', className + '-input', form);
 		try {
 			input.type = 'search';
@@ -19,11 +26,12 @@ L.Control.Search = L.Control.extend({
 		catch(e) {
 			input.type = 'text'; // IE
 		}
+		input.name = 'text';
 		input.placeholder = 'Воспользуйтесь поиском';
 
 		var submit = L.DomUtil.create('button', className + '-submit btn', form);
 		submit.type = 'submit';
-		submit.innerHTML = 'Найти памятник';
+		submit.innerHTML = 'Найти';
 
 		return container;
 	}
