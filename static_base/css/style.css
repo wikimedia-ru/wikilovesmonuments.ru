@@ -195,6 +195,12 @@ header .btn-large:hover,
 	padding: 5px 7px 0;
 }
 
+@media (max-width: 979px) {
+	.map .leaflet-control-search {
+		display: none;
+	}
+}
+
 #about.show-grid [class*="span"] {
 	background-color: #3883b2; /* Old browsers */
 	background-repeat: repeat-x; /* Repeat the gradient */
