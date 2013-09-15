@@ -39,7 +39,8 @@ var WLM = (function() {
 			else {
 				return cities[region];
 			}
-		} else {
+		}
+		else {
 			$.ajax({
 				url: '/ajax/citiesregion/' + region,
 				success: function(data) {
@@ -73,17 +74,17 @@ var WLM = (function() {
 
 
 WLM.map = (function($) {
-	var minZoom = 5,
+	var minZoom = 4,
 		maxZoom = 17,
 		center = new L.LatLng(66, 94);
 
 	//Default layer
-	var mapsurfer = new L.TileLayer('http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}', {
+	var mapsurfer = L.tileLayer('http://129.206.74.245:8001/tms_r.ashx?x={x}&y={y}&z={z}', {
 		maxZoom: maxZoom,
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href=\"http://giscience.uni-hd.de/\" target=\"_blank\">GIScience Research Group @ University of Heidelberg</a>'
 	});
-	var mapbox = new L.TileLayer('http://{s}.tiles.mapbox.com/v3/putnik.map-86mogcj7/{z}/{x}/{y}.png', {
+	var mapbox = L.tileLayer('http://{s}.tiles.mapbox.com/v3/putnik.map-86mogcj7/{z}/{x}/{y}.png', {
 		maxZoom: maxZoom,
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href="http://mapbox.com/">MapBox</a>'
@@ -92,8 +93,8 @@ WLM.map = (function($) {
 	//Map object
 	var map;
 
-	//Initialise map code.
-	init_map = function(item_name, config) {
+	//Initialise map code
+	var initMap = function (item_name, config) {
 		var config = config || [];
 		if (config['coord_lat'] && config['coord_lon']) {
 			center = new L.LatLng(config['coord_lat'], config['coord_lon']);
@@ -111,8 +112,10 @@ WLM.map = (function($) {
 	//Pan and zoom map to region
 	var setRegionPosition = function(region) {
 		var data = regions[region]; //Global bootstraped regions data
-		map.panTo(new L.LatLng(data['latitude'], data['longitude']))
-		map.setZoom(data['scale']);
+		map.setView(
+			new L.LatLng(data['latitude'], data['longitude']),
+			data['scale']
+		);
 	}
 
 	//Pan map to coordinates
@@ -139,7 +142,7 @@ WLM.map = (function($) {
 	var markersLayer;
 
 	//Get markers for selected region
-	regionMarkers = function(region) {
+	var regionMarkers = function(region) {
 		setRegionPosition(region);
 		WLM.getRegionMarkers(region, buildMarkersLayer);
 	}
@@ -177,7 +180,9 @@ WLM.map = (function($) {
 				new L.LatLng(val.coord_lat, val.coord_lon),
 				{ title: val.name }
 			);
-			marker.bindPopup(buildPopup(val)).addTo(markersLayer);
+			marker
+				.bindPopup(buildPopup(val))
+				.addTo(markersLayer);
 		}
 		map.addLayer(markersLayer);
 	}
@@ -196,13 +201,14 @@ WLM.map = (function($) {
 		});
 	}
 
+
 	return {
-		init_map: init_map,
+		initMap: initMap,
 		addMarker: addMarker,
 		regionMarkers: regionMarkers,
 		cityMarkers: cityMarkers,
 		setPosition: setPosition,
-		setZoom:setZoom
+		setZoom: setZoom
 	};
 })(jQuery);
 

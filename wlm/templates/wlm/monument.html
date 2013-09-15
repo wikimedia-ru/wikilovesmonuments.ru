@@ -127,7 +127,7 @@
 							"coord_lon": {{ monument.coord_lon|stringformat:"f" }},
 							"name": "{{ monument.name|default:'Без названия' }}"
 						}
-						WLM.map.init_map('map', {
+						WLM.map.initMap('map', {
 							'coord_lat': {{ monument.coord_lat|stringformat:"f" }},
 							'coord_lon': {{ monument.coord_lon|stringformat:"f" }},
 							'zoom': 17
