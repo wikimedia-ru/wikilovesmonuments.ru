@@ -47,7 +47,9 @@ $(function(){
 				.text(value.name));
 		});
 	}
-	WLM.map.initMap('map');
+	WLM.map.initMap('map', {
+		'searchControl': true
+	});
 	WLM.map.regionMarkers($('#filter-region option:selected').val());
 	WLM.getRegionCities($('option:selected').val(), setCities);
 	$('#filter-region').change(function(){

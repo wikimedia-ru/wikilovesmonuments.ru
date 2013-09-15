@@ -38,7 +38,7 @@ L.Control.Search = L.Control.extend({
 });
 
 L.Map.mergeOptions({
-	searchControl: true
+	searchControl: false
 });
 
 L.Map.addInitHook(function () {

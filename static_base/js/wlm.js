@@ -100,10 +100,11 @@ WLM.map = (function($) {
 			center = new L.LatLng(config['coord_lat'], config['coord_lon']);
 		}
 		map = new L.Map(item_name, {
-			center:      center,
-			zoom:        config['zoom'] || minZoom,
-			zoomControl: config['zoomControl'] || false,
-			layers:      [mapsurfer]
+			center:        center,
+			zoom:          config['zoom'] || minZoom,
+			zoomControl:   config['zoomControl'] || false,
+			searchControl: config['searchControl'] || false,
+			layers:        [mapsurfer]
 		});
 		map.zoomControl = new L.Control.Zoom({ position: 'topright' });
 		map.addControl(map.zoomControl);
