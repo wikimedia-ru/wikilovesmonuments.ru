@@ -56,24 +56,25 @@ class Command(BaseCommand):
             return True
         text = u'{{WLM/заголовок}}\n'
         for m in monuments:
-            city_name = u''
-            if m.city and m.city.name:
-                city_name = m.city.name
-            text += u'{{WLM/строка\n'
-            text += u'| id = %d\n' % m.kult_id
-            text += u'| название = %s\n' % m.name
-            text += u'| нп = %s\n' % city_name
-            text += u'| адрес = %s\n' % m.address
-            text += u'| регион = %s\n' % m.region.name
-            text += u'| регион_iso = %s\n' % m.region.iso_code
-            if m.coord_lat and m.coord_lat is not None:
-                text += u'| lat = %.6f\n' % m.coord_lat
-                text += u'| lon = %.6f\n' % m.coord_lon
-            else:
-                text += u'| lat = \n'
-                text += u'| lon = \n'
-            text += u'| фото = \n'
-            text += u'}}\n'
+            if m.kult_id is not None:
+                city_name = u''
+                if m.city and m.city.name:
+                    city_name = m.city.name
+                text += u'{{WLM/строка\n'
+                text += u'| id = %d\n' % m.kult_id
+                text += u'| название = %s\n' % m.name
+                text += u'| нп = %s\n' % city_name
+                text += u'| адрес = %s\n' % m.address
+                text += u'| регион = %s\n' % m.region.name
+                text += u'| регион_iso = %s\n' % m.region.iso_code
+                if m.coord_lat and m.coord_lat is not None:
+                    text += u'| lat = %.6f\n' % m.coord_lat
+                    text += u'| lon = %.6f\n' % m.coord_lon
+                else:
+                    text += u'| lat = \n'
+                    text += u'| lon = \n'
+                text += u'| фото = \n'
+                text += u'}}\n'
         text += u'|}'
 
         page = u'Проект:Вики любит памятники/Списки/%s' % title
