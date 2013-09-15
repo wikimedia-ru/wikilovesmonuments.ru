@@ -172,7 +172,7 @@ WLM.map = (function($) {
 		markersLayer = new L.MarkerClusterGroup({
 			showCoverageOnHover: false,
 			spiderfyOnMaxZoom: true,
-			disableClusteringAtZoom: 16
+			maxClusterRadius: 70
 		});
 		for (var key in data) {
 			var val = data[key];
