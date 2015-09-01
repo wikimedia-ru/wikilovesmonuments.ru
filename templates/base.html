@@ -49,9 +49,7 @@
 					<li{% if request.path == '/' %} class="active"{% endif %}><a href="/">Карта памятников</a></li>
 					<li{% if request.path == '/list/' or request.path|truncatechars:9 == '/list/...' %} class="active"{% endif %}><a href="/list/">Списки памятников</a></li>
 					<li{% if request.path == '/rules/' %} class="active"{% endif %}><a href="/rules/">Правила, жюри, призы</a></li>
-					<li{% if request.path == '/partners/' %} class="active"{% endif %}><a href="/partners/">Партнёры</a></li>
 					<li{% if request.path == '/feedback/' %} class="active"{% endif %}><a href="/feedback/">Обратная связь</a></li>
-					<li><a href="//commons.wikimedia.org/wiki/Wiki_Loves_Monuments_2014_winners#.D0.A0.D0.BE.D1.81.D1.81.D0.B8.D1.8F">Победители</a></li>
 					{%block moderator_menu%}{%endblock%}
 				</ul>
 			</div>
