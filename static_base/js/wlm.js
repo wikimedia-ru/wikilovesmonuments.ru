@@ -89,6 +89,11 @@ WLM.map = (function($) {
 		minZoom: minZoom,
 		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href="http://mapbox.com/">MapBox</a>'
 	});
+	var sputnik = L.tileLayer('http://{s}.tiles.maps.sputnik.ru/{z}/{x}/{y}.png', {
+		maxZoom: maxZoom,
+		minZoom: minZoom,
+		attribution: 'данные карты &copy; участники <a href="http://osm.org">OpenStreetMap</a>, рендер &copy; <a href="http://maps.sputnik.ru/">Спутник</a>'
+	});
 
 	//Map object
 	var map;
@@ -104,7 +109,7 @@ WLM.map = (function($) {
 			zoom:          config['zoom'] || minZoom,
 			zoomControl:   config['zoomControl'] || false,
 			searchControl: config['searchControl'] || false,
-			layers:        [mapsurfer]
+			layers:        [sputnik]
 		});
 		map.zoomControl = new L.Control.Zoom({ position: 'topright' });
 		map.addControl(map.zoomControl);
