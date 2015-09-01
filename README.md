@@ -1,14 +1,22 @@
 ## Install
 
-    git clone git@github.com:putnik/WLM.git
+    git clone https://github.com/wikimedia-ru/wikilovesmonuments.ru.git WLM
     cd WLM
     cp settings_local.default.py settings_local.py
 
 Create database for project. Than put settings to your settings\_local.py file.
 
+Requrements.
+
+    alias python=python2
+    pip2 install Django==1.4.22
+    apt-get install geoip-database libmysqlclient-dev python-dev
+    pip2 install -r requirements.txt
+
 Install django-tynymce application.
 
     python2 manage.py syncdb
+    python2 manage.py migrate
     python2 manage.py collectstatic
     wget http://wikilovesmonuments.ru/dumps/wlm.sql.bz2
     bzip2 -d wlm.sql.bz2
