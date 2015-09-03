@@ -101,10 +101,10 @@ class Command(BaseCommand):
         }
         self.run_pagegenerator_loop(api_params)
         
-        api_params.gapprefix = u'Культурное наследие/Крым'.encode('utf8')
+        api_params['gapprefix'] = u'Культурное наследие/Крым'.encode('utf8')
         self.run_pagegenerator_loop(api_params)
         
-        api_params.gapprefix = u'Культурное наследие/Севастополь'.encode('utf8')
+        api_params['gapprefix'] = u'Культурное наследие/Севастополь'.encode('utf8')
         self.run_pagegenerator_loop(api_params)
 
 
