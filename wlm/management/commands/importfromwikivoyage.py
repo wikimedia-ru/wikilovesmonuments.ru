@@ -46,7 +46,7 @@ class Command(BaseCommand):
             try:
                 monument = Monument.objects.get(kult_id=int(monument_data[u'knid']))
             except:
-                continue
+                monument = Monument(kult_id=int(monument_data[u'knid']))
             print monument_data[u'knid']
             
             if u'name' in monument_data and monument_data[u'name'] != '':
@@ -89,18 +89,28 @@ class Command(BaseCommand):
             
 
     def run_pagegenerator(self):
+        api_params = {
+            'action': 'query',
+            'generator': 'allpages',
+            'gapprefix': u'Культурное наследие России/'.encode('utf8'),
+            'gapnamespace': 0,
+            'gapcontinue': gapcontinue,
+            'gaplimit': 100, # 500
+            'prop': 'revisions',
+            'rvprop': 'content',
+        }
+        run_pagegenerator_loop(api_params)
+        
+        api_params.gapprefix = u'Культурное наследие/Крым'.encode('utf8')
+        run_pagegenerator_loop(api_params)
+        
+        api_params.gapprefix = u'Культурное наследие/Севастополь'.encode('utf8')
+        run_pagegenerator_loop(api_params)
+
+
+    def run_pagegenerator_loop(api_params):
         gapcontinue = ''
         while True:
-            api_params = {
-                'action': 'query',
-                'generator': 'allpages',
-                'gapprefix': u'Культурное наследие России/'.encode('utf8'),
-                'gapnamespace': 0,
-                'gapcontinue': gapcontinue,
-                'gaplimit': 100, # 500
-                'prop': 'revisions',
-                'rvprop': 'content',
-            }   
             answer = self.api_request(api_params, True)
             for page_id in answer['query']['pages']:
                 page = answer['query']['pages'][page_id]
