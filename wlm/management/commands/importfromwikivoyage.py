@@ -94,22 +94,21 @@ class Command(BaseCommand):
             'generator': 'allpages',
             'gapprefix': u'Культурное наследие России/'.encode('utf8'),
             'gapnamespace': 0,
-            'gapcontinue': gapcontinue,
+            'gapcontinue': '',
             'gaplimit': 100, # 500
             'prop': 'revisions',
             'rvprop': 'content',
         }
-        run_pagegenerator_loop(api_params)
+        self.run_pagegenerator_loop(api_params)
         
         api_params.gapprefix = u'Культурное наследие/Крым'.encode('utf8')
-        run_pagegenerator_loop(api_params)
+        self.run_pagegenerator_loop(api_params)
         
         api_params.gapprefix = u'Культурное наследие/Севастополь'.encode('utf8')
-        run_pagegenerator_loop(api_params)
+        self.run_pagegenerator_loop(api_params)
 
 
-    def run_pagegenerator_loop(api_params):
-        gapcontinue = ''
+    def run_pagegenerator_loop(self, api_params):
         while True:
             answer = self.api_request(api_params, True)
             for page_id in answer['query']['pages']:
@@ -123,7 +122,7 @@ class Command(BaseCommand):
                 'gapcontinue' not in answer['query-continue']['allpages'] or \
                 answer['query-continue']['allpages']['gapcontinue'] == ''):
                 break
-            gapcontinue = answer['query-continue']['allpages']['gapcontinue'].encode('utf8')
+            api_params.gapcontinue = answer['query-continue']['allpages']['gapcontinue'].encode('utf8')
                 
             
     def login(self):
