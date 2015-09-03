@@ -76,6 +76,8 @@ class Command(BaseCommand):
                 iso_code = monument_data[u'region'].upper()
                 if iso_code == u'RU-MOW':
                     iso_code = u'RU-MOS'
+                if iso_code == u'RU-SEV':
+                    iso_code = u'RU-KM'
                 regions = Region.objects.filter(iso_code=iso_code)
                 if regions.count():
                     region = regions[0]
